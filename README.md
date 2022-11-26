@@ -1,2 +1,17 @@
-# haven-client-pwa
-Client PWA de Haven
+# Vue3 starter kit template
+
+
+## Installation
+```
+yarn
+```
+
+### For vue 3 development (with hot reloading)
+```
+yarn run serve
+```
+
+### To build / minify for production
+```
+yarn run build
+```
