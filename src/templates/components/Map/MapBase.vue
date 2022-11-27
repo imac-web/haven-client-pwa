@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-geosearch/dist/geosearch.css";
@@ -21,7 +21,6 @@ export default defineComponent({
 
         // ----- Mapbox -----
         //TODO: Move to store when request form input in frontend, send to firebase functions then get result
-
         const provider = new GeoApiFrProvider();
 
         function setupGeoSearch() {
