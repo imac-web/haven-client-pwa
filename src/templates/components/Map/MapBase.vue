@@ -17,7 +17,11 @@ import { MODAL_COMPONENTS } from "@/constants";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-geosearch/dist/geosearch.css";
-import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import {
+    GeoSearchControl,
+    OpenStreetMapProvider,
+    GeoApiFrProvider,
+} from "leaflet-geosearch";
 import L from "leaflet";
 
 import ButtonPrimary from "@/templates/components/_buttons/ButtonPrimary.vue";
@@ -44,20 +48,8 @@ export default defineComponent({
 
         // ----- Mapbox -----
         //TODO: Move to store when request form input in frontend, send to firebase functions then get result
-        function setupLeafletMap() {
-            const mapDiv = L.map(mapContainer.value).setView(center.value, 13);
-            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution:
-                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            }).addTo(mapDiv);
 
-            L.marker(center.value)
-                .addTo(mapDiv)
-                .bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
-                .openPopup();
-        }
-
-        const provider = new OpenStreetMapProvider();
+        const provider = new GeoApiFrProvider();
 
         function setupGeoSearch() {
             const map = L.map(mapContainer.value).setView([51.505, -0.09], 13);
@@ -66,15 +58,9 @@ export default defineComponent({
                 map
             );
 
-            /* const search = new GeoSearch.GeoSearchControl({
-                provider: new GeoSearch.OpenStreetMapProvider(),
-            });
-
-            map.addControl(search); */
-
             const searchControl = new GeoSearchControl({
                 notFoundMessage: "Sorry, that address could not be found.",
-                provider: new OpenStreetMapProvider(),
+                provider: provider,
                 style: "bar",
             });
 
@@ -82,8 +68,6 @@ export default defineComponent({
         }
 
         onMounted(() => {
-            //setupLeafletMap();
-
             setupGeoSearch();
         });
 
