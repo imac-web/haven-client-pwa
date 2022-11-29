@@ -37,6 +37,12 @@ export default defineComponent({
             });
 
             map.addControl(searchControl);
+
+            function searchEventHandler(result) {
+                console.log(result.location);
+            }
+
+            map.on("geosearch/showlocation", searchEventHandler);
         }
 
         onMounted(() => {
