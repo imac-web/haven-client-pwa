@@ -60,9 +60,10 @@ export default defineComponent({
 <style lang="scss">
 .c-map {
     &__map {
-        height: 80vh;
-        width: 100vw;
-        z-index: 2;
+        height: -webkit-fill-available;
     }
+    @include fullscreen;
+    z-index: 5;
+    background-color: red;
 }
 </style>

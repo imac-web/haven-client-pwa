@@ -8,8 +8,8 @@
 
         <main class="l-main" ref="main">
             <the-content />
+            <the-footer></the-footer>
         </main>
-        <the-footer></the-footer>
         <the-modal />
     </div>
 </template>
@@ -165,5 +165,7 @@ export default defineComponent({
 
 .l-main {
     background-color: var(--color-green);
+    min-height: 100vh;
+    overflow: hidden;
 }
 </style>
