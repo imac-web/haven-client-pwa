@@ -21,12 +21,12 @@
 import { defineComponent, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 
-import ProjectModal from "@/templates/components/Modals/ProjectModal.vue";
+import ModalComponent from "@/templates/components/organisms/Modals/ModalComponent.vue";
 
 export default defineComponent({
     name: "TheModal",
     components: {
-        ProjectModal,
+        ModalComponent,
     },
     props: {},
     setup(props) {
