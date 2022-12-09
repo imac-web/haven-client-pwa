@@ -18,6 +18,7 @@ import { MODAL_COMPONENTS } from "@/constants";
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 import MapBase from "@/templates/components/organisms/Map/MapBase.vue";
 
+
 export default defineComponent({
     name: "TheContent",
     components: {
@@ -29,6 +30,7 @@ export default defineComponent({
         function openModal(data) {
             store.dispatch("modal/open", {
                 component: MODAL_COMPONENTS.Modal,
+
                 data,
             });
         }
