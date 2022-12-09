@@ -5,8 +5,9 @@
             label="Open Modal"
             color="light"
             @click="openModal"
-        /> -->
-        <map-base />
+        /> 
+        <map-base />-->
+        <hero />
     </div>
 </template>
 
@@ -16,13 +17,14 @@ import { useStore } from "vuex";
 import { MODAL_COMPONENTS } from "@/constants";
 
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
+import Hero from "@/templates/components/organisms/Hero/Hero.vue";
 import MapBase from "@/templates/components/organisms/Map/MapBase.vue";
-
 
 export default defineComponent({
     name: "TheContent",
     components: {
         ButtonPrimary,
+        Hero,
         MapBase,
     },
     setup() {
@@ -44,6 +46,5 @@ export default defineComponent({
 
 <style lang="scss">
 .l-content {
-    height: -webkit-fill-available;
 }
 </style>
