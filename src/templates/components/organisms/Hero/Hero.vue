@@ -14,6 +14,18 @@
                     class="c-hero__content-search-input"
                 />
             </div>
+            <div class="c-hero__content-desc">
+                <h2 class="c-hero__content-desc-title">
+                    Discover Your Ideal Location
+                </h2>
+                <p class="c-hero__content-desc-txt">
+                    the ultimate measure of a place's vivability and potential.
+                    Our tool takes into account factors like proximity to public
+                    transportation, safety, noise levels, nearby schools, and
+                    the quality of amenities to give you an insight into the
+                    vivability of an address.
+                </p>
+            </div>
         </div>
     </div>
 </template>
@@ -83,6 +95,21 @@ export default defineComponent({
                 margin-left: 1rem;
                 width: 100%;
                 color: var(--color-white);
+            }
+        }
+
+        &-desc {
+            margin-top: 5rem;
+            &-title {
+                color: var(--color-white);
+                font-size: 5rem;
+                text-align: center;
+            }
+            &-txt {
+                margin-top: 2rem;
+                color: var(--color-white);
+                font-size: 1.5rem;
+                text-align: center;
             }
         }
     }
