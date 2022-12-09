@@ -3,6 +3,7 @@
         <div class="c-hero__content">
             <h1 class="c-hero__content-title">HAVEN</h1>
             <div class="c-hero__content-search">
+                <!-- TODO: Add search icon instead of close icon-->
                 <object-icon
                     class="c-hero__content-search-icon c-hero__content-search-icon--before"
                     name="close"
@@ -53,7 +54,6 @@ export default defineComponent({
 <style lang="scss">
 .c-hero {
     height: -webkit-fill-available;
-    //background-color: var(--color-black);
 
     &__content {
         position: absolute;
