@@ -2,16 +2,27 @@
     <div
         class="c-project-modal | l-container"
         :class="{ 'c-project-modal--active': isOpen }"
-    ></div>
+    >
+        <button-primary
+            class="c-project-modal__btn"
+            label="Close Modal"
+            color="light"
+            @click="close"
+        />
+    </div>
 </template>
 
 <script>
 import { defineComponent, toRef, computed } from "vue";
 import { useStore } from "vuex";
 
+import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
+
 export default defineComponent({
     name: "ProjectModal",
-    components: {},
+    components: {
+        ButtonPrimary,
+    },
     props: {
         data: {
             type: Object,
@@ -49,6 +60,11 @@ export default defineComponent({
             opacity: 0;
             visibility: hidden;
         }
+    }
+
+    &__btn {
+        --btn-txt-color: var(--color-black);
+        --btn-border-color: var(--color-black);
     }
 
     color: var(--color-pistachio);
