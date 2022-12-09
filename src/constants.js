@@ -8,7 +8,7 @@ export const STORE_MODULES = Object.freeze([
     "userContext",
 ]);
 
-export const MODAL_COMPONENTS = Object.freeze({ Project: "ProjectModal" });
+export const MODAL_COMPONENTS = Object.freeze({ Modal: "ModalComponent" });
 
 // Loader settings
 export const LOADER = Object.freeze({
