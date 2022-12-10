@@ -1,13 +1,7 @@
 <template>
     <div class="l-content" ref="content">
-        <!-- <button-primary
-            class="c-project-modal-btn"
-            label="Open Modal"
-            color="light"
-            @click="openModal"
-        /> 
-        <map-base />-->
         <hero />
+        <map-base />
     </div>
 </template>
 

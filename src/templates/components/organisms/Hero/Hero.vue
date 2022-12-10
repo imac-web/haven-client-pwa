@@ -3,16 +3,7 @@
         <div class="c-hero__content">
             <h1 class="c-hero__content-title">HAVEN</h1>
             <div class="c-hero__content-search">
-                <!-- TODO: Add search icon instead of close icon-->
-                <object-icon
-                    class="c-hero__content-search-icon c-hero__content-search-icon--before"
-                    name="close"
-                />
-                <input
-                    type="text"
-                    placeholder="Enter your desired location"
-                    class="c-hero__content-search-input"
-                />
+                <search />
             </div>
             <div class="c-hero__content-desc">
                 <h2 class="c-hero__content-desc-title">
@@ -31,7 +22,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { MODAL_COMPONENTS } from "@/constants";
 
@@ -39,12 +30,15 @@ import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.v
 import MapBase from "@/templates/components/organisms/Map/MapBase.vue";
 import ObjectIcon from "@/templates/objects/ObjectIcon.vue";
 
+import Search from "@/templates/components/organisms/Search/Search.vue";
+
 export default defineComponent({
     name: "Hero",
     components: {
         ButtonPrimary,
         MapBase,
         ObjectIcon,
+        Search,
     },
     setup() {
         const store = useStore();
@@ -65,7 +59,7 @@ export default defineComponent({
 
 <style lang="scss">
 .c-hero {
-    height: -webkit-fill-available;
+    height: 80vh;
 
     &__content {
         position: absolute;
@@ -79,23 +73,6 @@ export default defineComponent({
             text-align: center;
         }
         &-search {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-
-            border: 1px solid var(--color-white);
-            border-radius: 10rem;
-            padding: 1rem 2rem;
-
-            &-icon {
-                color: var(--color-white);
-            }
-
-            &-input {
-                margin-left: 1rem;
-                width: 100%;
-                color: var(--color-white);
-            }
         }
 
         &-desc {

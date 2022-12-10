@@ -8,9 +8,9 @@
 import { defineComponent, ref, onMounted } from "vue";
 
 import "leaflet/dist/leaflet.css";
-import "leaflet-geosearch/dist/geosearch.css";
-import { GeoSearchControl, GeoApiFrProvider } from "leaflet-geosearch";
-import L from "leaflet";
+import L, { map } from "leaflet";
+
+import emitter from "@/services/emitter";
 
 export default defineComponent({
     name: "MapBase",
@@ -18,31 +18,41 @@ export default defineComponent({
     setup() {
         const content = ref(null);
         const mapContainer = ref(null);
+        let map = null;
+        let marker = null;
+        const SelectedResult = ref([]);
+        emitter.on("selected-result", (data) => {
+            SelectedResult.value = data;
+            map.setView(
+                [
+                    SelectedResult.value.raw.geometry.coordinates[1],
+                    SelectedResult.value.raw.geometry.coordinates[0],
+                ],
+                13
+            );
+            marker = L.marker([
+                SelectedResult.value.raw.geometry.coordinates[1],
+                SelectedResult.value.raw.geometry.coordinates[0],
+            ]).addTo(map);
+        });
 
         // ----- Mapbox -----
-        //TODO: Move to store when request form input in frontend, send to firebase functions then get result
-        const provider = new GeoApiFrProvider();
-
         function setupGeoSearch() {
-            const map = L.map(mapContainer.value).setView([51.505, -0.09], 13);
+            map = L.map(mapContainer.value).setView([51.505, -0.09], 13);
 
             L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
                 map
             );
+            var popup = L.popup();
 
-            const searchControl = new GeoSearchControl({
-                notFoundMessage: "Sorry, that address could not be found.",
-                provider: provider,
-                style: "bar",
-            });
-
-            map.addControl(searchControl);
-
-            function searchEventHandler(result) {
-                console.log(result.location);
+            function onMapClick(e) {
+                popup
+                    .setLatLng(e.latlng)
+                    .setContent("You clicked the map at " + e.latlng.toString())
+                    .openOn(map);
             }
 
-            map.on("geosearch/showlocation", searchEventHandler);
+            map.on("click", onMapClick);
         }
 
         onMounted(() => {
@@ -52,6 +62,7 @@ export default defineComponent({
         return {
             content,
             mapContainer,
+            SelectedResult,
         };
     },
 });
@@ -60,10 +71,7 @@ export default defineComponent({
 <style lang="scss">
 .c-map {
     &__map {
-        height: -webkit-fill-available;
+        height: 50vh;
     }
-    @include fullscreen;
-    z-index: 5;
-    background-color: red;
 }
 </style>
