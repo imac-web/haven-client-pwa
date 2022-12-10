@@ -70,6 +70,7 @@ export default defineComponent({
 
 <style lang="scss">
 .c-map {
+    z-index: 0;
     &__map {
         height: 50vh;
     }
