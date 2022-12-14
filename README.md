@@ -9,7 +9,7 @@ yarn
 
 ### For vue 3 development (with hot reloading)
 ```
-yarn run serve
+yarn run dev
 ```
 
 ### To build / minify for production
