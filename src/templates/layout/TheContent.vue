@@ -1,9 +1,9 @@
 <template>
-  <div class="l-content" ref="content">
-    <!-- <hero /> -->
-    <map-base />
-    <panel class="l-content__panel" />
-  </div>
+    <div class="l-content" ref="content">
+        <!-- <hero /> -->
+        <map-base />
+        <panel class="l-content__panel" />
+    </div>
 </template>
 
 <script>
@@ -17,31 +17,34 @@ import MapBase from "@/templates/components/organisms/Map/MapBase.vue";
 import Panel from "@/templates/components/organisms/Panel/Panel.vue";
 
 export default defineComponent({
-  name: "TheContent",
-  components: {
-    ButtonPrimary,
-    Hero,
-    Panel,
-    MapBase,
-  },
-  setup() {
-    const store = useStore();
-    function openModal(data) {
-      store.dispatch("modal/open", {
-        component: MODAL_COMPONENTS.Modal,
+    name: "TheContent",
+    components: {
+        ButtonPrimary,
+        Hero,
+        Panel,
+        MapBase,
+    },
+    setup() {
+        const store = useStore();
+        function openModal(data) {
+            store.dispatch("modal/open", {
+                component: MODAL_COMPONENTS.Modal,
 
-        data,
-      });
-    }
+                data,
+            });
+        }
 
-    return {
-      openModal,
-    };
-  },
+        return {
+            openModal,
+        };
+    },
 });
 </script>
 
 <style lang="scss">
 .l-content {
+    @include max(md) {
+        @include fullscreen;
+    }
 }
 </style>
