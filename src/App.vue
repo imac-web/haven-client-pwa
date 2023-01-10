@@ -9,6 +9,7 @@ import {
     onBeforeUnmount,
     nextTick,
 } from "vue";
+import { isTouch } from "@/utils";
 
 import "@/assets/scss/global.scss";
 
@@ -18,6 +19,11 @@ export default defineComponent({
     name: "App",
     components: {
         TheBase,
+    },
+    setup() {
+        onMounted(() => {
+            if (isTouch) document.documentElement.classList.add("is-touch");
+        });
     },
 });
 </script>
