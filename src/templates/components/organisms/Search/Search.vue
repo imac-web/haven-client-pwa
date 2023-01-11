@@ -24,6 +24,9 @@ export default defineComponent({
         emitter.on("search-results", (data) => {
             SearchResults.value = data;
         });
+        emitter.on("selected-result", (data) => {
+            SearchResults.value = {};
+        });
 
         return {
             SearchResults,
