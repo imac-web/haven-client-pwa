@@ -20,6 +20,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.o-panel-conten {
+.o-panel-content {
 }
 </style>

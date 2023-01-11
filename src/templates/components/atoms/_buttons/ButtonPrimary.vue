@@ -211,6 +211,10 @@ export default defineComponent({
         gap: var(--svg-spacing);
         font-size: var(--btn-txt-size);
         z-index: 2;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     &__label {

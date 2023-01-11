@@ -57,7 +57,13 @@ export default defineComponent({
         flex-direction: column;
         gap: 2rem;
     }
-    &__list-element {
+    .c-button-primary {
+        @include min(md) {
+            --btn-txt-size: var(--fs-small);
+        }
+        @include max(md) {
+            --btn-txt-size: var(--fs-xsmall);
+        }
     }
 }
 </style>

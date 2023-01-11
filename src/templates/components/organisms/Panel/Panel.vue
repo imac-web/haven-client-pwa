@@ -1,5 +1,5 @@
 <template>
-    <div lass="o-panel">
+    <div class="o-panel">
         <panel-content />
     </div>
 </template>
@@ -21,5 +21,6 @@ export default defineComponent({
 
 <style lang="scss">
 .o-panel {
+    padding: 2rem;
 }
 </style>
