@@ -1,17 +1,17 @@
 <template>
-    <div lass="o-panel">
-        <panel-content />
+    <div class="o-panel-content">
+        <navigation-search />
     </div>
 </template>
 
 <script>
 import { defineComponent, onMounted, ref } from "vue";
-import PanelContent from "./PanelContent.vue";
+import NavigationSearch from "@/templates/components/molecules/Navigation/NavigationSearch.vue";
 
 export default defineComponent({
-    name: "Panel",
+    name: "PanelContent",
     components: {
-        PanelContent,
+        NavigationSearch,
     },
     setup() {
         return {};
@@ -20,6 +20,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.o-panel {
+.o-panel-content {
 }
 </style>

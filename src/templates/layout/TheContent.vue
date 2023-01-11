@@ -1,8 +1,8 @@
 <template>
     <div class="l-content" ref="content">
-        <!-- <hero /> -->
-        <map-base />
         <panel class="l-content__panel" />
+        <map-base class="l-content__map" />
+        <panel-mobile class="l-content__panel-mobile" />
     </div>
 </template>
 
@@ -14,6 +14,7 @@ import { MODAL_COMPONENTS } from "@/constants";
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 import Hero from "@/templates/components/organisms/Hero/Hero.vue";
 import MapBase from "@/templates/components/organisms/Map/MapBase.vue";
+import PanelMobile from "@/templates/components/organisms/PanelMobile/PanelMobile.vue";
 import Panel from "@/templates/components/organisms/Panel/Panel.vue";
 
 export default defineComponent({
@@ -21,6 +22,7 @@ export default defineComponent({
     components: {
         ButtonPrimary,
         Hero,
+        PanelMobile,
         Panel,
         MapBase,
     },
@@ -45,6 +47,39 @@ export default defineComponent({
 .l-content {
     @include max(md) {
         @include fullscreen;
+    }
+
+    @include min(md) {
+        .cupertino-pane-wrapper {
+            display: none !important;
+        }
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__panel {
+        @include max(md) {
+            display: none;
+        }
+
+        @include min(md) {
+            width: 30vw;
+        }
+
+        @include between(md, lg) {
+            width: 40vw;
+        }
+    }
+
+    &__map {
+        @include min(md) {
+            width: 70vw;
+        }
+        @include between(md, lg) {
+            width: 60vw;
+        }
     }
 }
 </style>
