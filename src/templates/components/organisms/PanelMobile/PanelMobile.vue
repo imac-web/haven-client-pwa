@@ -22,7 +22,7 @@ export default defineComponent({
       bottomClose: false,
       buttonDestroy: false,
       clickBottomOpen: true,
-      handleKeyboard: false,
+      handleKeyboard: true,
       fitScreenHeight: true,
       backdrop: true,
       backdropOpacity: 0.4,
