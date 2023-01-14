@@ -40,10 +40,8 @@ export default defineComponent({
     const store = useStore();
 
     function openPanel(data) {
-      console.log("openPanel", data);
       store.dispatch("panel/open", {
         component: PANEL_COMPONENTS.Panel,
-
         data,
       });
     }
