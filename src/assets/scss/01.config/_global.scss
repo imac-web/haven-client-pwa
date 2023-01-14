@@ -5,9 +5,9 @@
 $base-dir: "/static";
 
 $directories: (
-    font: "#{$base-dir}/fonts/",
-    img: "#{$base-dir}/images/",
-    icon: "#{$base-dir}/icons/",
+  font: "#{$base-dir}/fonts/",
+  img: "#{$base-dir}/images/",
+  icon: "#{$base-dir}/icons/",
 );
 
 /*=======================================
@@ -15,18 +15,19 @@ $directories: (
 =======================================*/
 
 $colors: (
-    black: #000000,
-    white: #ffffff,
-    smoke: #f5f3f1,
-    grey: #989693,
-    beige: #e8e3dd,
-    blue: #1acbff,
-    dark-blue: #00ade0,
-    yellow: #fdec5a,
-    gold: #a39d79,
-    pistachio: #dedb7b,
-    green: #00524e,
-    orange: #d87628,
+  black: #000000,
+  white: #ffffff,
+  dark: #121212,
+  smoke: #f5f3f1,
+  grey: #989693,
+  beige: #e8e3dd,
+  blue: #1acbff,
+  dark-blue: #00ade0,
+  yellow: #fdec5a,
+  gold: #a39d79,
+  pistachio: #dedb7b,
+  green: #00524e,
+  orange: #d87628,
 );
 
 $font-color: var(--color-black);
@@ -39,35 +40,35 @@ $selection-color: var(--color-white);
 =======================================*/
 
 $font-families: (
-    heading: (
-        "Durer",
-        "Helvetica Neue",
-        Arial,
-        sans-serif,
-    ),
-    body: (
-        //"NeutralFace",
-        "Helvetica Neue",
-        Arial,
-        sans-serif,
-    ),
+  heading: (
+    "Durer",
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+  ),
+  body: (
+    //"NeutralFace",
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+  ),
 );
 
 $font-sizes: (
-    xsmall: 1em,
-    small: 1.2em,
-    regular: 1.6em,
-    medium: 1.8em,
-    large: 2.5em,
-    xl: 4.5em,
-    2xl: 6em,
+  xsmall: 1em,
+  small: 1.2em,
+  regular: 1.6em,
+  medium: 1.8em,
+  large: 2.5em,
+  xl: 4.5em,
+  2xl: 6em,
 );
 
 $font-faces: (
-    // <name> <filename> <font-weight> <font-style>,
-    "Durer" "Durer" 400 normal,
-    "NeutralFace" "NeutralFaceRegular" 400 normal,
-    "NeutralFace" "NeutralFaceBold" 600 normal
+  // <name> <filename> <font-weight> <font-style>,
+  "Durer" "Durer" 400 normal,
+  "NeutralFace" "NeutralFaceRegular" 400 normal,
+  "NeutralFace" "NeutralFaceBold" 600 normal
 );
 
 // <html> Font-size

@@ -5,12 +5,14 @@
     :style="`--app-height: ${appHeight}px;`"
   >
     <the-loader></the-loader>
+    <the-header />
 
     <main class="l-main" ref="main">
       <the-content />
       <!-- <the-footer></the-footer> -->
     </main>
     <the-modal />
+    <the-panel />
   </div>
 </template>
 
@@ -33,7 +35,9 @@ gsap.registerPlugin(ScrollTrigger);
 import TheLoader from "@/templates/layout/TheLoader.vue";
 import TheContent from "@/templates/layout/TheContent.vue";
 import TheFooter from "@/templates/layout/TheFooter.vue";
+import TheHeader from "@/templates/layout/TheHeader.vue";
 import TheModal from "@/templates/layout/TheModal.vue";
+import ThePanel from "@/templates/layout/ThePanel.vue";
 
 export default defineComponent({
   name: "TheBase",
@@ -41,7 +45,9 @@ export default defineComponent({
     TheLoader,
     TheContent,
     TheFooter,
+    TheHeader,
     TheModal,
+    ThePanel,
   },
   setup() {
     const store = useStore();
