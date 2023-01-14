@@ -9,7 +9,6 @@
     >
       <component :is="panelComponent" :data="panelData" @close="close" />
     </div>
-    <div class="backdrop" :class="{ 'is-open': isReady }" @click="close"></div>
   </Teleport>
 </template>
 
@@ -80,7 +79,10 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel {
-  //@include full-screen-dom();
+  --panel-padding: 2rem;
+  --panel-width: min-content;
+  --panel-height: min-content;
+
   position: fixed;
   top: 50%;
   right: 5%;
@@ -97,12 +99,12 @@ export default defineComponent({
 
   transition: opacity 0.4s linear;
   @include min(md) {
-    width: min-content;
-    height: min-content;
+    width: var(--panel-width);
+    height: var(--panel-height);
   }
 
   @include min(md) {
-    padding: 5rem;
+    padding: var(--panel-padding);
   }
   @include max(md) {
     @include container("default");
@@ -111,23 +113,6 @@ export default defineComponent({
   &.is-open {
     opacity: 1;
     pointer-events: auto;
-  }
-}
-
-.backdrop {
-  background-color: var(--color-green);
-
-  height: 100%;
-  width: 100%;
-
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.4s, opacity 0.4s linear;
-  z-index: 100;
-
-  &.is-open {
-    visibility: visible;
-    opacity: 0.4;
   }
 }
 </style>
