@@ -4,8 +4,8 @@
     :class="`${globalUserContext}`"
     :style="`--app-height: ${appHeight}px;`"
   >
-    <the-loader></the-loader>
-    <the-header />
+    <!-- <the-loader></the-loader> -->
+    <the-header class="l-base__header" />
 
     <main class="l-main" ref="main">
       <the-content />
@@ -87,10 +87,6 @@ export default defineComponent({
     //======= END SCROLL TOP =======//
 
     ////////////////////////////////
-    //       END SMOOTHSCROLL
-    ////////////////////////////////
-
-    ////////////////////////////////
     //       START SCROLL DIRECTION
     ////////////////////////////////
     function onScroll() {
@@ -161,11 +157,37 @@ export default defineComponent({
 
 <style lang="scss">
 .l-base {
+  &__header {
+    @include min(md) {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    display: none;
+  }
 }
 
 .l-main {
-  background-color: var(--color-green);
-  min-height: 100vh;
+  background-color: var(--color-dark);
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  transform: translateZ(0);
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-user-drag: none;
+  -ms-content-zooming: none;
+  word-wrap: break-word;
+  overscroll-behavior-y: none;
+  text-size-adjust: none;
 }
 </style>

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { MODAL_COMPONENTS } from "@/constants";
 
