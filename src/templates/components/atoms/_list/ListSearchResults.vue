@@ -15,6 +15,8 @@
 
 <script>
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import { PANEL_COMPONENTS } from "@/constants";
 
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 
@@ -34,8 +36,25 @@ export default defineComponent({
   },
   emits: ["SelectedResult"],
   setup() {
+    //open and close panel functions
+    const store = useStore();
+
+    function openPanel(data) {
+      console.log("openPanel", data);
+      store.dispatch("panel/open", {
+        component: PANEL_COMPONENTS.Panel,
+
+        data,
+      });
+    }
+
+    const close = () => {
+      store.dispatch("panel/close");
+    };
+
     const selectResult = (result) => {
       emitter.emit("selected-result", result);
+      openPanel(result);
     };
 
     return {

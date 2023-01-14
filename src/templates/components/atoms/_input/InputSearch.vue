@@ -22,8 +22,6 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { useStore } from "vuex";
-import { PANEL_COMPONENTS } from "@/constants";
 import { GeoApiFrProvider } from "leaflet-geosearch";
 
 import ObjectIcon from "@/templates/objects/ObjectIcon.vue";
@@ -50,24 +48,8 @@ export default defineComponent({
       default: null,
     },
   },
-  emits: ["SearchResults", "SlideUpPanel", "close"],
+  emits: ["SearchResults", "SlideUpPanel"],
   setup(props, { emit }) {
-    //open and close panel functions
-    const store = useStore();
-
-    function openPanel(data) {
-      console.log("openPanel", data);
-      store.dispatch("panel/open", {
-        component: PANEL_COMPONENTS.Panel,
-
-        data,
-      });
-    }
-
-    const close = () => {
-      store.dispatch("panel/close");
-    };
-
     // setup provider
     const provider = new GeoApiFrProvider();
 
@@ -77,14 +59,12 @@ export default defineComponent({
     async function onInput(event) {
       const query = event.target.value;
       if (query.length > 0) {
-        openPanel({ query });
         results.value = await provider.search({ query });
 
         emitter.emit("slide-up-panel", true);
       } else {
         results.value = [];
         emitter.emit("slide-up-panel", false);
-        close();
       }
 
       emitter.emit("search-results", results.value);
@@ -94,7 +74,6 @@ export default defineComponent({
       searchInput,
       results,
       onInput,
-      openPanel,
     };
   },
 });
