@@ -23,6 +23,9 @@ export default defineComponent({
       buttonDestroy: false,
       clickBottomOpen: true,
       handleKeyboard: false,
+      fitScreenHeight: true,
+      backdrop: true,
+      backdropOpacity: 0.4,
     };
     var drawer = undefined;
 
