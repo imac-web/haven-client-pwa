@@ -110,6 +110,11 @@ export default defineComponent({
     @include container("default");
   }
 
+  @include min(md) {
+    display: block;
+  }
+  display: none;
+
   &.is-open {
     opacity: 1;
     pointer-events: auto;
