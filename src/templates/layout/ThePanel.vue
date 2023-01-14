@@ -80,7 +80,10 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel {
-  @include full-screen-dom();
+  //@include full-screen-dom();
+  position: fixed;
+  top: 50%;
+  right: 5%;
   z-index: 102;
   background: var(--color-dark);
   opacity: 0;
@@ -96,10 +99,6 @@ export default defineComponent({
   @include min(md) {
     width: min-content;
     height: min-content;
-
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
   }
 
   @include min(md) {
