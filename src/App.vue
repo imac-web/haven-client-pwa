@@ -28,6 +28,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.is-touch{
-overscroll-behavior-y: contain;
-}</style>
+.is-touch {
+  overscroll-behavior-y: contain;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+}
+</style>
