@@ -1,6 +1,6 @@
 {
-    "name": "vue-3-starter-kit",
-    "version": "1.0.0",
+    "name": "Haven",
+    "version": "0.1",
     "private": false,
     "scripts": {
         "dev": "vite",
