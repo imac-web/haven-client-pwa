@@ -5,12 +5,13 @@ export const STORE_MODULES = Object.freeze([
     "loader",
     "modal",
     "panel",
+    "panelMobile",
     "scroll",
     "userContext",
 ]);
 
 export const MODAL_COMPONENTS = Object.freeze({ Modal: "ModalComponent" });
-export const PANEL_COMPONENTS = Object.freeze({ Panel: "PanelComponent" });
+export const PANEL_COMPONENTS = Object.freeze({ Panel: "PanelComponent", PanelMobile: "PanelMobileComponent" });
 
 // Loader settings
 export const LOADER = Object.freeze({

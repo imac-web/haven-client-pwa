@@ -10,6 +10,7 @@
     <main class="l-main" ref="main">
       <the-content />
       <!-- <the-footer></the-footer> -->
+      <the-panel-mobile />
     </main>
     <the-modal />
     <the-panel />
@@ -38,6 +39,7 @@ import TheFooter from "@/templates/layout/TheFooter.vue";
 import TheHeader from "@/templates/layout/TheHeader.vue";
 import TheModal from "@/templates/layout/TheModal.vue";
 import ThePanel from "@/templates/layout/ThePanel.vue";
+import ThePanelMobile from "@/templates/layout/ThePanelMobile.vue";
 
 export default defineComponent({
   name: "TheBase",
@@ -48,6 +50,7 @@ export default defineComponent({
     TheHeader,
     TheModal,
     ThePanel,
+    ThePanelMobile,
   },
   setup() {
     const store = useStore();

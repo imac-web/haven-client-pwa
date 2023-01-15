@@ -1,7 +1,7 @@
 <template>
   <div class="l-content" ref="content">
     <map-base class="l-content__map" />
-    <panel-mobile class="l-content__panel-mobile" />
+    <!-- <panel-mobile class="l-content__panel-mobile" /> -->
   </div>
 </template>
 

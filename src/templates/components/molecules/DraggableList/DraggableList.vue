@@ -18,7 +18,7 @@
       @clone="logEvent"
     >
       <template #item="{ element, index }">
-        <div class="draggable" :key="element.id">
+        <div class="draggable-li" :key="element.id">
           {{ element.text }}
           <Sortable
             v-if="element.children"
@@ -39,7 +39,7 @@
             @clone="logEvent"
           >
             <template #item="{ element, index }">
-              <div class="draggable" :key="element.id">
+              <div class="draggable-li" :key="element.id">
                 {{ element.text }}
               </div>
             </template>
@@ -107,6 +107,54 @@ export default defineComponent({
           id: "4",
           text: "Four",
         },
+        {
+          id: "2",
+          text: "Two",
+        },
+        {
+          id: "3",
+          text: "Three",
+        },
+        {
+          id: "4",
+          text: "Four",
+        },
+        {
+          id: "2",
+          text: "Two",
+        },
+        {
+          id: "3",
+          text: "Three",
+        },
+        {
+          id: "4",
+          text: "Four",
+        },
+        {
+          id: "2",
+          text: "Two",
+        },
+        {
+          id: "3",
+          text: "Three",
+        },
+        {
+          id: "4",
+          text: "Four",
+        },
+        {
+          id: "2",
+          text: "Two",
+        },
+        {
+          id: "3",
+          text: "Three",
+        },
+        {
+          id: "4",
+          text: "Four",
+        },
       ];
     });
     const logEvent = (evt, evt2) => {
@@ -121,7 +169,7 @@ export default defineComponent({
     const scrollSpeed = ref(10);
     const options = computed(() => {
       return {
-        draggable: ".draggable",
+        draggable: ".draggable-li",
         animation: animating.value ? 150 : 0,
         ghostClass: "ghost",
         dragClass: "drag",
@@ -145,9 +193,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-draggable-list {
+  overflow: auto;
 }
 
-.draggable {
+.draggable-li {
   padding: 10px;
   margin: 10px;
   border: 1px solid var(--color-white);

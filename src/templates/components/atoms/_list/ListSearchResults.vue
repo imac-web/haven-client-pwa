@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import { PANEL_COMPONENTS } from "@/constants";
 
@@ -45,6 +45,12 @@ export default defineComponent({
         data,
       });
     }
+    function openPanelMobile(data) {
+      store.dispatch("panelMobile/open", {
+        component: PANEL_COMPONENTS.PanelMobile,
+        data,
+      });
+    }
 
     const close = () => {
       store.dispatch("panel/close");
@@ -53,6 +59,7 @@ export default defineComponent({
     const selectResult = (result) => {
       emitter.emit("selected-result", result);
       openPanel(result);
+      openPanelMobile(result);
     };
 
     return {
