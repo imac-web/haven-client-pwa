@@ -120,7 +120,6 @@ export default defineComponent({
     });
 
     const isMobile = computed(() => {
-      console.log("ISMOBILE", store.state.userContext.isMobile);
       return store.state.userContext.isMobile;
     });
 
