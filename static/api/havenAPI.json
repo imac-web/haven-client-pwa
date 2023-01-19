@@ -1,0 +1,21 @@
+{
+    "name": "Haven",
+    "version": "0.1",
+    "description": "Measure a place vivability and quality of life",
+    "services": [
+        {
+            "label": "Georisque",
+            "result": "1",
+            "rank": 1
+        },
+        {
+            "label": "Ecoles",
+            "result": "1",
+            "rank": 2
+        }
+    ],
+    "global": {
+        "label": "Indice de qualité de vie",
+        "result": "10"
+    }
+}
