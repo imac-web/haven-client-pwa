@@ -7,7 +7,12 @@
       aria-labelledby="panelTitle"
       aria-describedby="panelDescription"
     >
-      <component :is="panelComponent" :data="panelData" @close="close" />
+      <component
+        :is="panelComponent"
+        :data="panelData"
+        :index="panelIndex"
+        @close="close"
+      />
     </div>
   </Teleport>
 </template>
@@ -48,6 +53,9 @@ export default defineComponent({
     const panelData = computed(() => {
       return store.state.panel.data;
     });
+    const panelIndex = computed(() => {
+      return store.state.panel.index;
+    });
 
     const panelComponent = computed(() => {
       return store.state.panel.component;
@@ -72,6 +80,7 @@ export default defineComponent({
       panelComponent,
       close,
       hasPanel,
+      panelIndex,
     };
   },
 });

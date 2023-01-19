@@ -1,7 +1,6 @@
 <template>
   <div class="l-content" ref="content">
     <map-base class="l-content__map" />
-    <!-- <panel-mobile class="l-content__panel-mobile" /> -->
   </div>
 </template>
 
@@ -13,14 +12,12 @@ import { MODAL_COMPONENTS } from "@/constants";
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 import Hero from "@/templates/components/organisms/Hero/Hero.vue";
 import MapBase from "@/templates/components/organisms/Map/MapBase.vue";
-import PanelMobile from "@/templates/components/organisms/PanelMobile/PanelMobile.vue";
 
 export default defineComponent({
   name: "TheContent",
   components: {
     ButtonPrimary,
     Hero,
-    PanelMobile,
     MapBase,
   },
   setup() {

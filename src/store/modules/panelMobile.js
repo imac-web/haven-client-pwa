@@ -3,6 +3,7 @@
 // State
 const state = {
     data: false,
+    index: false,
     component: false,
 };
 
@@ -13,8 +14,8 @@ const getters = {
 
 // Actions
 const actions = {
-    open(store, { component, data }) {
-        store.commit("openPanelMobile", { component, data });
+    open(store, { component, data, index }) {
+        store.commit("openPanelMobile", { component, data, index });
     },
     close(store) {
         store.commit("closePanelMobile", false);
@@ -23,10 +24,10 @@ const actions = {
 
 // Mutations
 const mutations = {
-    openPanelMobile(state, { component, data, layout }) {
+    openPanelMobile(state, { component, data, index }) {
         state.component = component;
         state.data = data;
-        state.layout = layout || state.layout;
+        state.index = index;
     },
     closePanelMobile(state) {
         state.data = false;

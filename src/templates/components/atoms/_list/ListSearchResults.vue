@@ -14,13 +14,14 @@
 </template>
 
 <script>
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import { useStore } from "vuex";
 import { PANEL_COMPONENTS } from "@/constants";
 
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 
 import emitter from "@/services/emitter";
+import getIndexFromLocation from "@/utils/getIndexFromLocation";
 
 export default defineComponent({
   name: "ListSearchResults",
@@ -39,16 +40,18 @@ export default defineComponent({
     //open and close panel functions
     const store = useStore();
 
-    function openPanel(data) {
+    function openPanel(data, index) {
       store.dispatch("panel/open", {
         component: PANEL_COMPONENTS.Panel,
         data,
+        index,
       });
     }
-    function openPanelMobile(data) {
+    function openPanelMobile(data, index) {
       store.dispatch("panelMobile/open", {
         component: PANEL_COMPONENTS.PanelMobile,
         data,
+        index,
       });
     }
 
@@ -58,8 +61,12 @@ export default defineComponent({
 
     const selectResult = (result) => {
       emitter.emit("selected-result", result);
-      openPanel(result);
-      openPanelMobile(result);
+      let index = undefined;
+      getIndexFromLocation().then((data) => {
+        index = data;
+        openPanel(result, index);
+        openPanelMobile(result, index);
+      });
     };
 
     return {

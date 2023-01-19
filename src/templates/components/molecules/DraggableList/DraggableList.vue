@@ -1,7 +1,7 @@
 <template>
   <div class="m-draggable-list">
     <Sortable
-      :list="elements"
+      :list="data"
       item-key="id"
       :options="options"
       @change="logEvent"

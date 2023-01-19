@@ -12,6 +12,7 @@
       <component
         :is="panelMobileComponent"
         :data="panelMobileData"
+        :index="panelMobileIndex"
         @close="close"
       />
     </div>
@@ -115,6 +116,10 @@ export default defineComponent({
       return store.state.panelMobile.data;
     });
 
+    const panelMobileIndex = computed(() => {
+      return store.state.panelMobile.index;
+    });
+
     const panelMobileComponent = computed(() => {
       return store.state.panelMobile.component;
     });
@@ -149,6 +154,7 @@ export default defineComponent({
       panelMobileComponent,
       close,
       hasPanelMobile,
+      panelMobileIndex,
     };
   },
 });

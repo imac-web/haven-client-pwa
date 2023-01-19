@@ -4,14 +4,10 @@
     :class="{ 'o-nameof-panel-mobile--active': isOpen }"
   >
     <div class="o-nameof-panel-mobile__wrapper">
-      <div class="o-nameof-panel-mobile__wrapper-draggable">
-        <p>Given Address</p>
-        <h2>90%</h2>
-        <hr />
-      </div>
-      <div class="o-nameof-panel-mobile__wrapper-list">
-        <DraggableList />
-      </div>
+      <panel-results
+        class="o-nameof-panel-mobile__wrapper-results"
+        :data="index"
+      />
     </div>
   </div>
 </template>
@@ -20,16 +16,23 @@
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import DraggableList from "@/templates/components/molecules/DraggableList/DraggableList.vue";
+import PanelResults from "@/templates/components/organisms/Panels/PanelResults.vue";
 
 export default defineComponent({
-  name: "ProjectPanelMobile",
+  name: "PanelMobileComponent",
   components: {
     DraggableList,
+    PanelResults,
   },
   props: {
     data: {
       type: Object,
-      required: true,
+      required: false,
+      default: {},
+    },
+    index: {
+      type: Object,
+      required: false,
       default: {},
     },
   },
@@ -44,11 +47,13 @@ export default defineComponent({
     const isOpen = computed(() => store.getters["panelMobile/hasPanelMobile"]);
 
     const data = toRef(props, "data");
+    const index = toRef(props, "index");
 
     return {
       close,
       data,
       isOpen,
+      index,
     };
   },
 });
@@ -70,18 +75,8 @@ export default defineComponent({
   //overflow-y: hidden;
 
   &__wrapper {
-    &-draggable {
-      font-size: 1.5em;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    &-list {
-      //background-color: red;
-      //max-height: 400px;
-      // overflow-y: auto;
-      overflow: auto !important;
-      height: 50vh;
+    &-results {
+      --results-txt-color: var(--color-dark);
     }
   }
 }
