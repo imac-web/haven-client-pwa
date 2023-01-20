@@ -6,7 +6,10 @@
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { PANEL_COMPONENTS } from "@/constants";
 
+import getIndexFromLocation from "@/utils/getIndexFromLocation";
 import "leaflet/dist/leaflet.css";
 import L, { map } from "leaflet";
 
@@ -56,12 +59,41 @@ export default defineComponent({
         })
         .addTo(map);
 
+      //open and close panel functions
+      const store = useStore();
+
+      function openPanel(data, index) {
+        store.dispatch("panel/open", {
+          component: PANEL_COMPONENTS.Panel,
+          data,
+          index,
+        });
+      }
+      function openPanelMobile(data, index) {
+        store.dispatch("panelMobile/open", {
+          component: PANEL_COMPONENTS.PanelMobile,
+          data,
+          index,
+        });
+      }
+
+      const close = () => {
+        store.dispatch("panel/close");
+      };
+
       function onMapClick(e) {
         popup
           .setLatLng(e.latlng)
           .setContent("You clicked the map at " + e.latlng.toString())
           .openOn(map);
         emitter.emit("selected-location", e.latlng);
+        let location = e.latlng;
+        let index = undefined;
+        getIndexFromLocation().then((data) => {
+          index = data;
+          openPanel(location, index);
+          openPanelMobile(location, index);
+        });
       }
 
       map.on("click", onMapClick);
