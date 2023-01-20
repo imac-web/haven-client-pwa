@@ -3,11 +3,11 @@
     <div class="o-panel-results__wrapper">
       <p>{{ data.label }}</p>
       <div class="o-panel-results__wrapper-number">
-        {{ index.global }}
+        {{ index.global?.result }}
       </div>
       <hr />
       <div class="o-panel-results__wrapper-list">
-        <DraggableList :data="index.services" />
+        <DraggableList :data="index" />
       </div>
     </div>
   </div>
@@ -36,6 +36,8 @@ export default defineComponent({
   setup(props) {
     const data = toRef(props, "data");
     const index = toRef(props, "index");
+
+    console.log("index", index.value.global?.label);
 
     return {
       close,
