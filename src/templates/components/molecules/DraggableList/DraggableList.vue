@@ -2,7 +2,7 @@
   <div class="m-draggable-list">
     <Sortable
       :list="elements"
-      item-key="label"
+      item-key="rank"
       :options="options"
       @change="logEvent"
       @choose="logEvent"
@@ -18,12 +18,12 @@
       @clone="logEvent"
     >
       <template #item="{ element, index }">
-        <div class="draggable-li" :key="element.label">
+        <div class="draggable-li" :key="element.rank">
           {{ element.label }}
           <Sortable
             v-if="element.contains"
             :list="element.contains"
-            :item-key="(item) => item.label"
+            :item-key="(item) => item.rank"
             :options="options"
             @change="logEvent"
             @choose="logEvent"
@@ -39,7 +39,7 @@
             @clone="logEvent"
           >
             <template #item="{ element, index }">
-              <div class="draggable-li" :key="element.label">
+              <div class="draggable-li" :key="element.rank">
                 {{ element.label }}
               </div>
             </template>
@@ -69,15 +69,25 @@ export default defineComponent({
   setup(props) {
     const data = toRef(props, "data");
 
-    const elements = computed(() => {
+    const api = computed(() => {
       return Object.keys(data.value).map((key) => {
         return {
           id: key,
           label: data.value[key].label,
+          rank: data.value[key].rank,
           contains: data.value[key].contains,
         };
       });
     });
+
+    //order by rank and save in new array
+    const elements = computed(() => {
+      return api.value.sort((a, b) => {
+        return a.rank - b.rank;
+      });
+    });
+
+    console.log(elements.value);
 
     const logEvent = (evt, evt2) => {
       if (evt2) {
