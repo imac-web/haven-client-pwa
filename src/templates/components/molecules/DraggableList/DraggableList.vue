@@ -1,8 +1,8 @@
 <template>
   <div class="m-draggable-list">
     <Sortable
-      :list="data"
-      item-key="id"
+      :list="elements"
+      item-key="label"
       :options="options"
       @change="logEvent"
       @choose="logEvent"
@@ -18,12 +18,12 @@
       @clone="logEvent"
     >
       <template #item="{ element, index }">
-        <div class="draggable-li" :key="element.id">
-          {{ element.text }}
+        <div class="draggable-li" :key="element.label">
+          {{ element.label }}
           <Sortable
-            v-if="element.children"
-            :list="element.children"
-            :item-key="(item) => item.id"
+            v-if="element.contains"
+            :list="element.contains"
+            :item-key="(item) => item.label"
             :options="options"
             @change="logEvent"
             @choose="logEvent"
@@ -39,8 +39,8 @@
             @clone="logEvent"
           >
             <template #item="{ element, index }">
-              <div class="draggable-li" :key="element.id">
-                {{ element.text }}
+              <div class="draggable-li" :key="element.label">
+                {{ element.label }}
               </div>
             </template>
           </Sortable>
@@ -70,93 +70,15 @@ export default defineComponent({
     const data = toRef(props, "data");
 
     const elements = computed(() => {
-      return [
-        {
-          id: "1",
-          text: "One",
-          children: [
-            {
-              id: "1-1",
-              text: "One-One",
-              children: [
-                {
-                  id: "1-1-1",
-                  text: "One-One-One",
-                },
-                {
-                  id: "1-1-2",
-                  text: "One-One-Two",
-                },
-              ],
-            },
-            {
-              id: "1-2",
-              text: "One-Two",
-            },
-          ],
-        },
-        {
-          id: "2",
-          text: "Two",
-        },
-        {
-          id: "3",
-          text: "Three",
-        },
-        {
-          id: "4",
-          text: "Four",
-        },
-        {
-          id: "2",
-          text: "Two",
-        },
-        {
-          id: "3",
-          text: "Three",
-        },
-        {
-          id: "4",
-          text: "Four",
-        },
-        {
-          id: "2",
-          text: "Two",
-        },
-        {
-          id: "3",
-          text: "Three",
-        },
-        {
-          id: "4",
-          text: "Four",
-        },
-        {
-          id: "2",
-          text: "Two",
-        },
-        {
-          id: "3",
-          text: "Three",
-        },
-        {
-          id: "4",
-          text: "Four",
-        },
-        {
-          id: "2",
-          text: "Two",
-        },
-        {
-          id: "3",
-          text: "Three",
-        },
-        {
-          id: "4",
-          text: "Four",
-        },
-      ];
+      return Object.keys(data.value).map((key) => {
+        return {
+          id: key,
+          label: data.value[key].label,
+          contains: data.value[key].contains,
+        };
+      });
     });
+
     const logEvent = (evt, evt2) => {
       if (evt2) {
         //console.log(evt, evt2);

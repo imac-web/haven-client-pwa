@@ -7,7 +7,7 @@
       </div>
       <hr />
       <div class="o-panel-results__wrapper-list">
-        <DraggableList :data="index" />
+        <DraggableList :data="index.services" />
       </div>
     </div>
   </div>
