@@ -8,7 +8,7 @@
       aria-labelledby="panelMobileTitle"
       aria-describedby="panelMobileDescription"
     >
-      <navigation-search />
+      <navigation-search class="search" />
       <component
         :is="panelMobileComponent"
         :data="panelMobileData"
@@ -46,7 +46,7 @@ export default defineComponent({
       fitScreenHeight: true,
       backdrop: true,
       backdropOpacity: 0.4,
-      dragBy: [".m-navigation-search", ".draggable"],
+      dragBy: [".search", ".draggable"],
     };
     var drawer = undefined;
 
@@ -166,11 +166,6 @@ export default defineComponent({
   --panel-mobile-width: 100vw;
   --panel-mobile-height: 20rem;
 
-  //position: fixed;
-  //top: 50%;
-  //right: 5%;
-  //z-index: 102;
-  //background: var(--color-dark);
   opacity: 0;
   pointer-events: none;
 
@@ -181,25 +176,6 @@ export default defineComponent({
   overflow-y: hidden !important;
 
   transition: opacity 0.4s linear;
-
-  //width: var(--panel-mobile-width);
-  // height: var(--panel-mobile-height);
-  /*   @include min(md) {
-    width: var(--panel-mobile-width);
-    height: var(--panel-mobile-height);
-  }
-
-  @include min(md) {
-    padding: var(--panel-mobile-padding);
-  }
-  @include max(md) {
-    @include container("default");
-  }
-
-  @include min(md) {
-    display: block;
-  }
-  display: none; */
 
   &.is-open {
     opacity: 1;

@@ -31,6 +31,60 @@
             ]
         },
         {
+            "label": "Georisque",
+            "result": 1,
+            "rank": 1,
+            "contains": [
+                {
+                    "label": "Risques naturels",
+                    "result": 1,
+                    "rank": 1
+                },
+                {
+                    "label": "Risques technologiques",
+                    "result": 1,
+                    "rank": 1
+                },
+                {
+                    "label": "Risques sanitaires",
+                    "result": 1,
+                    "rank": 1
+                },
+                {
+                    "label": "Risques environnementaux",
+                    "result": 1,
+                    "rank": 1
+                }
+            ]
+        },
+        {
+            "label": "Georisque",
+            "result": 1,
+            "rank": 1,
+            "contains": [
+                {
+                    "label": "Risques naturels",
+                    "result": 1,
+                    "rank": 1
+                },
+                {
+                    "label": "Risques technologiques",
+                    "result": 1,
+                    "rank": 1
+                },
+                {
+                    "label": "Risques sanitaires",
+                    "result": 1,
+                    "rank": 1
+                },
+                {
+                    "label": "Risques environnementaux",
+                    "result": 1,
+                    "rank": 1
+                }
+            ]
+        },
+        {
             "label": "Ecoles",
             "result": 1,
             "rank": 2,

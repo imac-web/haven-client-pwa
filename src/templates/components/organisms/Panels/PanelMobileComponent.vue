@@ -6,7 +6,8 @@
     <div class="o-nameof-panel-mobile__wrapper">
       <panel-results
         class="o-nameof-panel-mobile__wrapper-results"
-        :data="index"
+        :data="data"
+        :index="index"
       />
     </div>
   </div>
@@ -64,10 +65,6 @@ export default defineComponent({
   &--to-close {
     .l-panel-mobile {
       opacity: 0;
-    }
-    .backdrop {
-      opacity: 0;
-      visibility: hidden;
     }
   }
 

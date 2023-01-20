@@ -62,25 +62,11 @@ export default defineComponent({
     .l-panel {
       opacity: 0;
     }
-    .backdrop {
-      opacity: 0;
-      visibility: hidden;
-    }
   }
 
   color: var(--color-white);
 
   &__wrapper {
-    &-number {
-      font-size: 1.5em;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    &-list {
-      max-height: 400px;
-      overflow-y: auto;
-    }
   }
 }
 </style>
