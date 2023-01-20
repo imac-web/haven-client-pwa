@@ -163,10 +163,6 @@ export default defineComponent({
   &__header {
     @include min(md) {
       display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
       z-index: 100;
     }
     display: none;
