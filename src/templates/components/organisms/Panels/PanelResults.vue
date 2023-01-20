@@ -3,7 +3,7 @@
     <div class="o-panel-results__wrapper">
       <p>{{ data.label }}</p>
       <div class="o-panel-results__wrapper-number">
-        {{ index.global?.result }}
+        {{ index.global?.score }}
       </div>
       <hr />
       <div class="o-panel-results__wrapper-list">
