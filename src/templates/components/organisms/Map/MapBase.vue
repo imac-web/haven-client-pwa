@@ -11,16 +11,7 @@ import { PANEL_COMPONENTS } from "@/constants";
 
 import getIndexFromLocation from "@/utils/getIndexFromLocation";
 import "leaflet/dist/leaflet.css";
-import L, { map } from "leaflet";
-L.Icon.Default.imagePath = ".";
-// OR
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "node_modules/leaflet/dist/images/marker-icon-2x.png",
-  iconUrl: "node_modules/leaflet/dist/images/marker-icon.png",
-  shadowUrl: "node_modules/leaflet/dist/images/marker-shadow.png",
-});
+import L, { icon, map } from "leaflet";
 
 import emitter from "@/services/emitter";
 
@@ -33,6 +24,12 @@ export default defineComponent({
     const mapContainer = ref(null);
     let map = null;
     let marker = null;
+    const markerIcon = L.icon({
+      iconUrl: "static/images/pinpoint.svg",
+      iconSize: [48, 48], // size of the icon
+      iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
+      popupAnchor: [0, -45], // point from which the popup should open relative to the iconAnchor
+    });
     const SelectedResult = ref([]);
     emitter.on("selected-result", (data) => {
       emitter.emit("slide-down-panel", true);
@@ -44,10 +41,15 @@ export default defineComponent({
         ],
         13
       );
-      marker = L.marker([
-        SelectedResult.value.raw.geometry.coordinates[1],
-        SelectedResult.value.raw.geometry.coordinates[0],
-      ]).addTo(map);
+      marker = L.marker(
+        [
+          SelectedResult.value.raw.geometry.coordinates[1],
+          SelectedResult.value.raw.geometry.coordinates[0],
+        ],
+        {
+          icon: markerIcon,
+        }
+      ).addTo(map);
     });
 
     // ----- Mapbox -----
