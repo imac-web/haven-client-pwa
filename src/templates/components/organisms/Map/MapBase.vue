@@ -48,7 +48,7 @@ export default defineComponent({
           SelectedResult.value.raw.geometry.coordinates[0],
         ],
         {
-          //icon: markerIcon,
+          icon: markerIcon,
         }
       ).addTo(map);
     });
