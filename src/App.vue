@@ -10,7 +10,7 @@ import {
   nextTick,
 } from "vue";
 import { isTouch } from "@/utils";
-
+import "leaflet/dist/leaflet.css";
 import "@/assets/scss/global.scss";
 import TheBase from "@/templates/layout/TheBase.vue";
 
