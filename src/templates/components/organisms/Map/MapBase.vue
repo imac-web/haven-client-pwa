@@ -129,7 +129,6 @@ export default defineComponent({
                     .openOn(map);
                 emitter.emit("selected-location", e.latlng);
                 getServices(e.latlng.lat, e.latlng.lng, 1000);
-                getServices(e.latlng.lat, e.latlng.lng, 1000);
                 let location = e.latlng;
                 let index = undefined;
                 getIndexFromLocation().then((data) => {
