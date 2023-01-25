@@ -45,7 +45,7 @@ export default defineComponent({
                     ""
             );
             // Parse the JSON response
-            console.log("response", response);
+            // console.log("response", response);
             const services = await response.json();
             // Return the risks data
             return services;
@@ -53,14 +53,12 @@ export default defineComponent({
 
         const getServices = async (lat, lon, radius) => {
             // Fetching risks data
-            const risks = await fetchServices(lat, lon, radius);
+            const serv = await fetchServices(lat, lon, radius);
             // Return the risks
-            return risks.data;
+            return serv.data;
         };
 
         emitter.on("selected-result", (data) => {
-            console.log("selected-result X", data.x);
-            console.log("selected-result Y", data.y);
             getServices(data.y, data.x, 1000);
             emitter.emit("slide-down-panel", true);
             SelectedResult.value = data;
@@ -130,6 +128,7 @@ export default defineComponent({
                     .setContent("You clicked the map at " + e.latlng.toString())
                     .openOn(map);
                 emitter.emit("selected-location", e.latlng);
+                getServices(e.latlng.lat, e.latlng.lng, 1000);
                 getServices(e.latlng.lat, e.latlng.lng, 1000);
                 let location = e.latlng;
                 let index = undefined;
