@@ -83,7 +83,7 @@ export default defineComponent({
         // ----- Mapbox -----
         function setupGeoSearch() {
             map = L.map(mapContainer.value, { zoomControl: false }).setView(
-                [51.505, -0.09],
+                [48.84277323737967, 2.587709798324433],
                 13
             );
 
