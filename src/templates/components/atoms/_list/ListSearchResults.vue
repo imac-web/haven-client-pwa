@@ -68,8 +68,8 @@ export default defineComponent({
         .catch((err) => {
           console.log(err);
         });
-      openPanel(location, services);
-      openPanelMobile(location, services);
+      openPanel(result, services);
+      openPanelMobile(result, services);
     };
 
     return {

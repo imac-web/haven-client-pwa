@@ -37,8 +37,6 @@ export default defineComponent({
     const data = toRef(props, "data");
     const index = toRef(props, "index");
 
-    console.log("index", index.value.global?.label);
-
     return {
       close,
       data,
