@@ -108,14 +108,8 @@ export default defineComponent({
           .catch((err) => {
             console.log(err);
           });
-        console.log("SERVICES::", services);
         openPanel(location, services);
         openPanelMobile(location, services);
-        /* getIndexFromLocation().then((data) => {
-          //index = data;
-          //openPanel(location, index);
-          openPanelMobile(location, index);
-        }); */
       }
 
       map.on("click", onMapClick);
