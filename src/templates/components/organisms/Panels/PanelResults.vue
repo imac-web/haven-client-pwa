@@ -6,6 +6,9 @@
         {{ index.global?.score }}
       </div>
       <hr />
+      <div class="o-panel-results__wrapper-charts">
+        <charts-doughnut :data="chartData" />
+      </div>
       <div class="o-panel-results__wrapper-list">
         <DraggableList :data="index.services" />
       </div>
@@ -16,10 +19,12 @@
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import DraggableList from "@/templates/components/molecules/DraggableList/DraggableList.vue";
+import ChartsDoughnut from "@/templates/components/molecules/Charts/ChartsDoughnut.vue";
 export default defineComponent({
   name: "PanelResults",
   components: {
     DraggableList,
+    ChartsDoughnut,
   },
   props: {
     data: {
@@ -37,10 +42,16 @@ export default defineComponent({
     const data = toRef(props, "data");
     const index = toRef(props, "index");
 
+    const chartData = {
+      labels: ["January", "February", "March"],
+      datasets: [{ data: [40, 20, 12] }],
+    };
+
     return {
       close,
       data,
       index,
+      chartData,
     };
   },
 });
