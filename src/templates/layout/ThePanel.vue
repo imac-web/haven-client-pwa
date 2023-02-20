@@ -114,8 +114,7 @@ export default defineComponent({
 
         left: calc(100vw - var(--panel-width));
         top: var(--navbar-height);
-    }
-    @include min(md) {
+
         padding: var(--panel-padding);
         display: block;
     }
