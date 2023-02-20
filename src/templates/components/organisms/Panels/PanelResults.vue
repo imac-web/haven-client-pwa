@@ -21,6 +21,9 @@
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import DraggableList from "@/templates/components/molecules/DraggableList/DraggableList.vue";
 import ChartsDoughnut from "@/templates/components/molecules/Charts/ChartsDoughnut.vue";
+
+import emitter from "@/services/emitter";
+
 export default defineComponent({
     name: "PanelResults",
     components: {
@@ -48,10 +51,23 @@ export default defineComponent({
             datasets: [{ data: [40, 20, 12] }],
         };
         //TODO - recalculate lat and long on click
-        const positionCoords = String(data.value.lat).concat(
-            " ",
-            String(data.value.lng)
+        const positionCoords = ref(
+            String(data.value.lat.toFixed(5)).concat(
+                " ",
+                String(data.value.lng.toFixed(5))
+            )
         );
+
+        emitter.on("selected-location", (data) => {
+            if (data) {
+                positionCoords.value = String(data.lat.toFixed(5)).concat(
+                    " ",
+                    String(data.lng.toFixed(5))
+                );
+            }
+        });
+
+        console.log("COORDS", positionCoords);
 
         return {
             close,
