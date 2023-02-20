@@ -2,7 +2,8 @@
     <div class="o-panel-results">
         <div class="o-panel-results__wrapper">
             <p v-if="data.label">{{ data.label }}</p>
-            <p v-else>{{ positionCoords }}</p>
+            <p v-else-if="positionCoords">{{ positionCoords }}</p>
+            <p v-else>{{ positionCoordsFirst }}</p>
             <div class="o-panel-results__wrapper-number">
                 {{ index.global?.score }}
             </div>
@@ -51,6 +52,12 @@ export default defineComponent({
             datasets: [{ data: [40, 20, 12] }],
         };
 
+        const positionCoordsFirst = ref(
+            String(data.value.lat.toFixed(5)).concat(
+                " ",
+                String(data.value.lng.toFixed(5))
+            )
+        );
         const positionCoords = ref();
 
         emitter.on("selected-location", (data) => {
@@ -68,6 +75,7 @@ export default defineComponent({
             index,
             chartData,
             positionCoords,
+            positionCoordsFirst,
         };
     },
 });
