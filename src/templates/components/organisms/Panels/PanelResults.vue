@@ -47,7 +47,7 @@ export default defineComponent({
             labels: ["January", "February", "March"],
             datasets: [{ data: [40, 20, 12] }],
         };
-
+        //TODO - recalculate lat and long on click
         const positionCoords = String(data.value.lat).concat(
             " ",
             String(data.value.lng)
