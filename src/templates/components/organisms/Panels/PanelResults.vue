@@ -53,10 +53,7 @@ export default defineComponent({
         };
 
         const positionCoordsFirst = ref(
-            String(data.value.lat.toFixed(5)).concat(
-                " ",
-                String(data.value.lng.toFixed(5))
-            )
+            String(data.value.lat).concat(" ", String(data.value.lng))
         );
         const positionCoords = ref();
 
