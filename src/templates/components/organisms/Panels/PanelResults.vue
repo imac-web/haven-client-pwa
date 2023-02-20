@@ -50,13 +50,8 @@ export default defineComponent({
             labels: ["January", "February", "March"],
             datasets: [{ data: [40, 20, 12] }],
         };
-        //TODO - recalculate lat and long on click
-        const positionCoords = ref(
-            String(data.value.lat.toFixed(5)).concat(
-                " ",
-                String(data.value.lng.toFixed(5))
-            )
-        );
+
+        const positionCoords = ref();
 
         emitter.on("selected-location", (data) => {
             if (data) {
@@ -66,8 +61,6 @@ export default defineComponent({
                 );
             }
         });
-
-        console.log("COORDS", positionCoords);
 
         return {
             close,

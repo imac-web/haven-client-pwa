@@ -103,11 +103,11 @@ export default defineComponent({
             };
 
             async function onMapClick(e) {
+                emitter.emit("selected-location", e.latlng);
                 popup
                     .setLatLng(e.latlng)
                     .setContent("You clicked the map at " + e.latlng.toString())
                     .openOn(map);
-                emitter.emit("selected-location", e.latlng);
                 let location = e.latlng;
                 let services = await getServices(
                     location.lat,
