@@ -48,9 +48,9 @@ export default defineComponent({
             datasets: [{ data: [40, 20, 12] }],
         };
 
-        let positionCoords = String(data.value.lat.toFixed(5)).concat(
+        const positionCoords = String(data.value.lat).concat(
             " ",
-            String(data.value.lng.toFixed(5))
+            String(data.value.lng)
         );
 
         return {
