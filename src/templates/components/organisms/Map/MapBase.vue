@@ -90,13 +90,12 @@ export default defineComponent({
       var lc = L.control
         .locate({
           enableHighAccuracy: true,
-          flyTo: true,
+          //flyTo: true,
           position: "topleft",
           drawCircle: false,
           drawMarker: false,
         })
         .addTo(map);
-      //L.control.zoom({ position: "bottomleft" }).addTo(map);
 
       var popup = L.popup();
 
@@ -106,21 +105,19 @@ export default defineComponent({
         })
         .addTo(map);
 
-      async function onLocationFound(e) {
+      async function callIndexAPI(e) {
+        let location = e.latlng;
+        let services = await getServices(location.lat, location.lng, 1000);
+        openPanel(location, services);
+        openPanelMobile(location, services);
+      }
+
+      function onLocationFound(e) {
+        emitter.emit("selected-location", e.latlng);
         L.marker(e.latlng, {
           icon: markerIcon,
         }).addTo(map);
-
-        let location = e.latlng;
-        let services = await getServices(location.lat, location.lng, 1000)
-          .then((data) => {
-            return data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        openPanel(location, services);
-        openPanelMobile(location, services);
+        callIndexAPI(e);
       }
 
       map.on("locationfound", onLocationFound);
@@ -151,25 +148,17 @@ export default defineComponent({
 
       const close = () => {
         store.dispatch("panel/close");
+        store.dispatch("panelMobile/close");
       };
 
-      async function onMapClick(e) {
+      function onMapClick(e) {
         lc.stop();
         emitter.emit("selected-location", e.latlng);
         popup
           .setLatLng(e.latlng)
           .setContent("You clicked the map at " + e.latlng.toString())
           .openOn(map);
-        let location = e.latlng;
-        let services = await getServices(location.lat, location.lng, 1000)
-          .then((data) => {
-            return data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        openPanel(location, services);
-        openPanelMobile(location, services);
+        callIndexAPI(e);
       }
 
       map.on("click", onMapClick);
