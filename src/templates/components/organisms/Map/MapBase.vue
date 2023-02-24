@@ -91,6 +91,8 @@ export default defineComponent({
 
       var layerControl = L.control.layers(baseMaps).addTo(map);
 
+      //L.control.zoom({ position: "bottomleft" }).addTo(map);
+
       var popup = L.popup();
 
       L.control
@@ -164,6 +166,10 @@ export default defineComponent({
     @include min(md) {
       //height: 50vh;
     }
+  }
+
+  .leaflet-control-container {
+    height: calc(100% - 5rem);
   }
 }
 </style>
