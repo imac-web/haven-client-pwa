@@ -13,6 +13,9 @@ import getServices from "@/utils/getServices";
 import "leaflet/dist/leaflet.css";
 import L, { icon, map } from "leaflet";
 
+import "leaflet.locatecontrol/dist/L.Control.Locate.css";
+import "leaflet.locatecontrol/dist/L.Control.Locate.min.js";
+
 import emitter from "@/services/emitter";
 
 export default defineComponent({
@@ -72,6 +75,7 @@ export default defineComponent({
       );
 
       map = L.map(mapContainer.value, {
+        tap: false,
         zoomControl: false,
         layers: [dark, osm, satelite],
       }).setView([48.84277323737967, 2.587709798324433], 13);
@@ -83,7 +87,15 @@ export default defineComponent({
       };
 
       var layerControl = L.control.layers(baseMaps).addTo(map);
-
+      var lc = L.control
+        .locate({
+          enableHighAccuracy: true,
+          flyTo: true,
+          position: "topleft",
+          drawCircle: false,
+          drawMarker: false,
+        })
+        .addTo(map);
       //L.control.zoom({ position: "bottomleft" }).addTo(map);
 
       var popup = L.popup();
@@ -93,6 +105,31 @@ export default defineComponent({
           position: "topleft",
         })
         .addTo(map);
+
+      async function onLocationFound(e) {
+        L.marker(e.latlng, {
+          icon: markerIcon,
+        }).addTo(map);
+
+        let location = e.latlng;
+        let services = await getServices(location.lat, location.lng, 1000)
+          .then((data) => {
+            return data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        openPanel(location, services);
+        openPanelMobile(location, services);
+      }
+
+      map.on("locationfound", onLocationFound);
+
+      function onLocationError(e) {
+        alert(e.message);
+      }
+
+      map.on("locationerror", onLocationError);
 
       //open and close panel functions
       const store = useStore();
@@ -117,6 +154,7 @@ export default defineComponent({
       };
 
       async function onMapClick(e) {
+        lc.stop();
         emitter.emit("selected-location", e.latlng);
         popup
           .setLatLng(e.latlng)
