@@ -2,7 +2,8 @@
   <div
     class="l-base"
     :class="`${globalUserContext}`"
-    :style="`--app-height: ${appHeight}px;`"
+    :style="`--header-height: ${headerHeight}px; --app-height: ${appHeight}px;`"
+    id="base"
   >
     <!-- <the-loader></the-loader> -->
     <the-header class="l-base__header" />
@@ -12,8 +13,8 @@
       <!-- <the-footer></the-footer> -->
       <the-panel-mobile />
     </main>
-    <the-modal />
     <the-panel />
+    <the-modal />
   </div>
 </template>
 
@@ -114,6 +115,10 @@ export default defineComponent({
     ////////////////////////////////
     const appHeight = ref(window.innerHeight);
 
+    const headerHeight = computed(() => {
+      return store.state.navigation.navHeight;
+    });
+
     const isMobile = computed(() => {
       return store.state.userContext.isMobile;
     });
@@ -153,6 +158,7 @@ export default defineComponent({
       isLoading,
       globalUserContext,
       appHeight,
+      headerHeight,
     };
   },
 });

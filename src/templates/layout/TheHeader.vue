@@ -1,11 +1,17 @@
 <template>
-  <div class="l-header">
+  <div class="l-header" ref="navBar">
     <navigation />
   </div>
 </template>
 
 <script>
-import { defineComponent, computed } from "vue";
+import {
+  defineComponent,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+  ref,
+} from "vue";
 import { useStore } from "vuex";
 import { MODAL_COMPONENTS } from "@/constants";
 
@@ -27,8 +33,38 @@ export default defineComponent({
       });
     }
 
+    const navBar = ref(null);
+
+    const isMobile = computed(() => {
+      return store.state.userContext.isMobile;
+    });
+
+    let height = null;
+
+    function setNavStoreHeight(height) {
+      store.dispatch("navigation/setNavHeightGlobally", height);
+    }
+
+    function setNavHeight() {
+      height = navBar.value.offsetHeight;
+      setNavStoreHeight(height);
+    }
+
+    function onResize() {
+      !isMobile.value ? setNavHeight() : null;
+    }
+
+    onMounted(() => {
+      setNavHeight();
+      window.addEventListener("resize", onResize);
+    });
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", onResize);
+    });
+
     return {
       openModal,
+      navBar,
     };
   },
 });

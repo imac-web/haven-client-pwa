@@ -106,14 +106,15 @@ export default defineComponent({
         .addTo(map);
 
       async function callIndexAPI(e) {
+        emitter.emit("selected-location", e.latlng);
         let location = e.latlng;
         let services = await getServices(location.lat, location.lng, 1000);
+
         openPanel(location, services);
         openPanelMobile(location, services);
       }
 
       function onLocationFound(e) {
-        emitter.emit("selected-location", e.latlng);
         L.marker(e.latlng, {
           icon: markerIcon,
         }).addTo(map);
@@ -153,7 +154,6 @@ export default defineComponent({
 
       function onMapClick(e) {
         lc.stop();
-        emitter.emit("selected-location", e.latlng);
         popup
           .setLatLng(e.latlng)
           .setContent("You clicked the map at " + e.latlng.toString())
@@ -189,7 +189,7 @@ export default defineComponent({
   }
 
   .leaflet-control-container {
-    height: calc(100% - 5rem);
+    height: calc(100% - var(--header-height));
   }
 }
 </style>

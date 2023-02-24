@@ -39,6 +39,7 @@ export default defineComponent({
 
 <style lang="scss">
 .l-content {
+  --map-width: 100vw;
   @include max(md) {
     @include fullscreen;
   }
@@ -55,7 +56,7 @@ export default defineComponent({
 
   &__map {
     @include min(md) {
-      width: 100vw;
+      width: var(--map-width);
     }
   }
 }

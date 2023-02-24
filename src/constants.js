@@ -8,6 +8,7 @@ export const STORE_MODULES = Object.freeze([
     "panelMobile",
     "scroll",
     "userContext",
+    "navigation",
 ]);
 
 export const MODAL_COMPONENTS = Object.freeze({ Modal: "ModalComponent" });
