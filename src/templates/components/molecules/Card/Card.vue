@@ -6,7 +6,7 @@
       </div>
       <div class="m-card__content-right">
         <ve-progress
-          :progress="data.score * 100"
+          :progress="data.score * 10"
           :angle="90"
           size="100"
           emptyColor="transparent"
