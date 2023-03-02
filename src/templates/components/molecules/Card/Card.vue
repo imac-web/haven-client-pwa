@@ -1,6 +1,13 @@
 <template>
   <div class="m-card">
-    <ve-progress :progress="50" />
+    <div class="m-card__content">
+      <div class="m-card__content-left">
+        <h3>{{ data.label }}</h3>
+      </div>
+      <div class="m-card__content-right">
+        <ve-progress :progress="data.score * 100" :angle="90" size="100" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,6 +47,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-card {
-  overflow: auto;
+  --bg-color: var(--color-green);
+  background-color: var(--bg-color);
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    &-left {
+    }
+    &-right {
+    }
+  }
 }
 </style>

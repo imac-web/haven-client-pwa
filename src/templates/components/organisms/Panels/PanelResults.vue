@@ -8,7 +8,9 @@
         {{ index.global?.score }}
       </div>
       <hr />
-      <div class="o-panel-results__wrapper-charts"></div>
+      <div class="o-panel-results__wrapper-result">
+        <ve-progress :progress="50" :angle="90" emptyColor="transparent" />
+      </div>
       <div class="o-panel-results__wrapper-list">
         <cards-list :data="index.services" />
       </div>
@@ -19,13 +21,14 @@
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
-
+import { VeProgress } from "vue-ellipse-progress";
 import emitter from "@/services/emitter";
 
 export default defineComponent({
   name: "PanelResults",
   components: {
     CardsList,
+    VeProgress,
   },
   props: {
     data: {
@@ -88,7 +91,6 @@ export default defineComponent({
 
     &-list {
       max-height: 400px;
-      overflow-y: auto;
     }
   }
 }

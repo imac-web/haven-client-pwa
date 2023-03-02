@@ -37,6 +37,5 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-cards-list {
-  overflow: auto;
 }
 </style>
