@@ -2590,6 +2590,11 @@ vue-demi@*:
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
   integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
+vue-ellipse-progress@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/vue-ellipse-progress/-/vue-ellipse-progress-2.1.1.tgz#1d35d1ae0a822b89b2c1c3807fc9caba23b6f4b4"
+  integrity sha512-pYLzKbhRJ9+htcMnuF6WyJkNAC2b8g+wy8npYJbwkYSatICft3ezvlinx7G0lBn7+iPBkRbihY6F9Hc+Mbp21Q==
+
 vue-jest@^5.0.0-0:
   version "5.0.0-alpha.10"
   resolved "https://registry.yarnpkg.com/vue-jest/-/vue-jest-5.0.0-alpha.10.tgz#4326977b3b0268b1def140f3b69113c2d82fb090"
