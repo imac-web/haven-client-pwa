@@ -9,7 +9,11 @@
       </div>
       <hr />
       <div class="o-panel-results__wrapper-result">
-        <ve-progress :progress="50" :angle="90" emptyColor="transparent" />
+        <ve-progress
+          :progress="index.global?.score * 10"
+          :angle="90"
+          emptyColor="transparent"
+        />
       </div>
       <div class="o-panel-results__wrapper-list">
         <cards-list :data="index.services" />

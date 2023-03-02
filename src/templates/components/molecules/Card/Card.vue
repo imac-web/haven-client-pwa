@@ -5,7 +5,12 @@
         <h3>{{ data.label }}</h3>
       </div>
       <div class="m-card__content-right">
-        <ve-progress :progress="data.score * 100" :angle="90" size="100" />
+        <ve-progress
+          :progress="data.score * 100"
+          :angle="90"
+          size="100"
+          emptyColor="transparent"
+        />
       </div>
     </div>
   </div>
