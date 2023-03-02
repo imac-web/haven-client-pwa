@@ -6,12 +6,10 @@
 
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
-import ChartsDoughnut from "@/templates/components/molecules/Charts/ChartsDoughnut.vue";
 import { VeProgress } from "vue-ellipse-progress";
 export default defineComponent({
   name: "Card",
   components: {
-    ChartsDoughnut,
     VeProgress,
   },
   props: {

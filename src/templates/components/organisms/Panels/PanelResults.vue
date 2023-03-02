@@ -8,9 +8,7 @@
         {{ index.global?.score }}
       </div>
       <hr />
-      <div class="o-panel-results__wrapper-charts">
-        <charts-doughnut :data="chartData" />
-      </div>
+      <div class="o-panel-results__wrapper-charts"></div>
       <div class="o-panel-results__wrapper-list">
         <cards-list :data="index.services" />
       </div>
@@ -20,7 +18,6 @@
 
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
-import ChartsDoughnut from "@/templates/components/molecules/Charts/ChartsDoughnut.vue";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
 
 import emitter from "@/services/emitter";
@@ -28,7 +25,6 @@ import emitter from "@/services/emitter";
 export default defineComponent({
   name: "PanelResults",
   components: {
-    ChartsDoughnut,
     CardsList,
   },
   props: {
