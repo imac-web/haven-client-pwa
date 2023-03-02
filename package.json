@@ -26,8 +26,6 @@
         "loader-utils": "^3.2.1",
         "mitt": "^3.0.0",
         "mobile-device-detect": "^0.4.3",
-        "sortablejs": "^1.15.0",
-        "sortablejs-vue3": "^1.2.5",
         "split-type": "^0.3.3",
         "vue": "^3.2.45",
         "vue-chartjs": "^5.2.0",
