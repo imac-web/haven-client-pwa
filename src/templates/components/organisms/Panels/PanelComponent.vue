@@ -12,13 +12,11 @@
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
-import DraggableList from "@/templates/components/molecules/DraggableList/DraggableList.vue";
 import PanelResults from "@/templates/components/organisms/Panels/PanelResults.vue";
 
 export default defineComponent({
   name: "PanelComponent",
   components: {
-    DraggableList,
     PanelResults,
   },
   props: {
