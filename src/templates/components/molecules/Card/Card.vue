@@ -10,6 +10,7 @@
           :angle="90"
           size="100"
           emptyColor="transparent"
+          :legend="data.score"
         />
       </div>
     </div>

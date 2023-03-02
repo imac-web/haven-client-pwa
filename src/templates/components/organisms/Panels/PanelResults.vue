@@ -13,6 +13,7 @@
           :progress="index.global?.score * 10"
           :angle="90"
           emptyColor="transparent"
+          :legend="index.global?.score"
         />
       </div>
       <div class="o-panel-results__wrapper-list">
