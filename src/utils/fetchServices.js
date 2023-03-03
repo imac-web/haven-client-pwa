@@ -22,7 +22,7 @@ import async from 'async';
 
 
 
-const fetchService = async (lat, lon, radius, url) => {
+const fetchService = async (lat, lon, radius, url, callback) => {
     // Make an HTTP GET request to the Georisques API with the provided latitude, longitude, and radius as query parameters
     const response = await fetch(
         url +
@@ -38,7 +38,7 @@ const fetchService = async (lat, lon, radius, url) => {
     //console.log("response", response);
     const services = await response.json();
     // Return the risks data
-    return services;
+    return callback(null, services);
 };
 
 /* function fetchService(url, lat, lon, radius) {
@@ -85,10 +85,10 @@ const fetchServices = async (lat, lon, radius) => {
     try {
         const services = await async.parallel({
             one: function (callback) {
-                callback(null, fetchService(lat, lon, radius, "https://europe-west3-haven-5f945.cloudfunctions.net/getServices?"));
+                fetchService(lat, lon, radius, "https://europe-west3-haven-5f945.cloudfunctions.net/getServices?", callback)
             },
             two: function (callback) {
-                callback(null, fetchService(lat, lon, radius, "https://europe-west3-haven-5f945.cloudfunctions.net/getServices?"));
+                fetchService(lat, lon, radius, "https://europe-west3-haven-5f945.cloudfunctions.net/getServices?", callback)
             },
         });
         return services;
