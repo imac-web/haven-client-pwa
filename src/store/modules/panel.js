@@ -5,6 +5,7 @@ const state = {
     data: false,
     index: false,
     component: false,
+    panelWidth: 0,
 };
 
 // Getters
@@ -20,6 +21,9 @@ const actions = {
     close(store) {
         store.commit("closePanel", false);
     },
+    setPanelWidthGlobally(store, width) {
+        store.commit("setPanelWidth", width);
+    }
 };
 
 // Mutations
@@ -33,6 +37,9 @@ const mutations = {
         state.data = false;
         state.component = false;
     },
+    setPanelWidth(state, width) {
+        state.panelWidth = width;
+    }
 };
 
 // Export module
