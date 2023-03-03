@@ -8,7 +8,7 @@
         <ve-progress
           :progress="data.score * 10"
           :angle="90"
-          size="100"
+          :size="100"
           emptyColor="transparent"
           :legend="data.score"
         />
@@ -34,8 +34,6 @@ export default defineComponent({
   },
   setup(props) {
     const data = toRef(props, "data");
-
-    console.log("data", data.value);
 
     /* 
     label
