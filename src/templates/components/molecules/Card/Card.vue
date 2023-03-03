@@ -20,6 +20,8 @@
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import { VeProgress } from "vue-ellipse-progress";
+
+import async from "async-es";
 export default defineComponent({
   name: "Card",
   components: {

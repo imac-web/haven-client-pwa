@@ -1,3 +1,5 @@
+//import async from 'async-es';
+
 const fetchServices = async (lat, lon, radius) => {
     // Make an HTTP GET request to the Georisques API with the provided latitude, longitude, and radius as query parameters
     const response = await fetch(
