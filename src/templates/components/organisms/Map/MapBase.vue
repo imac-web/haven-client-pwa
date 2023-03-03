@@ -109,7 +109,7 @@ export default defineComponent({
         emitter.emit("selected-location", e.latlng);
         let location = e.latlng;
         let services = await getServices(location.lat, location.lng, 1000);
-
+        console.log(services);
         openPanel(location, services);
         openPanelMobile(location, services);
       }

@@ -7,6 +7,8 @@
       aria-labelledby="panelTitle"
       aria-describedby="panelDescription"
     >
+      {{ panelData }}
+      {{ panelIndex }}
       <component
         :is="panelComponent"
         :data="panelData"
