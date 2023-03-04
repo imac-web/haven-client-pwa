@@ -1,130 +1,130 @@
 <template>
-    <Teleport to="body">
-        <div
-            class="l-panel"
-            :class="{ 'is-open': isReady }"
-            role="dialog"
-            aria-labelledby="panelTitle"
-            aria-describedby="panelDescription"
-            ref="panel"
-        >
-            <component
-                :is="panelComponent"
-                :data="panelData"
-                :index="panelIndex"
-                @close="close"
-            />
-        </div>
-    </Teleport>
+  <Teleport to="body">
+    <div
+      class="l-panel"
+      :class="{ 'is-open': isReady }"
+      role="dialog"
+      aria-labelledby="panelTitle"
+      aria-describedby="panelDescription"
+      ref="panel"
+    >
+      <component
+        :is="panelComponent"
+        :data="panelData"
+        :index="panelIndex"
+        @close="close"
+      />
+    </div>
+  </Teleport>
 </template>
 
 <script>
 import {
-    defineComponent,
-    computed,
-    ref,
-    watch,
-    onMounted,
-    onBeforeUnmount,
-    nextTick,
+  defineComponent,
+  computed,
+  ref,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  nextTick,
 } from "vue";
 import { useStore } from "vuex";
 
 import PanelComponent from "@/templates/components/organisms/Panels/PanelComponent.vue";
 
 export default defineComponent({
-    name: "ThePanel",
-    components: {
-        PanelComponent,
-    },
-    props: {},
-    setup(props) {
-        const store = useStore();
+  name: "ThePanel",
+  components: {
+    PanelComponent,
+  },
+  props: {},
+  setup(props) {
+    const store = useStore();
 
-        const isOpen = ref(false);
+    const isOpen = ref(false);
 
-        const close = () => {
-            isOpen.value = false;
-            setTimeout(() => {
-                store.dispatch("panel/close");
-            }, 600);
-        };
+    const close = () => {
+      isOpen.value = false;
+      setTimeout(() => {
+        store.dispatch("panel/close");
+      }, 600);
+    };
 
-        const currentScroll = ref(0);
+    const currentScroll = ref(0);
 
-        const isReady = computed(() => {
-            return store.getters["panel/hasPanel"] && isOpen.value;
+    const isReady = computed(() => {
+      return store.getters["panel/hasPanel"] && isOpen.value;
+    });
+    const hasPanel = computed(() => {
+      return store.getters["panel/hasPanel"];
+    });
+
+    const panelData = computed(() => {
+      return store.state.panel.data;
+    });
+    const panelIndex = computed(() => {
+      return store.state.panel.index;
+    });
+
+    const panelComponent = computed(() => {
+      return store.state.panel.component;
+    });
+
+    const panel = ref(null);
+
+    const isMobile = computed(() => {
+      return store.state.userContext.isMobile;
+    });
+
+    const width = ref(null);
+
+    function setPanelStoreWidth(width) {
+      store.dispatch("panel/setPanelWidthGlobally", width);
+    }
+
+    function setPanelWidth() {
+      width.value = panel.value.clientWidth;
+      setPanelStoreWidth(width.value);
+    }
+
+    function onResize() {
+      !isMobile.value ? setPanelWidth() : null;
+    }
+
+    onMounted(() => {
+      setPanelWidth();
+      window.addEventListener("resize", onResize);
+    });
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", onResize);
+    });
+
+    watch(hasPanel, (open) => {
+      if (open) {
+        isOpen.value = true;
+        currentScroll.value = window.scrollY;
+        store.dispatch("scroll/toggleDisabledScroll", true);
+        nextTick(() => {
+          setPanelWidth();
         });
-        const hasPanel = computed(() => {
-            return store.getters["panel/hasPanel"];
-        });
+      } else {
+        window.scrollTo(0, currentScroll.value);
+        store.dispatch("scroll/toggleDisabledScroll", false);
+      }
+    });
 
-        const panelData = computed(() => {
-            return store.state.panel.data;
-        });
-        const panelIndex = computed(() => {
-            return store.state.panel.index;
-        });
-
-        const panelComponent = computed(() => {
-            return store.state.panel.component;
-        });
-
-        const panel = ref(null);
-
-        const isMobile = computed(() => {
-            return store.state.userContext.isMobile;
-        });
-
-        const width = ref(null);
-
-        function setPanelStoreWidth(width) {
-            store.dispatch("panel/setPanelWidthGlobally", width);
-        }
-
-        function setPanelWidth() {
-            width.value = panel.value.clientWidth;
-            setPanelStoreWidth(width.value);
-        }
-
-        function onResize() {
-            !isMobile.value ? setPanelWidth() : null;
-        }
-
-        onMounted(() => {
-            setPanelWidth();
-            window.addEventListener("resize", onResize);
-        });
-        onBeforeUnmount(() => {
-            window.removeEventListener("resize", onResize);
-        });
-
-        watch(hasPanel, (open) => {
-            if (open) {
-                isOpen.value = true;
-                currentScroll.value = window.scrollY;
-                store.dispatch("scroll/toggleDisabledScroll", true);
-                nextTick(() => {
-                    setPanelWidth();
-                });
-            } else {
-                window.scrollTo(0, currentScroll.value);
-                store.dispatch("scroll/toggleDisabledScroll", false);
-            }
-        });
-
-        return {
-            isReady,
-            currentScroll,
-            isOpen,
-            panelData,
-            panelComponent,
-            close,
-            hasPanel,
-            panelIndex,
-            panel,
-        };
-    },
+    return {
+      isReady,
+      currentScroll,
+      isOpen,
+      panelData,
+      panelComponent,
+      close,
+      hasPanel,
+      panelIndex,
+      panel,
+    };
+  },
 });
 </script>
 
@@ -132,13 +132,11 @@ export default defineComponent({
 .l-panel {
     --panel-padding: 2rem;
     --panel-height: 100%;
-    --panel-bg: var(--color-dark);
+    --panel-bg: var(--color-haven_dark_green_alpha);
     --navbar-height: 5rem;
 
     @include full-screen-dom();
     z-index: 102;
-    background: var(--color-beige);
-    //opacity: 0;
     pointer-events: none;
 
     width: var(--panel-width, 0rem) ;
@@ -149,6 +147,7 @@ export default defineComponent({
 
     overflow-y: auto;
     background-color: var(--panel-bg);
+    backdrop-filter: blur(0.7rem);
     transition: opacity 0.4s linear;
     @include min(md) {
         height: var(--panel-height);
