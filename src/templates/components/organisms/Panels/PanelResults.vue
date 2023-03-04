@@ -92,9 +92,25 @@ export default defineComponent({
       return total;
     }
 
+    function getAverageScore(obj) {
+      let totalScore = 0;
+      let count = 0;
+
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (typeof obj[key].score === "number") {
+            totalScore += obj[key].score;
+            count++;
+          }
+        }
+      }
+
+      return totalScore / count;
+    }
+
     //loop through index and find all scores and add them together
     const totalScore = computed(() => {
-      const total = getTotalScore(index.value);
+      const total = getAverageScore(index.value);
       return setToFixed(total);
     });
 
