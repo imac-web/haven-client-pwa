@@ -29,7 +29,7 @@ export default defineComponent({
     let marker = null;
     const markerIcon = L.icon({
       iconUrl:
-        "https://raw.githubusercontent.com/imac-web/haven-client-pwa/main/static/images/pinpoint-filled.svg",
+        "https://raw.githubusercontent.com/imac-web/haven-client-pwa/main/static/images/pinpoint-green.svg",
       iconSize: [48, 48], // size of the icon
       iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
       popupAnchor: [0, -45], // point from which the popup should open relative to the iconAnchor
