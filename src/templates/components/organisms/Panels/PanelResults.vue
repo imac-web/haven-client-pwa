@@ -6,19 +6,19 @@
             <p v-else-if="positionCoords">{{ positionCoords }}</p>
             <p v-else>{{ positionCoordsFirst }}</p>
             <div class="o-panel-results__wrapper-number">
-                {{ index.global?.score }}
+                {{ totalScore }}
             </div>
             <hr />
             <div class="o-panel-results__wrapper-result">
                 <ve-progress
-                    :progress="index.global?.score * 10"
+                    :progress="totalScore"
                     :angle="90"
                     emptyColor="transparent"
-                    :legend="index.global?.score"
+                    :legend="index.score"
                 />
             </div>
             <div class="o-panel-results__wrapper-list">
-                <cards-list :data="index.services" />
+                <cards-list :data="index" />
             </div>
         </div>
     </div>
@@ -71,6 +71,10 @@ export default defineComponent({
             }
         });
 
+        const totalScore = computed(() => {
+            return index.value.score * 10;
+        });
+
         return {
             close,
             data,
@@ -78,6 +82,7 @@ export default defineComponent({
             chartData,
             positionCoords,
             positionCoordsFirst,
+            totalScore,
         };
     },
 });
