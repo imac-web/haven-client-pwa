@@ -140,7 +140,7 @@ export default defineComponent({
     }
 
     &-list {
-      max-height: 400px;
+      //max-height: 400px;
     }
   }
 }

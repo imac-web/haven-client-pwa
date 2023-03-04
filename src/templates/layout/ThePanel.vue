@@ -130,7 +130,6 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel {
-    --panel-padding: 2rem;
     --panel-height: 100%;
     --panel-bg: var(--color-haven_dark_green_alpha);
     --navbar-height: 5rem;
@@ -139,7 +138,7 @@ export default defineComponent({
     z-index: 10;
     pointer-events: none;
 
-    width: var(--panel-width, 0rem) ;
+    width: var(--panel-width, 0px) ;
 
     display: flex;
     flex-direction: column;
@@ -153,7 +152,7 @@ export default defineComponent({
         height: var(--panel-height);
         max-height: calc(100vh - var(--navbar-height));
 
-        left: calc(100vw - var(--panel-width));
+        left: calc(100% - var(--panel-width));
         top: var(--navbar-height);
 
         display: block;
@@ -166,7 +165,7 @@ export default defineComponent({
 
     &.is-open {
         //opacity: 1;
-        --panel-width:45rem
+        --panel-width:400px
         pointer-events: auto;
     }
 }

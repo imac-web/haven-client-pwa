@@ -135,6 +135,7 @@ export default defineComponent({
 
   --btn-txt-color: var(--color-pistachio);
   --btn-txt-size: var(--fs-regular);
+  --btn-txt-display: block;
   --btn-padding-v: 0.5em;
   --btn-padding-h: 1em;
   --btn-padding: var(--btn-padding-v) var(--btn-padding-h);
@@ -220,7 +221,7 @@ export default defineComponent({
 
   &__label {
     --btn-label-spacing: 0.07em;
-    display: block;
+    display: var(--btn-txt-display);
     color: transparent;
     line-height: 1.3;
     overflow: hidden;

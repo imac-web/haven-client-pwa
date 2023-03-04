@@ -1,7 +1,10 @@
 <template>
-  <div class="m-cards-list" v-for="card in data" :key="data.label">
-    <card :data="card" />
-  </div>
+  <card
+    class="m-cards-list"
+    v-for="card in data"
+    :key="data.label"
+    :data="card"
+  />
 </template>
 
 <script>
@@ -37,5 +40,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-cards-list {
+  display: flex;
+  margin-top: 3rem;
 }
 </style>
