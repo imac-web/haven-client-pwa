@@ -9,7 +9,7 @@ import { defineComponent, onMounted, ref } from "vue";
 import Search from "@/templates/components/organisms/Search/Search.vue";
 
 export default defineComponent({
-  name: "NavigationSaarch",
+  name: "NavigationSearch",
   components: {
     Search,
   },

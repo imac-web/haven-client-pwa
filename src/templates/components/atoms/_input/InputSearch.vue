@@ -1,22 +1,19 @@
 <template>
   <div class="c-input-search">
-    <span class="c-button-primary__bg"></span>
     <object-icon
       v-if="iconBefore"
       class="c-input-search__icon c-input-search__icon--before"
       :name="iconBefore"
+      color="var(--input-txt-color)"
     />
-    <input
-      ref="searchInput"
-      @input="onInput"
-      :placeholder="label"
-      class="c-input-search__input"
-    />
-    <object-icon
-      v-if="iconAfter"
-      class="c-input-search__icon c-input-search__icon--after"
-      :name="iconAfter"
-    />
+    <div class="c-input-search__inner">
+      <input
+        ref="searchInput"
+        @input="onInput"
+        :placeholder="label"
+        class="c-input-search__input"
+      />
+    </div>
   </div>
 </template>
 
@@ -81,27 +78,37 @@ export default defineComponent({
 
 <style lang="scss">
 .c-input-search {
-  --input-txt-color: var(--color-black);
+  --input-txt-color: var(--color-haven_grey);
   --input-txt-size: var(--fs-small);
 
   --input-padding-v: 0.5em;
   --input-padding-h: 1em;
   --input-padding: var(--input-padding-v) var(--input-padding-h);
-  --input-border-color: var(--color-black);
-  --input-border-radius: 50rem;
+  --input-border-color: var(--color-haven_grey);
+  --input-bg-color: var(--color-haven_dark_grey);
+  --input-border-radius: 1.2rem;
 
   --svg-spacing: 0.5em;
 
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: var(--svg-spacing);
   font-size: var(--input-txt-size);
+  color: var(--input-txt-color);
   padding: var(--input-padding);
   z-index: 2;
 
   border: var(--input-border-color) solid 1px;
   border-radius: var(--input-border-radius);
+  background-color: var(--input-bg-color);
+
+  @include min(md) {
+    width: 100%;
+  }
+  &__inner {
+    width: 100%;
+    text-align: left;
+  }
 
   &__icon {
     --svg-width: 1.25em;

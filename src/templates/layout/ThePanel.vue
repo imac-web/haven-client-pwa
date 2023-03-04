@@ -136,7 +136,7 @@ export default defineComponent({
     --navbar-height: 5rem;
 
     @include full-screen-dom();
-    z-index: 102;
+    z-index: 10;
     pointer-events: none;
 
     width: var(--panel-width, 0rem) ;
