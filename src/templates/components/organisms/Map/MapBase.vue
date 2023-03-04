@@ -9,7 +9,7 @@ import { defineComponent, ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import { PANEL_COMPONENTS } from "@/constants";
 
-import getServices from "@/utils/getServices";
+import fetchServices from "@/utils/fetchServices";
 import "leaflet/dist/leaflet.css";
 import L, { icon, map } from "leaflet";
 
@@ -89,6 +89,7 @@ export default defineComponent({
 
             resizeObserver.observe(mapContainer.value);
 
+
             var baseMaps = {
                 OpenStreetMap: osm,
                 Satelite: satelite,
@@ -117,7 +118,9 @@ export default defineComponent({
             async function callIndexAPI(e) {
                 emitter.emit("selected-location", e.latlng);
                 let location = e.latlng;
-                let services = await getServices(
+
+                let services = await fetchServices(
+
                     location.lat,
                     location.lng,
                     1000

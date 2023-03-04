@@ -131,7 +131,6 @@ export default defineComponent({
 <style lang="scss">
 .l-panel {
     --panel-padding: 2rem;
-
     --panel-height: 100%;
     --panel-bg: var(--color-dark);
     --navbar-height: 5rem;

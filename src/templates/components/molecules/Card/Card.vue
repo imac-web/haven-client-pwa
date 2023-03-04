@@ -6,11 +6,11 @@
       </div>
       <div class="m-card__content-right">
         <ve-progress
-          :progress="data.score * 10"
+          :progress="score * 10"
           :angle="90"
           :size="100"
           emptyColor="transparent"
-          :legend="data.score"
+          :legend="score"
         />
       </div>
     </div>
@@ -20,6 +20,7 @@
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import { VeProgress } from "vue-ellipse-progress";
+
 export default defineComponent({
   name: "Card",
   components: {
@@ -35,6 +36,14 @@ export default defineComponent({
   setup(props) {
     const data = toRef(props, "data");
 
+    function setToFixed(v) {
+      return v % 1 ? v.toFixed(1) : v;
+    }
+
+    const score = computed(() => {
+      return setToFixed(data.value.score);
+    });
+
     /* 
     label
     score
@@ -44,6 +53,7 @@ export default defineComponent({
      */
     return {
       data,
+      score,
     };
   },
 });

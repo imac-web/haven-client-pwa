@@ -4,27 +4,33 @@
       <p v-if="data.label">{{ data.label }}</p>
       <p v-else-if="positionCoords">{{ positionCoords }}</p>
       <p v-else>{{ positionCoordsFirst }}</p>
-      <div class="o-panel-results__wrapper-number">
-        {{ index.global?.score }}
-      </div>
+      <div class="o-panel-results__wrapper-number"></div>
       <hr />
       <div class="o-panel-results__wrapper-result">
         <ve-progress
-          :progress="index.global?.score * 10"
+          :progress="totalScore * 10"
           :angle="90"
           emptyColor="transparent"
-          :legend="index.global?.score"
+          :legend="totalScore"
         />
       </div>
       <div class="o-panel-results__wrapper-list">
-        <cards-list :data="index.services" />
+        <cards-list :data="index" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, toRef, computed, onMounted, ref } from "vue";
+import {
+  defineComponent,
+  toRef,
+  computed,
+  onMounted,
+  ref,
+  isProxy,
+  toRaw,
+} from "vue";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
 import { VeProgress } from "vue-ellipse-progress";
 import emitter from "@/services/emitter";
@@ -70,6 +76,28 @@ export default defineComponent({
       }
     });
 
+    function setToFixed(v) {
+      return v % 1 ? v.toFixed(1) : v;
+    }
+
+    function getTotalScore(obj) {
+      let total = 0;
+
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          total += obj[key].score;
+        }
+      }
+
+      return total;
+    }
+
+    //loop through index and find all scores and add them together
+    const totalScore = computed(() => {
+      const total = getTotalScore(index.value);
+      return setToFixed(total);
+    });
+
     return {
       close,
       data,
@@ -77,6 +105,7 @@ export default defineComponent({
       chartData,
       positionCoords,
       positionCoordsFirst,
+      totalScore,
     };
   },
 });
