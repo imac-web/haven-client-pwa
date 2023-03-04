@@ -58,7 +58,7 @@ export default defineComponent({
 .o-nameof-panel {
     &--to-close {
         .l-panel {
-            opacity: 0;
+            width: 0;
         }
     }
 

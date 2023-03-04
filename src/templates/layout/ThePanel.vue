@@ -6,6 +6,7 @@
             role="dialog"
             aria-labelledby="panelTitle"
             aria-describedby="panelDescription"
+            ref="panel"
         >
             <component
                 :is="panelComponent"
@@ -18,7 +19,15 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref, watch } from "vue";
+import {
+    defineComponent,
+    computed,
+    ref,
+    watch,
+    onMounted,
+    onBeforeUnmount,
+    nextTick,
+} from "vue";
 import { useStore } from "vuex";
 
 import PanelComponent from "@/templates/components/organisms/Panels/PanelComponent.vue";
@@ -61,11 +70,43 @@ export default defineComponent({
             return store.state.panel.component;
         });
 
+        const panel = ref(null);
+
+        const isMobile = computed(() => {
+            return store.state.userContext.isMobile;
+        });
+
+        const width = ref(null);
+
+        function setPanelStoreWidth(width) {
+            store.dispatch("panel/setPanelWidthGlobally", width);
+        }
+
+        function setPanelWidth() {
+            width.value = panel.value.clientWidth;
+            setPanelStoreWidth(width.value);
+        }
+
+        function onResize() {
+            !isMobile.value ? setPanelWidth() : null;
+        }
+
+        onMounted(() => {
+            setPanelWidth();
+            window.addEventListener("resize", onResize);
+        });
+        onBeforeUnmount(() => {
+            window.removeEventListener("resize", onResize);
+        });
+
         watch(hasPanel, (open) => {
             if (open) {
                 isOpen.value = true;
                 currentScroll.value = window.scrollY;
                 store.dispatch("scroll/toggleDisabledScroll", true);
+                nextTick(() => {
+                    setPanelWidth();
+                });
             } else {
                 window.scrollTo(0, currentScroll.value);
                 store.dispatch("scroll/toggleDisabledScroll", false);
@@ -81,6 +122,7 @@ export default defineComponent({
             close,
             hasPanel,
             panelIndex,
+            panel,
         };
     },
 });
@@ -89,7 +131,6 @@ export default defineComponent({
 <style lang="scss">
 .l-panel {
     --panel-padding: 2rem;
-    --panel-width: min-content;
     --panel-height: 100%;
     --panel-bg: var(--color-dark);
     --navbar-height: 5rem;
@@ -97,8 +138,10 @@ export default defineComponent({
     @include full-screen-dom();
     z-index: 102;
     background: var(--color-beige);
-    opacity: 0;
+    //opacity: 0;
     pointer-events: none;
+
+    width: var(--panel-width, 0rem) ;
 
     display: flex;
     flex-direction: column;
@@ -108,17 +151,12 @@ export default defineComponent({
     background-color: var(--panel-bg);
     transition: opacity 0.4s linear;
     @include min(md) {
-        .l-content {
-            --map-width: calc(100vw - var(--panel-width));
-        }
-        width: var(--panel-width);
         height: var(--panel-height);
         max-height: calc(100vh - var(--navbar-height));
 
         left: calc(100vw - var(--panel-width));
         top: var(--navbar-height);
 
-        padding: var(--panel-padding);
         display: block;
     }
     @include max(md) {
@@ -128,7 +166,8 @@ export default defineComponent({
     display: none;
 
     &.is-open {
-        opacity: 1;
+        //opacity: 1;
+        --panel-width:45rem
         pointer-events: auto;
     }
 }

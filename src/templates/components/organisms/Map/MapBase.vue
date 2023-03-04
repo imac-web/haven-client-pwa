@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import { PANEL_COMPONENTS } from "@/constants";
 
@@ -83,6 +83,13 @@ export default defineComponent({
                 layers: [dark, osm, satelite],
             }).setView([48.84277323737967, 2.587709798324433], 13);
 
+            const resizeObserver = new ResizeObserver(() => {
+                map.invalidateSize();
+            });
+
+            resizeObserver.observe(mapContainer.value);
+
+
             var baseMaps = {
                 OpenStreetMap: osm,
                 Satelite: satelite,
@@ -111,12 +118,14 @@ export default defineComponent({
             async function callIndexAPI(e) {
                 emitter.emit("selected-location", e.latlng);
                 let location = e.latlng;
+
                 let services = await fetchServices(
+
                     location.lat,
                     location.lng,
                     1000
                 );
-                console.log(services);
+
                 openPanel(location, services);
                 openPanelMobile(location, services);
             }
@@ -165,6 +174,7 @@ export default defineComponent({
                     .setLatLng(e.latlng)
                     .setContent("You clicked the map at " + e.latlng.toString())
                     .openOn(map);
+                map.setView(e.latlng, 13);
                 callIndexAPI(e);
             }
 
@@ -197,6 +207,7 @@ export default defineComponent({
 
     .leaflet-control-container {
         height: calc(100% - var(--header-height));
+        margin-top: var(--header-height);
     }
 }
 </style>
