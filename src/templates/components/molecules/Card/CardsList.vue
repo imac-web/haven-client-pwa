@@ -40,7 +40,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-cards-list {
-  display: flex;
   margin-top: 3rem;
 }
 </style>

@@ -1,23 +1,25 @@
 <template>
-  <div class="m-card">
-    <div class="m-card__content">
-      <div class="m-card__content-left">
-        <h3>{{ data.label }}</h3>
+  <div class="m-card-main">
+    <div class="m-card-main__content">
+      <div class="m-card-main__content-top">
+        <h3>Vivability</h3>
       </div>
-      <div class="m-card__content-right">
+      <div class="m-card-main__content-bottom">
         <ve-progress
           :progress="score * 10"
           :angle="90"
-          :size="100"
+          :size="180"
           emptyColor="transparent"
           :legend="score"
+          :legend-formatter="myFormatter"
+          legend-class="legend-custom-style"
           color="#25c685"
-        />
+        ></ve-progress>
       </div>
-      <div class="m-card__content-more">
+      <div class="m-card-main__content-right">
         <button-primary
           tag="a"
-          class="m-card__content-more-btn"
+          class="m-card-main__content-right-btn"
           iconBefore="dots"
         />
       </div>
@@ -32,63 +34,68 @@ import { VeProgress } from "vue-ellipse-progress";
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 
 export default defineComponent({
-  name: "Card",
+  name: "CardMain",
   components: {
     VeProgress,
     ButtonPrimary,
   },
   props: {
-    data: {
-      type: Object,
+    score: {
+      type: Number,
       required: true,
-      default: {},
     },
   },
   setup(props) {
-    const data = toRef(props, "data");
+    const score = toRef(props, "score");
 
     function setToFixed(v) {
       return v % 1 ? v.toFixed(1) : v;
     }
 
-    const score = computed(() => {
-      return setToFixed(data.value.score);
-    });
+    const myFormatter = ({ currentValue }) => {
+      return `
+      <span style="opacity:0.5;">Safety</span>
+      </br>
+        <span style="font-weight: bold; font-size: 3rem;">${currentValue}</span>
+        </br>
+        <span style="opacity:0.5;">Total Score</span>
+      `;
+    };
 
     return {
-      data,
       score,
+      setToFixed,
+      myFormatter,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.m-card {
+.m-card-main {
   --bg-color: var(--color-haven_dark_grey);
   background-color: var(--bg-color);
   border-radius: (2rem);
 
-  height: 18rem;
+  height: 30rem;
   width: 100%;
   padding: 1rem;
 
   &__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     height: 100%;
-    &-left {
-      align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    &-top {
+      text-align: center;
+    }
+    &-bottom {
+      text-align: center;
     }
     &-right {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: row;
-    }
-
-    &-more {
+      position: absolute;
+      right: 0;
+      top: 0;
       &-btn {
         --color-white-alpha: rgba(255, 255, 255, 0.15);
         --btn-txt-display: none;

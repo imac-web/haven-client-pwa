@@ -4,15 +4,9 @@
       <p v-if="data.label">{{ data.label }}</p>
       <p v-else-if="positionCoords">{{ positionCoords }}</p>
       <p v-else>{{ positionCoordsFirst }}</p>
-      <div class="o-panel-results__wrapper-number"></div>
       <hr />
       <div class="o-panel-results__wrapper-result">
-        <ve-progress
-          :progress="totalScore * 10"
-          :angle="90"
-          emptyColor="transparent"
-          :legend="totalScore"
-        />
+        <card-main :score="totalScore" />
       </div>
       <div class="o-panel-results__wrapper-list">
         <cards-list :data="index" />
@@ -32,6 +26,7 @@ import {
   toRaw,
 } from "vue";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
+import CardMain from "@/templates/components/molecules/Card/CardMain.vue";
 import { VeProgress } from "vue-ellipse-progress";
 import emitter from "@/services/emitter";
 
@@ -39,6 +34,7 @@ export default defineComponent({
   name: "PanelResults",
   components: {
     CardsList,
+    CardMain,
     VeProgress,
   },
   props: {
@@ -133,11 +129,12 @@ export default defineComponent({
   color: var(--results-txt-color);
 
   &__wrapper {
+    & p {
+      margin-bottom: 3rem;
+    }
     text-align: center;
-    &-number {
-      font-size: 1.5em;
-      font-weight: 600;
-      margin-bottom: 10px;
+    &-result {
+      margin-top: 3rem;
     }
 
     &-list {
