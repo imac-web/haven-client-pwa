@@ -133,6 +133,7 @@ export default defineComponent({
   color: var(--results-txt-color);
 
   &__wrapper {
+    text-align: center;
     &-number {
       font-size: 1.5em;
       font-weight: 600;

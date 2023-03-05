@@ -130,43 +130,47 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel {
-    --panel-height: 100%;
-    --panel-bg: var(--color-haven_dark_green_alpha);
-    --navbar-height: 5rem;
+  --panel-height: 100%;
+  --panel-bg: var(--color-haven_dark_green_alpha);
+  --navbar-height: 5rem;
 
-    @include full-screen-dom();
-    z-index: 10;
-    pointer-events: none;
+  @include full-screen-dom();
+  z-index: 10;
+  pointer-events: none;
 
-    width: var(--panel-width, 0px) ;
+  width: var(--panel-width, 40vw);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-    overflow-y: auto;
-    background-color: var(--panel-bg);
-    backdrop-filter: blur(0.7rem);
-    transition: opacity 0.4s linear;
-    @include min(md) {
-        height: var(--panel-height);
-        max-height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  background-color: var(--panel-bg);
+  backdrop-filter: blur(0.7rem);
+  transition: clip-path 0.4s ease;
 
-        left: calc(100% - var(--panel-width));
-        top: var(--navbar-height);
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  @include min(md) {
+    height: var(--panel-height);
+    //max-height: calc(100vh - var(--navbar-height));
 
-        display: block;
-    }
-    @include max(md) {
-        @include container("default");
-    }
+    left: calc(100% - var(--panel-width));
+    padding-top: calc(var(--navbar-height) + 3rem);
 
-    display: none;
+    display: block;
+  }
+  @include max(md) {
+    @include container("default");
+  }
+  @include min(2xl) {
+    --panel-width: 30vw;
+  }
 
-    &.is-open {
-        //opacity: 1;
-        --panel-width:400px
-        pointer-events: auto;
-    }
+  display: none;
+
+  &.is-open {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    pointer-events: auto;
+  }
 }
 </style>

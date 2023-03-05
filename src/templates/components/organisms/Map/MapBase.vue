@@ -37,6 +37,9 @@ export default defineComponent({
     const SelectedResult = ref([]);
 
     emitter.on("selected-result", (data) => {
+      map.eachLayer((layer) => {
+        if (layer["_latlng"] != undefined) layer.remove();
+      });
       emitter.emit("slide-down-panel", true);
       SelectedResult.value = data;
       map.setView(
@@ -77,7 +80,7 @@ export default defineComponent({
       map = L.map(mapContainer.value, {
         tap: false,
         zoomControl: false,
-        layers: [dark, osm, satelite],
+        layers: [dark],
       }).setView([48.84277323737967, 2.587709798324433], 13);
 
       const resizeObserver = new ResizeObserver(() => {
@@ -92,7 +95,6 @@ export default defineComponent({
         Dark: dark,
       };
 
-      var layerControl = L.control.layers(baseMaps).addTo(map);
       var lc = L.control
         .locate({
           enableHighAccuracy: true,
@@ -111,6 +113,9 @@ export default defineComponent({
         })
         .addTo(map);
 
+      var layerControl = L.control
+        .layers(null, baseMaps, { position: "topleft" })
+        .addTo(map);
       async function callIndexAPI(e) {
         emitter.emit("selected-location", e.latlng);
         let location = e.latlng;
@@ -120,21 +125,6 @@ export default defineComponent({
         openPanel(location, services);
         openPanelMobile(location, services);
       }
-
-      function onLocationFound(e) {
-        L.marker(e.latlng, {
-          icon: markerIcon,
-        }).addTo(map);
-        callIndexAPI(e);
-      }
-
-      map.on("locationfound", onLocationFound);
-
-      function onLocationError(e) {
-        alert(e.message);
-      }
-
-      map.on("locationerror", onLocationError);
 
       //open and close panel functions
       const store = useStore();
@@ -160,11 +150,13 @@ export default defineComponent({
       };
 
       function onMapClick(e) {
+        map.eachLayer((layer) => {
+          if (layer["_latlng"] != undefined) layer.remove();
+        });
         lc.stop();
-        popup
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(map);
+        var newMarker = new L.marker(e.latlng, {
+          icon: markerIcon,
+        }).addTo(map);
         map.setView(e.latlng, 13);
         callIndexAPI(e);
       }
@@ -201,7 +193,7 @@ export default defineComponent({
     height: calc(100% - var(--header-height));
     margin-top: var(--header-height);
     @include min(md) {
-      width: var(--map-width);
+      width: 100%;
     }
   }
 }

@@ -93,6 +93,7 @@ export default defineComponent({
           --btn-border-color: transparent;
           --btn-padding-v: 0.5em;
           --btn-padding-h: 0.5em;
+          --btn-svg-width: 0.7em;
         }
       }
     }

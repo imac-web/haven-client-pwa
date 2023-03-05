@@ -86,7 +86,8 @@ export default defineComponent({
       type: String,
       required: false,
       default: "regular",
-      validator: (val) => ["regular", "large", "mega"].includes(val),
+      validator: (val) =>
+        ["x-small", "small", "regular", "large", "mega"].includes(val),
     },
 
     //--- Icons ---//
@@ -149,7 +150,9 @@ export default defineComponent({
   --btn-hover-scale: 0;
   --btn-hover-txt-color: var(--btn-txt-color);
 
+  --btn-svg-width: 1.2em;
   --svg-spacing: 0.5em;
+  --scale-svg: 0;
 
   display: inline-flex;
   align-items: center;
@@ -250,7 +253,7 @@ export default defineComponent({
   }
 
   &__icon {
-    --svg-width: 1.25em;
+    --svg-width: var(--btn-svg-width);
     --svg-height: var(--svg-width);
 
     &:deep(svg) {
