@@ -177,6 +177,8 @@ export default defineComponent({
 
 <style lang="scss">
 .o-map {
+  --leaflet-controls-bg-color: var(--color-haven_green_bright);
+  --leaflet-controls-shadow-color: var(--color-haven_dark_green);
   --map-width: calc(100% - var(--panel-width));
   z-index: 0;
   &__map {
@@ -193,6 +195,31 @@ export default defineComponent({
     @include min(md) {
       width: 100%;
     }
+  }
+
+  .leaflet-touch .leaflet-control-layers,
+  .leaflet-touch .leaflet-bar {
+    border: none;
+  }
+
+  .leaflet-control-locate-location-arrow {
+    filter: invert(1);
+  }
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out,
+  a:last-child {
+    color: var(--color-haven_white);
+    background-color: var(--leaflet-controls-bg-color);
+    //box-shadow: 0 0 1rem var(--leaflet-controls-shadow-color);
+
+    &:hover {
+      background-color: var(--color-haven_dark_green);
+    }
+  }
+  .leaflet-control-layers-toggle,
+  .leaflet-control-layers-expanded {
+    background-color: var(--leaflet-controls-bg-color);
+    color: var(--color-haven_white);
   }
 }
 </style>
