@@ -159,9 +159,6 @@ export default defineComponent({
 
     display: block;
   }
-  @include max(md) {
-    @include container("default");
-  }
   @include min(2xl) {
     --panel-width: 30vw;
   }

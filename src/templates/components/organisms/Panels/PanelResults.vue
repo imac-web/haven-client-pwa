@@ -53,11 +53,6 @@ export default defineComponent({
     const data = toRef(props, "data");
     const index = toRef(props, "index");
 
-    const chartData = {
-      labels: ["January", "February", "March"],
-      datasets: [{ data: [40, 20, 12] }],
-    };
-
     const positionCoordsFirst = ref(
       String(data.value.lat).concat(" ", String(data.value.lng))
     );
@@ -114,7 +109,6 @@ export default defineComponent({
       close,
       data,
       index,
-      chartData,
       positionCoords,
       positionCoordsFirst,
       totalScore,

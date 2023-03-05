@@ -1,10 +1,7 @@
 <template>
-  <card
-    class="m-cards-list"
-    v-for="card in data"
-    :key="data.label"
-    :data="card"
-  />
+  <div class="m-cards-list">
+    <card v-for="(card, i) in data" :key="`card-${i}`" :data="card" />
+  </div>
 </template>
 
 <script>
@@ -25,11 +22,9 @@ export default defineComponent({
   },
   setup(props) {
     const data = toRef(props, "data");
-
     const numberOfCards = computed(() => {
       return data.value.length;
     });
-
     return {
       data,
       numberOfCards,
@@ -40,6 +35,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-cards-list {
+  @include reset-list;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 21rem;
   margin-top: 3rem;
 }
 </style>

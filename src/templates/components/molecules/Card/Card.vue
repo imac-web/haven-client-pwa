@@ -1,25 +1,17 @@
 <template>
   <div class="m-card">
-    <div class="m-card__content">
-      <div class="m-card__content-left">
-        <h3>{{ data.label }}</h3>
+    <button-primary
+      tag="a"
+      class="m-card__flip-btn"
+      iconBefore="dots"
+      @click="flip = !flip"
+    />
+    <div class="m-card__flip" :class="{ 'do-flip': flip }">
+      <div class="m-card__flip-front">
+        <card-front :data="data" />
       </div>
-      <div class="m-card__content-right">
-        <ve-progress
-          :progress="score * 10"
-          :angle="90"
-          :size="100"
-          emptyColor="transparent"
-          :legend="score"
-          color="#25c685"
-        />
-      </div>
-      <div class="m-card__content-more">
-        <button-primary
-          tag="a"
-          class="m-card__content-more-btn"
-          iconBefore="dots"
-        />
+      <div class="m-card__flip-back">
+        <card-back :data="data.components" />
       </div>
     </div>
   </div>
@@ -29,6 +21,8 @@
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import { VeProgress } from "vue-ellipse-progress";
 
+import CardFront from "@/templates/components/molecules/Card/CardFront.vue";
+import CardBack from "@/templates/components/molecules/Card/CardBack.vue";
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 
 export default defineComponent({
@@ -36,6 +30,8 @@ export default defineComponent({
   components: {
     VeProgress,
     ButtonPrimary,
+    CardFront,
+    CardBack,
   },
   props: {
     data: {
@@ -46,7 +42,6 @@ export default defineComponent({
   },
   setup(props) {
     const data = toRef(props, "data");
-
     function setToFixed(v) {
       return v % 1 ? v.toFixed(1) : v;
     }
@@ -55,9 +50,12 @@ export default defineComponent({
       return setToFixed(data.value.score);
     });
 
+    const flip = ref(false);
+
     return {
       data,
       score,
+      flip,
     };
   },
 });
@@ -65,40 +63,49 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .m-card {
-  --bg-color: var(--color-haven_dark_grey);
-  background-color: var(--bg-color);
-  border-radius: (2rem);
-
-  height: 18rem;
-  width: 100%;
-  padding: 1rem;
-
-  &__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  &__flip {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
+    width: 100%;
     height: 100%;
-    &-left {
-      align-self: center;
-    }
-    &-right {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: row;
+    transform: rotateY(0deg);
+    &.do-flip {
+      transform: rotateY(180deg);
     }
 
-    &-more {
-      &-btn {
-        --color-white-alpha: rgba(255, 255, 255, 0.15);
-        --btn-txt-display: none;
-        --btn-bg-color: var(--color-white-alpha);
-        --btn-border-color: transparent;
-        --btn-padding-v: 0.5em;
-        --btn-padding-h: 0.5em;
-        --btn-svg-width: 0.7em;
-      }
+    &-btn {
+      --color-white-alpha: rgba(255, 255, 255, 0.15);
+      --btn-txt-display: none;
+      --btn-bg-color: var(--color-white-alpha);
+      --btn-hover-color: var(--color-haven_green);
+      --btn-border-color: transparent;
+      --btn-padding-v: 0.5em;
+      --btn-padding-h: 0.5em;
+      --btn-svg-width: 0.7em;
+
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 3;
+      cursor: pointer;
     }
+  }
+  &__flip-front,
+  &__flip-back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  &__flip-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+  &__flip-back {
+    transform: rotateY(180deg);
   }
 }
 </style>
