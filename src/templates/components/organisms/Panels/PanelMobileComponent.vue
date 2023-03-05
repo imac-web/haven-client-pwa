@@ -1,6 +1,6 @@
 <template>
   <div
-    class="o-nameof-panel-mobile | l-container"
+    class="o-nameof-panel-mobile"
     :class="{ 'o-nameof-panel-mobile--active': isOpen }"
   >
     <div class="o-nameof-panel-mobile__wrapper">

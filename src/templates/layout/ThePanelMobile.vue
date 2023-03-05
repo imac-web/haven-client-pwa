@@ -1,21 +1,23 @@
 <template>
   <Teleport to="body">
     <div
-      class="l-panel-mobile"
+      class="l-panel-mobile |"
       ref="cupertinoRef"
       :class="{ 'is-open': true }"
       role="dialog"
       aria-labelledby="panelMobileTitle"
       aria-describedby="panelMobileDescription"
     >
-      <navigation-search class="search" />
-      <component
-        class="l-panel-mobile__content"
-        :is="panelMobileComponent"
-        :data="panelMobileData"
-        :index="panelMobileIndex"
-        @close="close"
-      />
+      <div class="l-panel-mobile__wrapper">
+        <navigation-search class="l-panel-mobile__wrapper-search" />
+        <component
+          class="l-panel-mobile__wrapper-content"
+          :is="panelMobileComponent"
+          :data="panelMobileData"
+          :index="panelMobileIndex"
+          @close="close"
+        />
+      </div>
     </div>
   </Teleport>
 </template>
@@ -47,7 +49,7 @@ export default defineComponent({
       fitScreenHeight: true,
       backdrop: true,
       backdropOpacity: 0.4,
-      dragBy: [".search", ".draggable"],
+      dragBy: [".l-panel-mobile__wrapper-search", ".draggable"],
     };
     var drawer = undefined;
 
@@ -165,21 +167,31 @@ export default defineComponent({
 .l-panel-mobile {
   --panel-mobile-padding: 2rem;
   --panel-mobile-width: 100vw;
-  --panel-mobile-height: 20rem;
+  --panel-mobile-height: 100%;
 
   opacity: 0;
   pointer-events: none;
 
   transition: opacity 0.4s linear;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-radius: 1.2rem;
 
   &.is-open {
     opacity: 1;
     pointer-events: auto;
   }
+  .l-panel-mobile__wrapper {
+    border-radius: 1.2rem;
+  }
+  .l-panel-mobile__wrapper-search {
+    z-index: 9;
+    position: sticky;
+    top: 0;
+  }
 
-  .l-panel-mobile__content {
-    overflow-y: auto;
-    height: 100%;
+  .l-panel-mobile__wrapper-content {
+    margin-bottom: 5rem;
   }
 
   @include min(md) {

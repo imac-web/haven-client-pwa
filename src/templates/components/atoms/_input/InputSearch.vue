@@ -102,8 +102,8 @@ export default defineComponent({
   border-radius: var(--input-border-radius);
   background-color: var(--input-bg-color);
 
+  width: 100%;
   @include min(md) {
-    width: 100%;
   }
   &__inner {
     width: 100%;
