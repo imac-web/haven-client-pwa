@@ -105,8 +105,6 @@ export default defineComponent({
         })
         .addTo(map);
 
-      var popup = L.popup();
-
       L.control
         .zoom({
           position: "topleft",
