@@ -16,13 +16,13 @@
           color="#25c685"
         ></ve-progress>
       </div>
-      <div class="m-card-main__content-right">
+      <!-- <div class="m-card-main__content-right">
         <button-primary
           tag="a"
           class="m-card-main__content-right-btn"
           iconBefore="dots"
         />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
