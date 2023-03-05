@@ -66,13 +66,6 @@ export default defineComponent({
     }
   }
 
-  color: var(--color-dark);
-  //overflow-y: hidden;
-
-  &__wrapper {
-    &-results {
-      --results-txt-color: var(--color-dark);
-    }
-  }
+  margin-top: 3rem;
 }
 </style>
