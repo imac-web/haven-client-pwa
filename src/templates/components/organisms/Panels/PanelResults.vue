@@ -6,7 +6,7 @@
       <p v-else>{{ positionCoordsFirst }}</p>
       <hr />
       <div class="o-panel-results__wrapper-result">
-        <card-main :score="totalScore" />
+        <card-main :score="+totalScore" />
       </div>
       <div class="o-panel-results__wrapper-list">
         <cards-list :data="index" />
