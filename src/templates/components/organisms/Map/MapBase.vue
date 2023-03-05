@@ -221,5 +221,9 @@ export default defineComponent({
     background-color: var(--leaflet-controls-bg-color);
     color: var(--color-haven_white);
   }
+
+  .leaflet-control-locate a:first-child {
+    border-radius: 3rem;
+  }
 }
 </style>
