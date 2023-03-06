@@ -227,17 +227,18 @@ export default defineComponent({
       class="l-panel-mobile"
     >
       <ion-content class="ion-padding">
-        <div class="ion-margin-top">
-          <div class="l-panel-mobile__wrapper">
-            <navigation-search class="l-panel-mobile__wrapper-search" />
-            <component
-              class="l-panel-mobile__wrapper-content"
-              :is="panelMobileComponent"
-              :data="panelMobileData"
-              :index="panelMobileIndex"
-              @close="close"
-            />
-          </div>
+        <div class="l-panel-mobile__wrapper">
+          <navigation-search
+            class="l-panel-mobile__wrapper-search"
+            @click="$refs.modal.$el.setCurrentBreakpoint(1)"
+          />
+          <component
+            class="l-panel-mobile__wrapper-content"
+            :is="panelMobileComponent"
+            :data="panelMobileData"
+            :index="panelMobileIndex"
+            @close="close"
+          />
         </div>
       </ion-content>
     </ion-modal>
@@ -327,11 +328,17 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  position: absolute;
+  --ion-background-color: var(--color-haven_dark_green);
 
+  position: absolute;
   @include min(md) {
     display: none;
   }
   display: block;
+
+  &__wrapper {
+    //temporary fix for absolute cards not being inside parent div
+    margin-bottom: 20rem;
+  }
 }
 </style>
