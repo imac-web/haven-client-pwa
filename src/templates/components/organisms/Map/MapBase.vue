@@ -114,6 +114,7 @@ export default defineComponent({
       var layerControl = L.control
         .layers(null, baseMaps, { position: "topleft" })
         .addTo(map);
+
       async function callIndexAPI(e) {
         emitter.emit("selected-location", e.latlng);
         let location = e.latlng;
@@ -160,6 +161,19 @@ export default defineComponent({
       }
 
       map.on("click", onMapClick);
+
+      function onLocationFound(e) {
+        map.eachLayer((layer) => {
+          if (layer["_latlng"] != undefined) layer.remove();
+        });
+        var newMarker = new L.marker(e.latlng, {
+          icon: markerIcon,
+        }).addTo(map);
+        map.setView(e.latlng, 13);
+        callIndexAPI(e);
+      }
+
+      map.on("locationfound", onLocationFound);
     }
 
     onMounted(() => {
