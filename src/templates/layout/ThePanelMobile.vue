@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <Teleport to="body">
     <div
       class="l-panel-mobile |"
@@ -206,6 +206,130 @@ export default defineComponent({
   --cupertino-pane-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   --cupertino-pane-border-radius: 2rem;
   --cupertino-pane-move-background: var(--color-haven_grey);
+  @include min(md) {
+    display: none;
+  }
+  display: block;
+}
+</style>
+ -->
+
+<template>
+  <Teleport to="body">
+    <ion-modal
+      ref="modal"
+      :is-open="true"
+      :initial-breakpoint="0.1"
+      :breakpoints="[0.1, 0.25, 0.5, 0.75, 1]"
+      handle-behavior="cycle"
+      :backdrop-dismiss="false"
+      :backdrop-breakpoint="0.75"
+      class="l-panel-mobile"
+    >
+      {{ panelMobileIndex }}
+      <ion-content class="ion-padding">
+        <div class="ion-margin-top">
+          <div class="l-panel-mobile__wrapper">
+            <navigation-search class="l-panel-mobile__wrapper-search" />
+            <component
+              class="l-panel-mobile__wrapper-content"
+              :is="panelMobileComponent"
+              :data="panelMobileData"
+              :index="panelMobileIndex"
+              @close="close"
+            />
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal>
+  </Teleport>
+</template>
+
+<script>
+import {
+  IonButton,
+  IonModal,
+  IonHeader,
+  IonContent,
+  IonToolbar,
+  IonTitle,
+  IonLabel,
+} from "@ionic/vue";
+import { defineComponent, computed, ref, watch, onMounted } from "vue";
+import { useStore } from "vuex";
+import emitter from "@/services/emitter";
+import PanelMobileComponent from "@/templates/components/organisms/Panels/PanelMobileComponent.vue";
+import NavigationSearch from "@/templates/components/molecules/Navigation/NavigationSearch.vue";
+
+export default defineComponent({
+  components: {
+    IonButton,
+    IonModal,
+    IonHeader,
+    IonContent,
+    IonToolbar,
+    IonTitle,
+    IonLabel,
+    PanelMobileComponent,
+    NavigationSearch,
+  },
+  setup(props) {
+    const store = useStore();
+
+    const currentScroll = ref(0);
+
+    const isOpen = ref(false);
+
+    const isReady = computed(() => {
+      return store.getters["panelMobile/hasPanelMobile"] && isOpen.value;
+    });
+    const hasPanelMobile = computed(() => {
+      return store.getters["panelMobile/hasPanelMobile"];
+    });
+
+    const panelMobileData = computed(() => {
+      return store.state.panelMobile.data;
+    });
+
+    const panelMobileIndex = computed(() => {
+      return store.state.panelMobile.index;
+    });
+
+    const panelMobileComponent = computed(() => {
+      return store.state.panelMobile.component;
+    });
+
+    const isMobile = computed(() => {
+      return store.state.userContext.isMobile;
+    });
+
+    watch(hasPanelMobile, (open) => {
+      if (open) {
+        isOpen.value = true;
+        currentScroll.value = window.scrollY;
+        store.dispatch("scroll/toggleDisabledScroll", true);
+      } else {
+        window.scrollTo(0, currentScroll.value);
+        store.dispatch("scroll/toggleDisabledScroll", false);
+      }
+    });
+
+    return {
+      isReady,
+      panelMobileData,
+      panelMobileComponent,
+      close,
+      hasPanelMobile,
+      panelMobileIndex,
+    };
+  },
+});
+</script>
+
+<style lang="scss">
+.l-panel-mobile {
+  position: absolute;
+
   @include min(md) {
     display: none;
   }

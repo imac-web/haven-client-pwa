@@ -10,6 +10,7 @@
         "lint": "vite lint"
     },
     "dependencies": {
+        "@ionic/vue": "^6.6.0",
         "@types/faker": "^6.6.9",
         "@vueuse/core": "^9.10.0",
         "async": "^3.2.4",

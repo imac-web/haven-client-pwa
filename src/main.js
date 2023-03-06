@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { IonicVue } from '@ionic/vue';
 import App from '@/App.vue'
 import store from "@/store";
 import "virtual:svg-icons-register";
@@ -18,6 +19,7 @@ const app = createApp(App);
 
 app.use(store);
 app.use(veProgress);
+app.use(IonicVue);
 app.directive("magnet", magnet);
 
 app.directive("view", view);
