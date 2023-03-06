@@ -54,7 +54,7 @@ import {
 import { defineComponent, computed, ref, watch, onMounted } from "vue";
 import { useStore } from "vuex";
 import PanelMobileComponent from "@/templates/components/organisms/Panels/PanelMobileComponent.vue";
-
+import emitter from "@/services/emitter";
 import { GeoApiFrProvider } from "leaflet-geosearch";
 import { PANEL_COMPONENTS } from "@/constants";
 
@@ -70,6 +70,7 @@ export default defineComponent({
     PanelMobileComponent,
   },
   setup(props) {
+    const modal = ref(null);
     const store = useStore();
 
     const currentScroll = ref(0);
@@ -143,6 +144,12 @@ export default defineComponent({
       openPanelMobile(result, services);
     };
 
+    emitter.on("selected-location", (data) => {
+      setTimeout(() => {
+        modal.value.$el.setCurrentBreakpoint(1);
+      }, 500);
+    });
+
     return {
       isReady,
       panelMobileData,
@@ -154,6 +161,7 @@ export default defineComponent({
       onInput,
       results,
       selectResult,
+      modal,
     };
   },
 });

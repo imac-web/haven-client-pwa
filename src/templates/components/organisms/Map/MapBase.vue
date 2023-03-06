@@ -21,7 +21,7 @@ import emitter from "@/services/emitter";
 export default defineComponent({
   name: "MapBase",
   components: {},
-  emits: ["SlideDownPanel", "SelectedLocation"],
+  emits: ["SelectedLocation"],
   setup(props, { emit }) {
     const content = ref(null);
     const mapContainer = ref(null);
