@@ -226,7 +226,6 @@ export default defineComponent({
       :backdrop-breakpoint="0.75"
       class="l-panel-mobile"
     >
-      {{ panelMobileIndex }}
       <ion-content class="ion-padding">
         <div class="ion-margin-top">
           <div class="l-panel-mobile__wrapper">

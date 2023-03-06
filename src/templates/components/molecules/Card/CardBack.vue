@@ -54,7 +54,7 @@ export default defineComponent({
     }
 
     const score = computed(() => {
-      return data.value.score;
+      return setToFixed(data.value.score);
     });
 
     return {
