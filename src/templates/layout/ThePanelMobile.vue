@@ -112,7 +112,6 @@ export default defineComponent({
 
     const provider = new GeoApiFrProvider();
 
-    const searchInput = ref(null);
     const results = ref([]);
 
     async function onInput(event) {
@@ -122,8 +121,6 @@ export default defineComponent({
       } else {
         results.value = [];
       }
-
-      //emitter.emit("search-results", results.value);
     }
 
     function openPanelMobile(data, index) {
@@ -135,7 +132,6 @@ export default defineComponent({
     }
 
     const selectResult = async (result) => {
-      //emitter.emit("selected-result", result);
       let services = await fetchServices(result.y, result.x, 1000)
         .then((data) => {
           return data;
@@ -144,7 +140,6 @@ export default defineComponent({
           console.log(err);
         });
       results.value = [];
-      //openPanel(result, services);
       openPanelMobile(result, services);
     };
 
