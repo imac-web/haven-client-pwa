@@ -49,7 +49,8 @@ export default defineComponent({
     console.log(data.value);
 
     function setToFixed(v) {
-      return v % 1 ? v.toFixed(1) : v;
+      const value = +v;
+      return value % 1 ? value.toFixed(1) : value;
     }
 
     const score = computed(() => {

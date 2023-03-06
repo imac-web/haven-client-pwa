@@ -39,9 +39,11 @@ export default defineComponent({
   },
   setup(props) {
     const data = toRef(props, "data");
+    console.log(data.value.score);
 
     function setToFixed(v) {
-      return v % 1 ? v.toFixed(1) : v;
+      const value = +v;
+      return value % 1 ? value.toFixed(1) : value;
     }
 
     const score = computed(() => {
