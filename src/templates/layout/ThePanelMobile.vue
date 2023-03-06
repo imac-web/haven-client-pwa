@@ -3,19 +3,32 @@
     <ion-modal
       ref="modal"
       :is-open="true"
-      :initial-breakpoint="0.1"
-      :breakpoints="[0.1, 0.25, 0.5, 0.75, 1]"
+      :initial-breakpoint="0.15"
+      :breakpoints="[0.15, 0.25, 0.5, 0.75, 1]"
       handle-behavior="cycle"
       :backdrop-dismiss="false"
-      :backdrop-breakpoint="0.75"
+      :backdrop-breakpoint="0.5"
       class="l-panel-mobile"
     >
       <ion-content class="ion-padding">
         <div class="l-panel-mobile__wrapper">
-          <navigation-search
-            class="l-panel-mobile__wrapper-search"
+          <ion-searchbar
             @click="$refs.modal.$el.setCurrentBreakpoint(1)"
-          />
+            @input="onInput"
+            show-clear-button="always"
+            placeholder="Search"
+            class="l-panel-mobile__searchbar"
+          ></ion-searchbar>
+          <ion-list v-if="results.length > 0" class="l-panel-mobile__list">
+            <ion-item
+              class="l-panel-mobile__list-item"
+              v-for="result in results"
+              :key="result.id"
+              @click="selectResult(result)"
+            >
+              <ion-label>{{ result.label }}</ion-label>
+            </ion-item>
+          </ion-list>
           <component
             class="l-panel-mobile__wrapper-content"
             :is="panelMobileComponent"
@@ -31,31 +44,30 @@
 
 <script>
 import {
-  IonButton,
   IonModal,
-  IonHeader,
   IonContent,
-  IonToolbar,
-  IonTitle,
   IonLabel,
+  IonSearchbar,
+  IonItem,
+  IonList,
 } from "@ionic/vue";
 import { defineComponent, computed, ref, watch, onMounted } from "vue";
 import { useStore } from "vuex";
-import emitter from "@/services/emitter";
 import PanelMobileComponent from "@/templates/components/organisms/Panels/PanelMobileComponent.vue";
-import NavigationSearch from "@/templates/components/molecules/Navigation/NavigationSearch.vue";
 
+import { GeoApiFrProvider } from "leaflet-geosearch";
+import { PANEL_COMPONENTS } from "@/constants";
+
+import fetchServices from "@/utils/fetchServices";
 export default defineComponent({
   components: {
-    IonButton,
     IonModal,
-    IonHeader,
     IonContent,
-    IonToolbar,
-    IonTitle,
     IonLabel,
+    IonSearchbar,
+    IonItem,
+    IonList,
     PanelMobileComponent,
-    NavigationSearch,
   },
   setup(props) {
     const store = useStore();
@@ -98,6 +110,44 @@ export default defineComponent({
       }
     });
 
+    const provider = new GeoApiFrProvider();
+
+    const searchInput = ref(null);
+    const results = ref([]);
+
+    async function onInput(event) {
+      const query = event.target.value;
+      if (query.length > 0) {
+        results.value = await provider.search({ query });
+      } else {
+        results.value = [];
+      }
+
+      //emitter.emit("search-results", results.value);
+    }
+
+    function openPanelMobile(data, index) {
+      store.dispatch("panelMobile/open", {
+        component: PANEL_COMPONENTS.PanelMobile,
+        data,
+        index,
+      });
+    }
+
+    const selectResult = async (result) => {
+      //emitter.emit("selected-result", result);
+      let services = await fetchServices(result.y, result.x, 1000)
+        .then((data) => {
+          return data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      results.value = [];
+      //openPanel(result, services);
+      openPanelMobile(result, services);
+    };
+
     return {
       isReady,
       panelMobileData,
@@ -105,6 +155,10 @@ export default defineComponent({
       close,
       hasPanelMobile,
       panelMobileIndex,
+      isMobile,
+      onInput,
+      results,
+      selectResult,
     };
   },
 });
@@ -124,5 +178,22 @@ export default defineComponent({
     //temporary fix for absolute cards not being inside parent div
     margin-bottom: 20rem;
   }
+
+  &__searchbar {
+    color: var(--color-haven_white);
+    padding: 0;
+  }
+
+  &__list {
+    &-item {
+      color: var(--color-haven_white);
+    }
+  }
+}
+
+ion-item::part(native) {
+  //WRITE ALL YOUR CSS RULES HERE
+  padding-left: unset;
+  /** and lots more **/
 }
 </style>

@@ -45,7 +45,7 @@ export default defineComponent({
       default: null,
     },
   },
-  emits: ["SearchResults", "SlideUpPanel"],
+  emits: ["SearchResults"],
   setup(props, { emit }) {
     // setup provider
     const provider = new GeoApiFrProvider();
@@ -57,11 +57,8 @@ export default defineComponent({
       const query = event.target.value;
       if (query.length > 0) {
         results.value = await provider.search({ query });
-
-        emitter.emit("slide-up-panel", true);
       } else {
         results.value = [];
-        emitter.emit("slide-up-panel", false);
       }
 
       emitter.emit("search-results", results.value);
