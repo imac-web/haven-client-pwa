@@ -47,13 +47,6 @@ export default defineComponent({
         index,
       });
     }
-    function openPanelMobile(data, index) {
-      store.dispatch("panelMobile/open", {
-        component: PANEL_COMPONENTS.PanelMobile,
-        data,
-        index,
-      });
-    }
 
     const close = () => {
       store.dispatch("panel/close");
@@ -69,7 +62,6 @@ export default defineComponent({
           console.log(err);
         });
       openPanel(result, services);
-      openPanelMobile(result, services);
     };
 
     return {
