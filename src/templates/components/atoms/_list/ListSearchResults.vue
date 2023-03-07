@@ -54,7 +54,12 @@ export default defineComponent({
 
     const selectResult = async (result) => {
       emitter.emit("selected-result", result);
-      let services = await fetchServices(result.y, result.x, 1000)
+      let services = await fetchServices(
+        result.y,
+        result.x,
+        1000,
+        result.raw.properties.citycode
+      )
         .then((data) => {
           return data;
         })

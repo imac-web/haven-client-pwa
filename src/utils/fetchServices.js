@@ -18,7 +18,26 @@ const fetchService = async (lat, lon, radius, url, callback) => {
     return callback(null, services);
 };
 
-const fetchServices = async (lat, lon, radius) => {
+const fetchInsee = async (lat, lon) => {
+    const url = "https://api-adresse.data.gouv.fr/reverse/?"
+    const response = await fetch(
+        url +
+        "lon=" +
+        lon +
+        "&lat=" +
+        lat
+    );
+    // Parse the JSON respons
+    const request = await response.json();
+
+
+    return request.features[0].properties.citycode
+}
+
+const fetchServices = async (lat, lon, radius, citycode) => {
+
+    citycode ? citycode = citycode : citycode = await fetchInsee(lat, lon)
+
     try {
         const services = await async.parallel({
             publicServices: function (callback) {

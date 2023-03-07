@@ -40,7 +40,6 @@ export default defineComponent({
       map.eachLayer((layer) => {
         if (layer["_latlng"] != undefined) layer.remove();
       });
-      emitter.emit("slide-down-panel", true);
       SelectedResult.value = data;
       map.setView(
         [
