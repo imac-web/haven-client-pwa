@@ -2,7 +2,7 @@
   <div class="m-card-back">
     <div class="m-card-back__content">
       {{}}
-      <table class="rwd-table">
+      <table class="m-card-back__content-table">
         <tr>
           <th>Label</th>
           <th>Description</th>
@@ -70,9 +70,9 @@ export default defineComponent({
   background-color: var(--bg-color);
   border-radius: (2rem);
 
-  height: 18rem;
+  height: fit-content;
   width: 100%;
-  padding: 1rem;
+  padding-top: 5rem;
 
   &__content {
     display: flex;
@@ -87,6 +87,25 @@ export default defineComponent({
       justify-content: space-between;
       align-items: center;
       flex-direction: row;
+    }
+
+    &-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--color-haven_green);
+      border-radius: 2rem;
+      overflow: hidden;
+      & th {
+        padding: 0.5rem;
+        text-align: left;
+        border-bottom: 1px solid var(--color-haven_green);
+        background-color: var(--color-haven_green);
+      }
+      & td {
+        padding: 0.5rem;
+        text-align: left;
+        border-bottom: 1px solid var(--color-haven_green);
+      }
     }
   }
 }
