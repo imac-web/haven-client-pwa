@@ -30,13 +30,13 @@ const fetchInsee = async (lat, lon) => {
     // Parse the JSON respons
     const request = await response.json();
 
-
-    return request.features[0].properties.citycode
+    return request.features[0]?.properties?.citycode
 }
 
 const fetchServices = async (lat, lon, radius, citycode) => {
 
     citycode ? citycode = citycode : citycode = await fetchInsee(lat, lon)
+
 
     try {
         const services = await async.parallel({
