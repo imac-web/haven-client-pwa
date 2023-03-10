@@ -4,7 +4,9 @@
       <p v-if="data.label">{{ data.label }}</p>
       <p v-else-if="positionCoords">{{ positionCoords }}</p>
       <p v-else>{{ positionCoordsFirst }}</p>
-      <hr />
+      <p>Location radius:</p>
+
+      <input-slider class="o-panel-results__wrapper-slider" />
       <div class="o-panel-results__wrapper-result">
         <card-main :score="+totalScore" />
       </div>
@@ -27,6 +29,7 @@ import {
 } from "vue";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
 import CardMain from "@/templates/components/molecules/Card/CardMain.vue";
+import InputSlider from "@/templates/components/atoms/_input/InputSlider.vue";
 import { VeProgress } from "vue-ellipse-progress";
 import emitter from "@/services/emitter";
 
@@ -35,6 +38,7 @@ export default defineComponent({
   components: {
     CardsList,
     CardMain,
+    InputSlider,
     VeProgress,
   },
   props: {
@@ -131,9 +135,13 @@ export default defineComponent({
       margin-top: 3rem;
     }
 
-    &-list {
-      //max-height: 400px;
+    &-slider {
+      margin-top: 5rem;
     }
+  }
+
+  hr {
+    background-color: var(--color-haven_white);
   }
 }
 </style>

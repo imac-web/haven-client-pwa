@@ -35,6 +35,7 @@ export default defineComponent({
       popupAnchor: [0, -45], // point from which the popup should open relative to the iconAnchor
     });
     const SelectedResult = ref([]);
+    const currentLocation = ref(null);
 
     emitter.on("selected-result", (data) => {
       map.eachLayer((layer) => {
@@ -114,15 +115,32 @@ export default defineComponent({
         .layers(baseMaps, null, { position: "topleft" })
         .addTo(map);
 
-      async function callIndexAPI(e) {
+      async function callIndexAPI(e, radius) {
         emitter.emit("selected-location", e.latlng);
         let location = e.latlng;
+        currentLocation.value = location;
+        let services;
+        if (radius) {
+          services = await fetchServices(location.lat, location.lng, radius);
+        } else {
+          services = await fetchServices(location.lat, location.lng, 1000);
+        }
 
-        let services = await fetchServices(location.lat, location.lng, 1000);
+        close();
 
         openPanel(location, services);
         openPanelMobile(location, services);
       }
+
+      emitter.on("selected-radius", (data) => {
+        let location = {
+          latlng: {
+            lat: currentLocation.value.lat,
+            lng: currentLocation.value.lng,
+          },
+        };
+        callIndexAPI(location, data * 1000);
+      });
 
       //open and close panel functions
       const store = useStore();
