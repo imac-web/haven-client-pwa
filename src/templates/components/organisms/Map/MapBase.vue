@@ -42,6 +42,8 @@ export default defineComponent({
         if (layer["_latlng"] != undefined) layer.remove();
       });
       SelectedResult.value = data;
+      currentLocation.value = SelectedResult.value.raw.geometry.coordinates;
+      console.log(currentLocation.value);
       map.setView(
         [
           SelectedResult.value.raw.geometry.coordinates[1],
@@ -135,10 +137,15 @@ export default defineComponent({
       emitter.on("selected-radius", (data) => {
         let location = {
           latlng: {
-            lat: currentLocation.value.lat,
-            lng: currentLocation.value.lng,
+            lat: currentLocation.value.lat
+              ? currentLocation.value.lat
+              : currentLocation.value[1],
+            lng: currentLocation.value.lng
+              ? currentLocation.value.lng
+              : currentLocation.value[0],
           },
         };
+        console.log(location);
         callIndexAPI(location, data * 1000);
       });
 
