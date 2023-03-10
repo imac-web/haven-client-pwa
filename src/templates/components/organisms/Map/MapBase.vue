@@ -43,7 +43,6 @@ export default defineComponent({
       });
       SelectedResult.value = data;
       currentLocation.value = SelectedResult.value.raw.geometry.coordinates;
-      console.log(currentLocation.value);
       map.setView(
         [
           SelectedResult.value.raw.geometry.coordinates[1],
@@ -145,7 +144,6 @@ export default defineComponent({
               : currentLocation.value[0],
           },
         };
-        console.log(location);
         callIndexAPI(location, data * 1000);
       });
 
