@@ -6,7 +6,9 @@
       <p v-else>{{ positionCoordsFirst }}</p>
       <p>Location radius:</p>
 
-      <input-slider class="o-panel-results__wrapper-slider" />
+      <div class="o-panel-results__wrapper-slider">
+        <input-slider />
+      </div>
       <div class="o-panel-results__wrapper-result">
         <card-main :score="+totalScore" />
       </div>
@@ -137,6 +139,7 @@ export default defineComponent({
 
     &-slider {
       margin-top: 5rem;
+      padding: 2rem;
     }
   }
 
