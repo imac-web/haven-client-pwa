@@ -111,7 +111,7 @@ export default defineComponent({
         .addTo(map);
 
       var layerControl = L.control
-        .layers(null, baseMaps, { position: "topleft" })
+        .layers(baseMaps, null, { position: "topleft" })
         .addTo(map);
 
       async function callIndexAPI(e) {
@@ -237,6 +237,13 @@ export default defineComponent({
 
   .leaflet-control-locate a:first-child {
     border-radius: 3rem;
+  }
+
+  .leaflet-control-zoom {
+    display: none;
+    @include min(md) {
+      display: block;
+    }
   }
 }
 </style>
