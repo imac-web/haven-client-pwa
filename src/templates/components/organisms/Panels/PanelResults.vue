@@ -4,12 +4,12 @@
       <p v-if="data.label">{{ data.label }}</p>
       <p v-else-if="positionCoords">{{ positionCoords }}</p>
       <p v-else>{{ positionCoordsFirst }}</p>
-      <Hr />
+      <hr />
       <div class="o-panel-results__wrapper-result">
         <card-main :score="+totalScore" />
       </div>
       <div class="o-panel-results__wrapper-list">
-        <cards-list :data="index" />
+        <cards-list v-if="index" :data="index" />
       </div>
     </div>
   </div>

@@ -1,17 +1,28 @@
 import async from 'async';
 
-const fetchService = async (lat, lon, radius, url, callback) => {
+const fetchService = async (lat, lon, radius, citycode, url, callback) => {
     // Make an HTTP GET request to the Georisques API with the provided latitude, longitude, and radius as query parameters
-    const response = await fetch(
-        url +
-        "lat=" +
-        lat +
-        "&lng=" +
-        lon +
-        "&radius=" +
-        radius +
-        ""
-    );
+    let response = undefined
+    if (citycode) {
+        response = await fetch(
+            url +
+            "insee=" +
+            citycode +
+            ""
+        );
+    }
+    else {
+        response = await fetch(
+            url +
+            "lat=" +
+            lat +
+            "&lng=" +
+            lon +
+            "&radius=" +
+            radius +
+            ""
+        );
+    }
     // Parse the JSON respons
     const services = await response.json();
     // Return the risks data
@@ -41,10 +52,13 @@ const fetchServices = async (lat, lon, radius, citycode) => {
     try {
         const services = await async.parallel({
             publicServices: function (callback) {
-                fetchService(lat, lon, radius, "https://europe-west3-haven-5f945.cloudfunctions.net/getPublicServices?", callback)
+                fetchService(lat, lon, radius, null, "https://europe-west3-haven-5f945.cloudfunctions.net/getPublicServices?", callback)
             },
             naturalHazards: function (callback) {
-                fetchService(lat, lon, radius, "https://europe-west3-haven-5f945.cloudfunctions.net/getNaturalHazards?", callback)
+                fetchService(lat, lon, radius, null, "https://europe-west3-haven-5f945.cloudfunctions.net/getNaturalHazards?", callback)
+            },
+            wellBeing: function (callback) {
+                fetchService(lat, lon, radius, citycode, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
             },
         });
         return services;

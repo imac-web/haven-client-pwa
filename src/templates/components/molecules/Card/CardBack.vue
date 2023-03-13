@@ -1,7 +1,6 @@
 <template>
   <div class="m-card-back">
     <div class="m-card-back__content">
-      {{}}
       <table class="m-card-back__content-table">
         <tr>
           <th>Label</th>
@@ -40,7 +39,7 @@ export default defineComponent({
   props: {
     data: {
       type: Object,
-      required: true,
+      required: false,
       default: {},
     },
   },
