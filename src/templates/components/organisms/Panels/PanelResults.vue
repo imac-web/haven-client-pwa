@@ -130,6 +130,9 @@ export default defineComponent({
     &-result {
       margin-top: 3rem;
     }
+    &-list {
+      margin-top: 3rem;
+    }
   }
 
   hr {
