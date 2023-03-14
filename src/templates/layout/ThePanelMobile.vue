@@ -177,11 +177,6 @@ export default defineComponent({
   }
   display: block;
 
-  &__wrapper {
-    //temporary fix for absolute cards not being inside parent div
-    margin-bottom: 20rem;
-  }
-
   &__searchbar {
     color: var(--color-haven_white);
     padding: 0;
