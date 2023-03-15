@@ -1,5 +1,5 @@
 <template>
-  <div class="m-card" :class="{ 'is-switched': flip }">
+  <div v-if="data.score" class="m-card" :class="{ 'is-switched': flip }">
     <button-primary
       tag="a"
       class="m-card__btn"

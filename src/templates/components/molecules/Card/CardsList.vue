@@ -22,6 +22,7 @@ export default defineComponent({
   },
   setup(props) {
     const data = toRef(props, "data");
+
     const numberOfCards = computed(() => {
       return data.value.length;
     });
