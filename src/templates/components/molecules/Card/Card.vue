@@ -1,6 +1,7 @@
 <template>
   <div v-if="data.score" class="m-card" :class="{ 'is-switched': flip }">
     <button-primary
+      v-if="data.components"
       tag="a"
       class="m-card__btn"
       iconBefore="dots"
@@ -15,7 +16,7 @@
         class="m-card__side m-card__side--back"
         :class="{ 'is-active': flip }"
       >
-        <card-back :data="data.components" />
+        <card-back v-if="data.components" :data="data.components" />
       </div>
     </div>
   </div>
