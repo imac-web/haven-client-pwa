@@ -13,7 +13,7 @@ import mutateState from "./mutateState";
 import resizeEnd from "./resizeEnd";
 import userContext from "./userContext";
 import typeCheck from "./typeCheck";
-import getIndexFromLocation from "./getIndexFromLocation";
+import invertGeocoding from "./invertGeocoding";
 import fetchServices from "./fetchServices";
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isTouch = "ontouchstart" in document.documentElement;
@@ -25,7 +25,7 @@ export {
     userContext,
     typeCheck,
     reducedMotion,
-    getIndexFromLocation,
+    invertGeocoding,
     fetchServices,
 
 };
