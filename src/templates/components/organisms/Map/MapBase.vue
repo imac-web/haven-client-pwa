@@ -117,10 +117,10 @@ export default defineComponent({
         .addTo(map);
 
       async function callIndexAPI(e, radius) {
+        emitter.emit("selected-location", e.latlng);
         close();
         openPanel(e.latlng);
         openPanelMobile(e.latlng);
-        emitter.emit("selected-location", e.latlng);
         let location = e.latlng;
         currentLocation.value = location;
         let services;
@@ -135,7 +135,7 @@ export default defineComponent({
         openPanelMobile(location, services);
       }
 
-      emitter.on("selected-radius", (data) => {
+      /* emitter.on("selected-radius", (data) => {
         let location = {
           latlng: {
             lat: currentLocation.value.lat
@@ -147,7 +147,7 @@ export default defineComponent({
           },
         };
         callIndexAPI(location, data * 1000);
-      });
+      }); */
 
       //open and close panel functions
       const store = useStore();
