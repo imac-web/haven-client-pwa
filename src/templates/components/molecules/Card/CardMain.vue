@@ -6,7 +6,19 @@
       </div>
       <div class="m-card-main__content-bottom">
         <ve-progress
+          v-if="loading"
           :loading="loading"
+          :size="160"
+          emptyColor="rgba(255, 255, 255, 0.1)"
+          :thickness="15"
+          :empty-thickness="15"
+          :legend="score"
+          :legend-formatter="myFormatter"
+          legend-class="legend-custom-style"
+          color="#25c685"
+        ></ve-progress>
+        <ve-progress
+          v-else
           :progress="score * 10"
           :angle="90"
           :size="160"
