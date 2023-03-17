@@ -53,6 +53,8 @@ export default defineComponent({
     };
 
     const selectResult = async (result) => {
+      close();
+      openPanel(result);
       emitter.emit("selected-result", result);
       let services = await fetchServices(
         result.y,
@@ -66,6 +68,7 @@ export default defineComponent({
         .catch((err) => {
           console.log(err);
         });
+      close();
       openPanel(result, services);
     };
 
