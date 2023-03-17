@@ -10,6 +10,7 @@ import { useStore } from "vuex";
 import { PANEL_COMPONENTS } from "@/constants";
 
 import fetchServices from "@/utils/fetchServices";
+import invertGeocoding from "@/utils/invertGeocoding";
 import "leaflet/dist/leaflet.css";
 import L, { icon, map } from "leaflet";
 
@@ -117,11 +118,29 @@ export default defineComponent({
         .addTo(map);
 
       async function callIndexAPI(e, radius) {
+        const invertedGeocoding = await invertGeocoding(
+          e.latlng.lat,
+          e.latlng.lng
+        );
         emitter.emit("selected-location", e.latlng);
         close();
         openPanel(e.latlng);
         openPanelMobile(e.latlng);
-        let location = e.latlng;
+        let location;
+        let address = invertedGeocoding.features[0]?.properties?.label;
+        if (address) {
+          location = {
+            lat: e.latlng.lat,
+            lng: e.latlng.lng,
+            label: address,
+          };
+        } else {
+          location = {
+            lat: e.latlng.lat,
+            lng: e.latlng.lng,
+          };
+        }
+        console.log("location", location);
         currentLocation.value = location;
         let services;
         if (radius) {
