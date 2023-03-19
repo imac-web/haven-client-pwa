@@ -1,33 +1,56 @@
 import async from 'async';
+import timeout from 'async';
+
+async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 8000 } = options;
+
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    const response = await fetch(resource, {
+        ...options,
+        signal: controller.signal
+    });
+    clearTimeout(id);
+    return response;
+}
 
 const fetchService = async (lat, lon, radius, citycode, url, callback) => {
-    // Make an HTTP GET request to the Georisques API with the provided latitude, longitude, and radius as query parameters
-    let response = undefined
-    if (citycode) {
-        response = await fetch(
-            url +
-            "insee=" +
-            citycode +
-            ""
-        );
+    try {
+        let response = undefined
+        if (citycode) {
+            response = await fetchWithTimeout(
+                url +
+                "insee=" +
+                citycode +
+                ""
+                , {
+                    timeout: 5000
+                });
+        }
+        else {
+            response = await fetchWithTimeout(
+                url +
+                "lat=" +
+                lat +
+                "&lng=" +
+                lon +
+                "&radius=" +
+                radius +
+                ""
+                , {
+                    timeout: 5000
+                });
+        }
+        // Parse the JSON respons
+        const services = await response.json();
+        // Return the risks data
+        return callback(null, services);
+    } catch (error) {
+        return callback(null, null);
     }
-    else {
-        response = await fetch(
-            url +
-            "lat=" +
-            lat +
-            "&lng=" +
-            lon +
-            "&radius=" +
-            radius +
-            ""
-        );
-    }
-    // Parse the JSON respons
-    const services = await response.json();
-    // Return the risks data
-    return callback(null, services);
+
 };
+
 
 const fetchInsee = async (lat, lon) => {
     const url = "https://api-adresse.data.gouv.fr/reverse/?"
@@ -59,9 +82,11 @@ const fetchServices = async (lat, lon, radius, citycode) => {
             },
             wellBeing: function (callback) {
                 fetchService(lat, lon, radius, citycode, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
-            },
+            }
         });
-        return services;
+        console.log("services", services)
+        let servicesFixed = Object.fromEntries(Object.entries(services).filter(([_, v]) => v != null));
+        return servicesFixed;
     }
     catch (err) {
         console.log(err);
