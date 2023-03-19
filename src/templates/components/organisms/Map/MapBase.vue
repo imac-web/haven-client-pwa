@@ -140,7 +140,6 @@ export default defineComponent({
             lng: e.latlng.lng,
           };
         }
-        console.log("location", location);
         currentLocation.value = location;
         let services;
         if (radius) {
@@ -153,20 +152,6 @@ export default defineComponent({
         openPanel(location, services);
         openPanelMobile(location, services);
       }
-
-      /* emitter.on("selected-radius", (data) => {
-        let location = {
-          latlng: {
-            lat: currentLocation.value.lat
-              ? currentLocation.value.lat
-              : currentLocation.value[1],
-            lng: currentLocation.value.lng
-              ? currentLocation.value.lng
-              : currentLocation.value[0],
-          },
-        };
-        callIndexAPI(location, data * 1000);
-      }); */
 
       //open and close panel functions
       const store = useStore();
