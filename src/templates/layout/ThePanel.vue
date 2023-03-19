@@ -152,7 +152,6 @@ export default defineComponent({
   clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
   @include min(md) {
     height: var(--panel-height);
-    //max-height: calc(100vh - var(--navbar-height));
 
     left: calc(100% - var(--panel-width));
     padding-top: calc(var(--navbar-height) + 3rem);
