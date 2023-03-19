@@ -3,9 +3,8 @@
     <div class="m-card-back__content">
       <div class="m-card-back__content-title">Détails de la note</div>
       <table class="m-card-back__content-table">
-        <tr v-for="(data, i) in data" :key="`detail-${i}`">
+        <tr v-for="(data, i) in filteredData" :key="`detail-${i}`">
           <td v-if="data.label && data.score">{{ data.label }}</td>
-
           <td v-if="data.score">{{ data.score }}</td>
         </tr>
       </table>
@@ -42,9 +41,14 @@ export default defineComponent({
       return setToFixed(data.value.score);
     });
 
+    const filteredData = computed(() => {
+      return data.value.filter((obj) => obj.score !== 0);
+    });
+
     return {
       data,
       score,
+      filteredData,
     };
   },
 });
