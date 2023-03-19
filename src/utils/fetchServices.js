@@ -84,7 +84,6 @@ const fetchServices = async (lat, lon, radius, citycode) => {
                 fetchService(lat, lon, radius, citycode, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
             }
         });
-        console.log("services", services)
         let servicesFixed = Object.fromEntries(Object.entries(services).filter(([_, v]) => v != null));
         return servicesFixed;
     }
