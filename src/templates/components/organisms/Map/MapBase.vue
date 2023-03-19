@@ -219,7 +219,7 @@ export default defineComponent({
 
 <style lang="scss">
 .o-map {
-  --leaflet-controls-bg-color: var(--color-haven_green);
+  --leaflet-controls-bg-color: var(--color-haven_dark_grey);
   --leaflet-controls-shadow-color: var(--color-haven_dark_green);
   --map-width: calc(100% - var(--panel-width));
   z-index: 0;
@@ -229,6 +229,18 @@ export default defineComponent({
     @include min(md) {
       //height: 50vh;
     }
+  }
+
+  .leaflet-touch .leaflet-bar a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .leaflet-control-locate a .leaflet-control-locate-location-arrow {
+    width: 20px;
+    height: 20px;
+    margin: 9px;
   }
 
   .leaflet-control-container {
@@ -244,6 +256,7 @@ export default defineComponent({
   .leaflet-touch .leaflet-control-layers,
   .leaflet-touch .leaflet-bar {
     border: none;
+    border-radius: 1rem;
   }
 
   .leaflet-control-locate-location-arrow {
@@ -252,28 +265,100 @@ export default defineComponent({
   .leaflet-control-zoom-in,
   .leaflet-control-zoom-out,
   a:last-child {
-    color: var(--color-dark);
     background-color: var(--leaflet-controls-bg-color);
-    //box-shadow: 0 0 1rem var(--leaflet-controls-shadow-color);
+    border: 1px solid var(--color-haven_white);
 
     &:hover {
       background-color: var(--color-haven_dark_green);
     }
   }
-  .leaflet-control-layers-toggle,
+  .leaflet-control-layers-toggle {
+    background-color: var(--leaflet-controls-bg-color);
+    border: 1px solid var(--color-haven_white) !important;
+    border-radius: 1rem;
+  }
+
   .leaflet-control-layers-expanded {
     background-color: var(--leaflet-controls-bg-color);
-    color: var(--color-dark);
+    border: 1px solid var(--color-haven_white) !important;
+
+    $primary-color: #25c685; // Change color here. C'mon, try it!
+    $text-color: mix(#000, $primary-color, 64%);
+
+    label {
+      display: flex;
+      cursor: pointer;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.375em;
+
+      color: var(--color-white);
+      font-size: 1.5em;
+      &:hover {
+        color: var(--color-black);
+      }
+      span {
+        input {
+          position: absolute;
+          left: -9999px;
+          &:checked + span {
+            background-color: mix(#fff, $primary-color, 84%);
+            color: var(--color-black);
+
+            &:before {
+              box-shadow: inset 0 0 0 0.4375em $primary-color;
+            }
+          }
+        }
+        span {
+          display: flex;
+          align-items: center;
+          padding: 0.375em 0.75em 0.375em 0.375em;
+          border-radius: 99em;
+          &:hover {
+            background-color: mix(#fff, $primary-color, 84%);
+          }
+          &:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: #fff;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 0 0.125em $primary-color;
+          }
+        }
+      }
+    }
   }
 
   .leaflet-control-locate a:first-child {
     border-radius: 3rem;
+    border: 1px solid var(--color-haven_white);
   }
 
   .leaflet-control-zoom {
     display: none;
     @include min(md) {
       display: block;
+    }
+
+    &-in,
+    &-out {
+      color: var(--color-haven_white);
+    }
+
+    &-in {
+      border-top-left-radius: 0.7rem !important;
+      border-top-right-radius: 0.7rem !important;
+    }
+    &-out {
+      border-bottom-left-radius: 0.7rem !important;
+      border-bottom-right-radius: 0.7rem !important;
     }
   }
 }
