@@ -60,10 +60,51 @@ export default defineComponent({
   }
 
   color: var(--color-white);
-
-  padding: 2rem;
+  height: 100%;
+  padding: 0 2rem 0;
 
   &__wrapper {
+    padding-top: 2rem;
+    --scrollbar-width: 6px;
+    --mask-height: 32px;
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: var(--mask-height);
+    --mask-image-content: linear-gradient(
+      to bottom,
+      transparent,
+      black var(--mask-height),
+      black calc(100% - var(--mask-height)),
+      transparent
+    );
+    --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+    --mask-image-scrollbar: linear-gradient(black, black);
+
+    --mask-size-scrollbar: var(--scrollbar-width) 100%;
+
+    -webkit-mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+    -webkit-mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+    -webkit-mask-position: 0 0, 100% 0;
+    -webkit-mask-repeat: no-repeat, no-repeat;
+
+    & {
+      --scrollbarBG: transparent;
+      --thumbBG: #90a4ae;
+
+      scrollbar-width: thin;
+      scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--scrollbarBG);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--thumbBG);
+      border-radius: 6px;
+      border: 3px solid var(--scrollbarBG);
+    }
   }
 }
 </style>
