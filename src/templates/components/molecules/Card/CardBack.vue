@@ -3,7 +3,7 @@
     <div class="m-card-back__content">
       <div class="m-card-back__content-title">Détails de la note</div>
       <table class="m-card-back__content-table">
-        <tr v-for="(data, i) in data">
+        <tr v-for="(data, i) in data" :key="`detail-${i}`">
           <td v-if="data.label && data.score">{{ data.label }}</td>
 
           <td v-if="data.score">{{ data.score }}</td>
