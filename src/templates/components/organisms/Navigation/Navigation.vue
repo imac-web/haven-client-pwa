@@ -38,11 +38,14 @@ export default defineComponent({
 
 <style lang="scss">
 .o-navigation {
+  --nav-padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   color: var(--color-white);
+
+  padding: var(--nav-padding);
 
   &__logo {
     font-size: 2rem;
@@ -51,7 +54,11 @@ export default defineComponent({
   }
 
   &__search {
-    width: 40rem;
+    width: calc(40rem - calc(2 * var(--nav-padding)));
+
+    @include min(2xl) {
+      width: calc(50rem - calc(2 * var(--nav-padding)));
+    }
   }
 }
 </style>

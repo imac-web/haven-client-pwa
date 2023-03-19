@@ -138,7 +138,7 @@ export default defineComponent({
   z-index: 10;
   pointer-events: none;
 
-  width: var(--panel-width, 40vw);
+  width: var(--panel-width, 40rem);
 
   display: flex;
   flex-direction: column;
@@ -160,7 +160,7 @@ export default defineComponent({
     display: block;
   }
   @include min(2xl) {
-    --panel-width: 30vw;
+    --panel-width: 50rem;
   }
 
   display: none;
