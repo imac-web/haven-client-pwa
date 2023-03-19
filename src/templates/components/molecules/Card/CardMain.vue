@@ -2,7 +2,7 @@
   <div class="m-card-main">
     <div class="m-card-main__content">
       <div class="m-card-main__content-top">
-        <h3>Vivability</h3>
+        <h3>Indice d'habitabilité</h3>
       </div>
       <div class="m-card-main__content-bottom">
         <ve-progress
@@ -12,10 +12,11 @@
           emptyColor="rgba(255, 255, 255, 0.1)"
           :thickness="15"
           :empty-thickness="15"
-          :legend="score"
-          :legend-formatter="myFormatter"
-          legend-class="legend-custom-style"
           color="#25c685"
+          ><template #legend-caption>
+            <div class="loading loading-0"></div>
+            <div class="loading loading-1"></div>
+            <div class="loading loading-2"></div></template
         ></ve-progress>
         <ve-progress
           v-else
@@ -27,7 +28,6 @@
           :empty-thickness="15"
           :legend="score"
           :legend-formatter="myFormatter"
-          legend-class="legend-custom-style"
           color="#25c685"
         ></ve-progress>
       </div>
@@ -68,7 +68,8 @@ export default defineComponent({
     const myFormatter = ({ currentValue }) => {
       return `
         <span style="font-weight: bold; font-size: 6rem;">${currentValue}</span>
-        <span style="opacity:0.5; font-size: 2rem; text-transform:uppercase;"> / 10</span>
+        <br/>
+        <span style="opacity:0.5; font-size: 2rem; text-transform:uppercase;"> sur 10</span>
       `;
     };
 
@@ -99,6 +100,11 @@ export default defineComponent({
     justify-content: space-evenly;
     &-top {
       text-align: center;
+      h3 {
+        font-variant: small-caps;
+        font-size: var(--fs-regular);
+        font-weight: 700;
+      }
     }
     &-bottom {
       text-align: center;
@@ -117,6 +123,39 @@ export default defineComponent({
         --btn-svg-width: 0.7em;
       }
     }
+  }
+}
+
+.loading {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 100%;
+  float: left;
+  margin-right: 5px;
+}
+.loading-0 {
+  -webkit-animation: bounce 1s infinite;
+  -webkit-animation-delay: 0.1s;
+  background: var(--color-haven_green);
+}
+.loading-1 {
+  -webkit-animation: bounce 1s infinite;
+  -webkit-animation-delay: 0.3s;
+  background: var(--color-haven_green);
+}
+.loading-2 {
+  -webkit-animation: bounce 1s infinite ease;
+  -webkit-animation-delay: 0.5s;
+  background: var(--color-haven_green);
+}
+@-webkit-keyframes bounce {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
   }
 }
 </style>

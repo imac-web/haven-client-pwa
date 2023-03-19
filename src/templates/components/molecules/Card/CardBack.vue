@@ -70,6 +70,7 @@ export default defineComponent({
 
     &-title {
       text-align: left;
+      font-variant: small-caps;
       padding-left: var(--details-padding);
       font-size: var(--fs-small);
       font-weight: 700;
