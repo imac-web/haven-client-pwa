@@ -178,7 +178,6 @@ export default defineComponent({
       right: 0;
       width: 100%;
       z-index: 100;
-      //padding: 2rem;
     }
     display: none;
   }
