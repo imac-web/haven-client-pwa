@@ -125,7 +125,9 @@ export default defineComponent({
   &__wrapper {
     & p {
       margin-bottom: 3rem;
-      font-size: var(--fs-large);
+      font-variant: small-caps;
+      font-size: var(--fs-regular);
+      font-weight: 700;
     }
     text-align: center;
     &-result {
