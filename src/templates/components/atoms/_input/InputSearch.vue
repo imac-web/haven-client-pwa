@@ -33,7 +33,7 @@ export default defineComponent({
   props: {
     label: {
       type: [String, Number],
-      default: "Input placeholder",
+      default: "Recherche",
     },
     //--- Icons ---//
     iconBefore: {

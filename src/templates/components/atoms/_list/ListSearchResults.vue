@@ -11,10 +11,11 @@
       />
     </div>
   </div>
+  <div class="backdrop-search" :class="{ 'backdrop-open': showBackdrop }" />
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, toRef } from "vue";
 import { useStore } from "vuex";
 import { PANEL_COMPONENTS } from "@/constants";
 
@@ -36,7 +37,8 @@ export default defineComponent({
     },
   },
   emits: ["SelectedResult"],
-  setup() {
+  setup(props) {
+    const results = toRef(props, "results");
     //open and close panel functions
     const store = useStore();
 
@@ -72,8 +74,14 @@ export default defineComponent({
       openPanel(result, services);
     };
 
+    const showBackdrop = computed(() => {
+      return results.value.length > 0 ? true : false;
+    });
+
     return {
       selectResult,
+      results,
+      showBackdrop,
     };
   },
 });
@@ -81,7 +89,8 @@ export default defineComponent({
 
 <style lang="scss">
 .c-list-search-results {
-  background-color: var(--color-haven_dark_grey);
+  position: absolute;
+  //background-color: var(--color-haven_dark_grey);
   width: 100%;
   &__list {
     list-style: none;
@@ -104,6 +113,26 @@ export default defineComponent({
     @include max(md) {
       --btn-txt-size: var(--fs-xsmall);
     }
+  }
+}
+
+.backdrop-search {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: var(--color-haven_dark_grey_alpha);
+  backdrop-filter: blur(2rem);
+  width: var(--panel-width);
+  height: 100%;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: visibility 0.2s, opacity 0.2s ease-in-out;
+
+  &.backdrop-open {
+    opacity: 1;
+    visibility: visible;
   }
 }
 </style>
