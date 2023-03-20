@@ -13,7 +13,7 @@
       <ion-content class="ion-padding">
         <div class="l-panel-mobile__wrapper">
           <ion-searchbar
-            @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
+            @click="$refs.modal.$el.setCurrentBreakpoint(1)"
             @input="onInput"
             show-clear-button="always"
             placeholder="Search"
@@ -137,6 +137,8 @@ export default defineComponent({
     };
 
     const selectResult = async (result) => {
+      close();
+      openPanelMobile(result);
       modal.value.$el.setCurrentBreakpoint(1);
       results.value = [];
       let services = await fetchServices(result.y, result.x, 1000)
