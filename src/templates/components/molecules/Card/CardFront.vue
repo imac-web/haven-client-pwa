@@ -8,9 +8,10 @@
         <ve-progress
           :progress="score * 10"
           :angle="90"
-          :size="100"
+          :size="80"
           emptyColor="transparent"
           :legend="score"
+          :legend-formatter="myFormatter"
           color="#25c685"
         />
       </div>
@@ -49,9 +50,17 @@ export default defineComponent({
       return setToFixed(data.value.score);
     });
 
+    const myFormatter = (computed) => {
+      return `
+        <span style=" font-size: 2.5rem;">${score.value}</span>
+      `;
+    };
+
     return {
       data,
       score,
+      setToFixed,
+      myFormatter,
     };
   },
 });
