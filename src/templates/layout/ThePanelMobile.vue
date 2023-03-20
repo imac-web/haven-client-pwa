@@ -16,7 +16,7 @@
             @click="$refs.modal.$el.setCurrentBreakpoint(1)"
             @input="onInput"
             show-clear-button="always"
-            placeholder="Search"
+            placeholder="Recherche"
             class="l-panel-mobile__searchbar"
           ></ion-searchbar>
           <ion-list v-if="results.length > 0" class="l-panel-mobile__list">
