@@ -1,7 +1,7 @@
 <template>
   <div class="m-card-back">
     <div class="m-card-back__content">
-      <div class="m-card-back__content-title">Détails de la note</div>
+      <div class="m-card-back__content-title">Détails</div>
       <table class="m-card-back__content-table">
         <tr v-for="(data, i) in filteredData" :key="`detail-${i}`">
           <td v-if="data.label && data.score">{{ data.label }}</td>
@@ -59,11 +59,11 @@ export default defineComponent({
   --details-padding: 2rem;
   --bg-color: var(--color-haven_dark_grey);
   background-color: var(--bg-color);
-  border-radius: (2rem);
+  border-radius: 1rem;
 
   height: fit-content;
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
 
   &__content {
     display: flex;
@@ -83,7 +83,7 @@ export default defineComponent({
       width: 100%;
       border-collapse: collapse;
       overflow: hidden;
-      margin-top: 2rem;
+      margin-top: 0.5rem;
 
       & tr {
         border-bottom: 1px solid var(--color-haven_green);

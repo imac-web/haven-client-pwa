@@ -240,12 +240,13 @@ export default defineComponent({
   .leaflet-control-locate a .leaflet-control-locate-location-arrow {
     width: 20px;
     height: 20px;
-    margin: 9px;
+    position: relative;
+    top: 3px;
   }
 
   .leaflet-control-container {
     margin-left: 1rem;
-    top: 2rem;
+    top: 3rem;
     height: calc(100% - var(--header-height));
     margin-top: var(--header-height);
     @include min(md) {
@@ -266,7 +267,7 @@ export default defineComponent({
   .leaflet-control-zoom-out,
   a:last-child {
     background-color: var(--leaflet-controls-bg-color);
-    border: 1px solid var(--color-haven_white);
+    border: 1px solid var(--color-haven_grey);
 
     &:hover {
       background-color: var(--color-haven_dark_green);
@@ -274,13 +275,15 @@ export default defineComponent({
   }
   .leaflet-control-layers-toggle {
     background-color: var(--leaflet-controls-bg-color);
-    border: 1px solid var(--color-haven_white) !important;
+    border: 1px solid var(--color-haven_grey) !important;
     border-radius: 1rem;
+    width: 40px;
+    height: 40px;
   }
 
   .leaflet-control-layers-expanded {
     background-color: var(--leaflet-controls-bg-color);
-    border: 1px solid var(--color-haven_white) !important;
+    border: 1px solid var(--color-haven_grey) !important;
 
     $primary-color: #25c685; // Change color here. C'mon, try it!
     $text-color: mix(#000, $primary-color, 64%);
@@ -338,7 +341,7 @@ export default defineComponent({
 
   .leaflet-control-locate a:first-child {
     border-radius: 3rem;
-    border: 1px solid var(--color-haven_white);
+    border: 1px solid var(--color-haven_grey);
   }
 
   .leaflet-control-zoom {

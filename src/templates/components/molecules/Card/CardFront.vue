@@ -5,15 +5,8 @@
         <h3>{{ data.label }}</h3>
       </div>
       <div class="m-card-front__content-right">
-        <ve-progress
-          :progress="score * 10"
-          :angle="90"
-          :size="80"
-          emptyColor="transparent"
-          :legend="score"
-          :legend-formatter="myFormatter"
-          color="#25c685"
-        />
+        <ve-progress :progress="score * 10" :angle="90" :size="80" emptyColor="transparent" :legend="score"
+          :legend-formatter="myFormatter" color="#25c685" />
       </div>
     </div>
   </div>
@@ -70,25 +63,30 @@ export default defineComponent({
 .m-card-front {
   --bg-color: var(--color-haven_dark_grey);
   background-color: var(--bg-color);
-  border-radius: (2rem);
+  border-radius: 1rem;
 
-  height: 12rem;
+  height: 10rem;
   width: 100%;
   padding: 1rem;
 
   &__content {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     height: 100%;
+
     &-left {
       align-self: center;
+      flex: 0 0 21rem;
+      text-align: left;
+      padding: 0 2rem;
+
       h3 {
         font-variant: small-caps;
         font-size: var(--fs-small);
         font-weight: 700;
       }
     }
+
     &-right {
       display: flex;
       justify-content: space-between;

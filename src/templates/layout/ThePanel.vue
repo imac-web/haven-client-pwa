@@ -131,7 +131,7 @@ export default defineComponent({
 <style lang="scss">
 .l-panel {
   --panel-height: 100%;
-  --panel-bg: var(--color-haven_dark_green_alpha);
+  --panel-bg: var(--color-haven_dark_grey_alpha);
   --navbar-height: 5rem;
 
   @include full-screen-dom();
