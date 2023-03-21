@@ -15,10 +15,8 @@ async function fetchWithTimeout(resource, options = {}) {
 }
 
 const fetchService = async (citycode, lat, lng, url, callback) => {
-    console.log("hello")
     try {
-        let response = undefined
-        response = await fetchWithTimeout(
+        let response = await fetchWithTimeout(
             url +
             "insee=" +
             citycode +
@@ -27,13 +25,11 @@ const fetchService = async (citycode, lat, lng, url, callback) => {
             "&lng=" +
             lng
             , {
-                timeout: 5000
+                timeout: 20000
             });
 
-        console.log(response)
         // Parse the JSON respons
         const services = await response.json();
-        console.log(services)
         // Return the risks data
         return callback(null, services);
     } catch (error) {
