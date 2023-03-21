@@ -117,7 +117,7 @@ export default defineComponent({
         .layers(baseMaps, null, { position: "topleft" })
         .addTo(map);
 
-      async function callIndexAPI(e, radius) {
+      async function callIndexAPI(e) {
         const invertedGeocoding = await invertGeocoding(
           e.latlng.lat,
           e.latlng.lng
@@ -142,11 +142,11 @@ export default defineComponent({
         }
         currentLocation.value = location;
         let services;
-        if (radius) {
-          services = await fetchServices(location.lat, location.lng, radius);
-        } else {
-          services = await fetchServices(location.lat, location.lng, 1000);
-        }
+        // if (radius) {
+        services = await fetchServices(location.lat, location.lng);
+        // } else {
+        //   services = await fetchServices(location.lat, location.lng);
+        // }
 
         close();
         openPanel(location, services);

@@ -14,33 +14,19 @@ async function fetchWithTimeout(resource, options = {}) {
     return response;
 }
 
-const fetchService = async (lat, lon, radius, citycode, url, callback) => {
+const fetchService = async (citycode, lat, lng, url, callback) => {
     try {
-        let response = undefined
-        if (citycode) {
-            response = await fetchWithTimeout(
-                url +
-                "insee=" +
-                citycode +
-                ""
-                , {
-                    timeout: 5000
-                });
-        }
-        else {
-            response = await fetchWithTimeout(
-                url +
-                "lat=" +
-                lat +
-                "&lng=" +
-                lon +
-                "&radius=" +
-                radius +
-                ""
-                , {
-                    timeout: 5000
-                });
-        }
+        let response = await fetchWithTimeout(
+            url +
+            "insee=" +
+            citycode +
+            "lat=" +
+            lat +
+            "lng=" +
+            lng
+            , {
+                timeout: 5000
+            });
         // Parse the JSON respons
         const services = await response.json();
         // Return the risks data
@@ -52,12 +38,12 @@ const fetchService = async (lat, lon, radius, citycode, url, callback) => {
 };
 
 
-const fetchInsee = async (lat, lon) => {
+const fetchInsee = async (lat, lng) => {
     const url = "https://api-adresse.data.gouv.fr/reverse/?"
     const response = await fetch(
         url +
-        "lon=" +
-        lon +
+        "lng=" +
+        lng +
         "&lat=" +
         lat
     );
@@ -67,21 +53,21 @@ const fetchInsee = async (lat, lon) => {
     return request.features[0]?.properties?.citycode
 }
 
-const fetchServices = async (lat, lon, radius, citycode) => {
+const fetchServices = async (lat, lng, citycode) => {
 
-    citycode ? citycode = citycode : citycode = await fetchInsee(lat, lon)
+    citycode ? citycode = citycode : citycode = await fetchInsee(lat, lng)
 
 
     try {
         const services = await async.parallel({
             publicServices: function (callback) {
-                fetchService(lat, lon, radius, null, "https://europe-west3-haven-5f945.cloudfunctions.net/getPublicServices?", callback)
+                fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getPublicServices?", callback)
             },
             naturalHazards: function (callback) {
-                fetchService(lat, lon, radius, null, "https://europe-west3-haven-5f945.cloudfunctions.net/getNaturalHazards?", callback)
+                fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getNaturalHazards?", callback)
             },
             wellBeing: function (callback) {
-                fetchService(lat, lon, radius, citycode, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
+                fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
             }
         });
         let servicesFixed = Object.fromEntries(Object.entries(services).filter(([_, v]) => v != null));

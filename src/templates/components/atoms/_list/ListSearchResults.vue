@@ -61,7 +61,7 @@ export default defineComponent({
       let services = await fetchServices(
         result.y,
         result.x,
-        1000,
+        // 1000,
         result.raw.properties.citycode
       )
         .then((data) => {
