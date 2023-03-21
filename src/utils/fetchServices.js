@@ -15,20 +15,25 @@ async function fetchWithTimeout(resource, options = {}) {
 }
 
 const fetchService = async (citycode, lat, lng, url, callback) => {
+    console.log("hello")
     try {
-        let response = await fetchWithTimeout(
+        let response = undefined
+        response = await fetchWithTimeout(
             url +
             "insee=" +
             citycode +
-            "lat=" +
+            "&lat=" +
             lat +
-            "lng=" +
+            "&lng=" +
             lng
             , {
                 timeout: 5000
             });
+
+        console.log(response)
         // Parse the JSON respons
         const services = await response.json();
+        console.log(services)
         // Return the risks data
         return callback(null, services);
     } catch (error) {
@@ -42,14 +47,13 @@ const fetchInsee = async (lat, lng) => {
     const url = "https://api-adresse.data.gouv.fr/reverse/?"
     const response = await fetch(
         url +
-        "lng=" +
+        "lon=" +
         lng +
         "&lat=" +
         lat
     );
     // Parse the JSON respons
     const request = await response.json();
-
     return request.features[0]?.properties?.citycode
 }
 

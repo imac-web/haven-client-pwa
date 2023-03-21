@@ -141,12 +141,7 @@ export default defineComponent({
           };
         }
         currentLocation.value = location;
-        let services;
-        // if (radius) {
-        services = await fetchServices(location.lat, location.lng);
-        // } else {
-        //   services = await fetchServices(location.lat, location.lng);
-        // }
+        let services = await fetchServices(location.lat, location.lng);
 
         close();
         openPanel(location, services);
