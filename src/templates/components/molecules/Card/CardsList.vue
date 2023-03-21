@@ -39,6 +39,6 @@ export default defineComponent({
   @include reset-list;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
 }
 </style>

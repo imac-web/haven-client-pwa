@@ -2,7 +2,7 @@
   <div class="m-card-main">
     <div class="m-card-main__content">
       <div class="m-card-main__content-top">
-        <h3>Indice d'habitabilité</h3>
+        <h3>Score d'habitabilité</h3>
       </div>
       <div class="m-card-main__content-bottom">
         <ve-progress
@@ -67,9 +67,9 @@ export default defineComponent({
 
     const myFormatter = ({ currentValue }) => {
       return `
-        <span style="font-weight: bold; font-size: 6rem;">${currentValue}</span>
+        <span style="font-weight: bold; font-size: 6rem; line-height: 4rem;display: inline-block; margin-top: 0.5rem;">${currentValue}</span>
         <br/>
-        <span style="opacity:0.5; font-size: 2rem; text-transform:uppercase;"> sur 10</span>
+        <span style="opacity:0.5; font-size: 2rem; text-transform:uppercase; line-height: 1rem;"> sur 10</span>
       `;
     };
 
@@ -87,9 +87,9 @@ export default defineComponent({
 .m-card-main {
   --bg-color: var(--color-haven_dark_grey);
   background-color: var(--bg-color);
-  border-radius: (2rem);
+  border-radius: 1rem;
 
-  height: 30rem;
+  height: 24rem;
   width: 100%;
   padding: 1rem;
 
@@ -104,6 +104,7 @@ export default defineComponent({
         font-variant: small-caps;
         font-size: var(--fs-regular);
         font-weight: 700;
+        margin-top: 0;
       }
     }
     &-bottom {

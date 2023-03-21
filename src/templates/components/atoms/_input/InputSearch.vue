@@ -83,7 +83,7 @@ export default defineComponent({
   --input-padding: var(--input-padding-v) var(--input-padding-h);
   --input-border-color: var(--color-haven_grey);
   --input-bg-color: var(--color-haven_dark_grey);
-  --input-border-radius: 1.2rem;
+  --input-border-radius: 3rem;
 
   --svg-spacing: 0.5em;
 

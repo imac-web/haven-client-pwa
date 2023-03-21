@@ -126,15 +126,16 @@ export default defineComponent({
     & p {
       margin-bottom: 3rem;
       font-variant: small-caps;
-      font-size: var(--fs-regular);
+      font-size: var(--fs-small);
       font-weight: 700;
+      color: var(--color-haven_grey);
     }
     text-align: center;
     &-result {
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
     &-list {
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
   }
 
