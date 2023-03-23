@@ -25,7 +25,7 @@ const fetchService = async (citycode, lat, lng, url, callback) => {
             "&lng=" +
             lng
             , {
-                timeout: 20000
+                timeout: 50000
             });
 
         // Parse the JSON respons
@@ -57,7 +57,6 @@ const fetchServices = async (lat, lng, citycode) => {
 
     citycode ? citycode = citycode : citycode = await fetchInsee(lat, lng)
 
-
     try {
         const services = await async.parallel({
             publicServices: function (callback) {
@@ -66,9 +65,12 @@ const fetchServices = async (lat, lng, citycode) => {
             naturalHazards: function (callback) {
                 fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getNaturalHazards?", callback)
             },
-            wellBeing: function (callback) {
-                fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
-            }
+            IndustrialHazards: function (callback) {
+                fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getIndustrialHazards?", callback)
+            },
+            // wellBeing: function (callback) {
+            //     fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
+            // }
         });
         let servicesFixed = Object.fromEntries(Object.entries(services).filter(([_, v]) => v != null));
         return servicesFixed;
