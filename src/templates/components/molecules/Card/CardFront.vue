@@ -3,6 +3,7 @@
     <div class="m-card-front__content">
       <div class="m-card-front__content-left">
         <h3>{{ data.label }}</h3>
+        <p>{{ data.description }}</p>
       </div>
       <div class="m-card-front__content-right">
         <ve-progress :progress="score * 10" :angle="90" :size="80" emptyColor="transparent" :legend="score"
@@ -84,6 +85,12 @@ export default defineComponent({
         font-variant: small-caps;
         font-size: var(--fs-small);
         font-weight: 700;
+        margin: 0;
+      }
+
+      p {
+        font-size: 1.3rem;
+        color: var(--color-haven_grey);
       }
     }
 
