@@ -25,7 +25,7 @@ const fetchService = async (citycode, lat, lng, url, callback) => {
             "&lng=" +
             lng
             , {
-                timeout: 50000
+                timeout: 2000
             });
 
         // Parse the JSON respons
@@ -68,9 +68,9 @@ const fetchServices = async (lat, lng, citycode) => {
             IndustrialHazards: function (callback) {
                 fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getIndustrialHazards?", callback)
             },
-            // wellBeing: function (callback) {
-            //     fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
-            // }
+            wellBeing: function (callback) {
+                fetchService(citycode, lat, lng, "https://europe-west3-haven-5f945.cloudfunctions.net/getWellBeing?", callback)
+            }
         });
         let servicesFixed = Object.fromEntries(Object.entries(services).filter(([_, v]) => v != null));
         return servicesFixed;
