@@ -11,6 +11,7 @@
 
 html {
   font-size: $root-fs;
+  background-color: #333;
 
   @include min(2xl) {
     $min-bp: breakpoint-min(2xl);
