@@ -25,7 +25,7 @@ const fetchService = async (citycode, lat, lng, url, callback) => {
             "&lng=" +
             lng
             , {
-                timeout: 50000
+                timeout: 2000
             });
 
         // Parse the JSON respons
