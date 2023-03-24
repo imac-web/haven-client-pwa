@@ -5,8 +5,9 @@
       <p v-else-if="positionCoords">{{ positionCoords }}</p>
       <p v-else>{{ positionCoordsFirst }}</p>
       <div class="o-panel-results__wrapper-result">
-        <card-main v-if="totalScore" :loading="false" :score="+totalScore" />
-        <card-main v-else :loading="true" />
+        <card-main v-if="loading" :loading="true" />
+        <card-main v-else-if="isResultEmpty" :isResultsEmpty="true" />
+        <card-main v-else :score="+totalScore" />
       </div>
       <div class="o-panel-results__wrapper-list">
         <cards-list v-if="index" :data="index" />
@@ -16,15 +17,7 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  toRef,
-  computed,
-  onMounted,
-  ref,
-  isProxy,
-  toRaw,
-} from "vue";
+import { defineComponent, toRef, computed, watch, ref } from "vue";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
 import CardMain from "@/templates/components/molecules/Card/CardMain.vue";
 import { VeProgress } from "vue-ellipse-progress";
@@ -105,6 +98,39 @@ export default defineComponent({
       return setToFixed(total);
     });
 
+    const loading = ref(true);
+    const isResultEmpty = ref(true);
+    let timer = null;
+
+    // Set up timer to check if index is still empty after 10 seconds
+    function startTimer() {
+      timer = setInterval(() => {
+        if (Object.keys(props.index).length === 0) {
+          isResultEmpty.value = true;
+        } else {
+          isResultEmpty.value = false;
+        }
+        loading.value = false;
+        clearInterval(timer);
+      }, 10000);
+    }
+
+    // Watch for changes to props.index and update variables accordingly
+    watch(
+      props,
+      () => {
+        loading.value = true;
+        clearInterval(timer);
+        if (Object.keys(props.index).length === 0) {
+          startTimer();
+        } else {
+          isResultEmpty.value = false;
+          loading.value = false;
+        }
+      },
+      { immediate: true }
+    );
+
     return {
       close,
       data,
@@ -112,6 +138,8 @@ export default defineComponent({
       positionCoords,
       positionCoordsFirst,
       totalScore,
+      loading,
+      isResultEmpty,
     };
   },
 });

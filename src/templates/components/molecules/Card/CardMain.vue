@@ -2,9 +2,17 @@
   <div class="m-card-main">
     <div class="m-card-main__content">
       <div class="m-card-main__content-top">
-        <h3>Score d'habitabilité</h3>
+        <h3 v-if="isResultsEmpty">Erreur</h3>
+        <h3 v-else>Score d'habitabilité</h3>
       </div>
-      <div class="m-card-main__content-bottom">
+      <div v-if="isResultsEmpty" class="m-card-main__content-bottom">
+        <button-primary
+          label="Recommencer le calcul"
+          tag="a"
+          class="m-card-main__content-bottom-btn"
+        />
+      </div>
+      <div v-else class="m-card-main__content-bottom">
         <ve-progress
           v-if="loading"
           :loading="loading"
@@ -54,12 +62,17 @@ export default defineComponent({
     },
     loading: {
       type: Boolean,
-      required: true,
+      default: false,
+    },
+    isResultsEmpty: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {
     const score = toRef(props, "score");
     const loading = toRef(props, "loading");
+    const isResultsEmpty = toRef(props, "isResultsEmpty");
 
     function setToFixed(v) {
       return v % 1 ? v.toFixed(1) : v;
@@ -76,6 +89,7 @@ export default defineComponent({
     return {
       score,
       loading,
+      isResultsEmpty,
       setToFixed,
       myFormatter,
     };
@@ -109,19 +123,13 @@ export default defineComponent({
     }
     &-bottom {
       text-align: center;
-    }
-    &-right {
-      position: absolute;
-      right: 0;
-      top: 0;
+
       &-btn {
         --color-white-alpha: rgba(255, 255, 255, 0.15);
-        --btn-txt-display: none;
-        --btn-bg-color: var(--color-white-alpha);
-        --btn-border-color: transparent;
-        --btn-padding-v: 0.5em;
-        --btn-padding-h: 0.5em;
-        --btn-svg-width: 0.7em;
+        --btn-bg-color: transparent;
+        --btn-border-color: var(--color-haven_white);
+        --btn-txt-color: var(--color-haven_red);
+        --btn-hover-color: var(--color-white-alpha);
       }
     }
   }
