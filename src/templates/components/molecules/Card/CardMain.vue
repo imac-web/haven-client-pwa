@@ -10,6 +10,7 @@
           label="Recommencer le calcul"
           tag="a"
           class="m-card-main__content-bottom-btn"
+          @click="restartCalculations"
         />
       </div>
       <div v-else class="m-card-main__content-bottom">
@@ -46,6 +47,7 @@
 <script>
 import { defineComponent, toRef, computed, onMounted, ref } from "vue";
 import { VeProgress } from "vue-ellipse-progress";
+import emitter from "@/services/emitter";
 
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 
@@ -69,6 +71,7 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: ["restartCalculations"],
   setup(props) {
     const score = toRef(props, "score");
     const loading = toRef(props, "loading");
@@ -86,12 +89,17 @@ export default defineComponent({
       `;
     };
 
+    function restartCalculations(e) {
+      emitter.emit("restart-calculations", e);
+    }
+
     return {
       score,
       loading,
       isResultsEmpty,
       setToFixed,
       myFormatter,
+      restartCalculations,
     };
   },
 });

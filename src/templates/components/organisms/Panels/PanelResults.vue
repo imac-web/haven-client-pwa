@@ -18,6 +18,11 @@
 
 <script>
 import { defineComponent, toRef, computed, watch, ref } from "vue";
+import { useStore } from "vuex";
+import { PANEL_COMPONENTS } from "@/constants";
+
+import fetchServices from "@/utils/fetchServices";
+import invertGeocoding from "@/utils/invertGeocoding";
 import CardsList from "@/templates/components/molecules/Card/CardsList.vue";
 import CardMain from "@/templates/components/molecules/Card/CardMain.vue";
 import { VeProgress } from "vue-ellipse-progress";
@@ -43,6 +48,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore();
     const data = toRef(props, "data");
     const index = toRef(props, "index");
 
@@ -52,6 +58,7 @@ export default defineComponent({
     const positionCoords = ref();
 
     emitter.on("selected-location", (data) => {
+      console.log("selected-location", data);
       if (data) {
         positionCoords.value = String(data.lat.toFixed(5)).concat(
           " ",
@@ -130,6 +137,53 @@ export default defineComponent({
       },
       { immediate: true }
     );
+
+    async function callIndexAPI(e) {
+      const invertedGeocoding = await invertGeocoding(e.lat, e.lng);
+      close();
+      let location;
+      let address = invertedGeocoding.features[0]?.properties?.label;
+      if (address) {
+        location = {
+          lat: e.lat,
+          lng: e.lng,
+          label: address,
+        };
+      } else {
+        location = {
+          lat: e.lat,
+          lng: e.lng,
+        };
+      }
+      let services = await fetchServices(location.lat, location.lng);
+      openPanel(location, services);
+      openPanelMobile(location, services);
+    }
+
+    function openPanel(data, index) {
+      store.dispatch("panel/open", {
+        component: PANEL_COMPONENTS.Panel,
+        data,
+        index,
+      });
+    }
+    function openPanelMobile(data, index) {
+      store.dispatch("panelMobile/open", {
+        component: PANEL_COMPONENTS.PanelMobile,
+        data,
+        index,
+      });
+    }
+
+    const close = () => {
+      store.dispatch("panel/close");
+      store.dispatch("panelMobile/close");
+    };
+
+    emitter.on("restart-calculations", (e) => {
+      console.log("restart-calculations", data.value);
+      callIndexAPI(data.value);
+    });
 
     return {
       close,
