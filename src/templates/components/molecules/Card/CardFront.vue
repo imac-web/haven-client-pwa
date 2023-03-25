@@ -6,8 +6,15 @@
         <p>{{ data.description }}</p>
       </div>
       <div class="m-card-front__content-right">
-        <ve-progress :progress="score * 10" :angle="90" :size="80" emptyColor="transparent" :legend="score"
-          :legend-formatter="myFormatter" color="#25c685" />
+        <ve-progress
+          :progress="score * 10"
+          :angle="90"
+          :size="80"
+          emptyColor="transparent"
+          :legend="score"
+          :legend-formatter="myFormatter"
+          color="#25c685"
+        />
       </div>
     </div>
   </div>
@@ -66,7 +73,7 @@ export default defineComponent({
   background-color: var(--bg-color);
   border-radius: 1rem;
 
-  height: 10rem;
+  height: auto;
   width: 100%;
   padding: 1rem;
 
