@@ -3,7 +3,7 @@
     "background_color": "#333",
     "display": "fullscreen",
     "scope": "https://haven-pwa.netlify.app/",
-    "start_url": "./?utm_source=web_app_manifest",
+    "start_url": "https://haven-pwa.netlify.app/",
     "name": "Haven - Indice d'habitabilit\u00e9",
     "short_name": "Haven",
     "description": "Calcul d'indice d'habitabilit\u00e9",
