@@ -3,9 +3,9 @@
     <div class="m-card-back__content">
       <div class="m-card-back__content-title">En détail</div>
       <table class="m-card-back__content-table">
-        <tr v-for="(data, i) in filteredData" :key="`detail-${i}`">
-          <td v-if="data.label && data.score">{{ data.label }}</td>
-          <td v-if="data.score" class="score-value">{{ data.score }}</td>
+        <tr v-for="(data, i) in data" :key="`detail-${i}`">
+          <td v-if="data.label && data.score >= 0">{{ data.label }}</td>
+          <td v-if="data.score >= 0" class="score-value">{{ data.score }}</td>
         </tr>
       </table>
     </div>
@@ -42,7 +42,7 @@ export default defineComponent({
     });
 
     const filteredData = computed(() => {
-      return data.value.filter((obj) => obj.score !== 0);
+      return data.value.filter((obj) => obj.score !== null);
     });
 
     return {
@@ -83,13 +83,19 @@ export default defineComponent({
     }
 
     &-title::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(37, 198, 133, 0) 0%, rgba(37, 198, 133, 0.9598433123249299) 50%, rgba(37, 198, 133, 0) 100%);
+      background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(37, 198, 133, 0) 0%,
+        rgba(37, 198, 133, 0.9598433123249299) 50%,
+        rgba(37, 198, 133, 0) 100%
+      );
     }
 
     &-table {
@@ -103,13 +109,19 @@ export default defineComponent({
         justify-content: space-between;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 0;
           left: 0;
           right: 0;
           height: 1px;
-          background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(37, 198, 133, 0) 0%, rgba(37, 198, 133, 0.9598433123249299) 50%, rgba(37, 198, 133, 0) 100%);
+          background: linear-gradient(
+            90deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(37, 198, 133, 0) 0%,
+            rgba(37, 198, 133, 0.9598433123249299) 50%,
+            rgba(37, 198, 133, 0) 100%
+          );
         }
 
         &:last-child {
@@ -130,7 +142,6 @@ export default defineComponent({
       & .score-value {
         font-weight: bold;
       }
-
     }
   }
 }
