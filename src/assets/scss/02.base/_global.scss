@@ -22,6 +22,8 @@ html {
   // Better font rendering for mac
   @include antialiased;
 
+  overflow-y: auto;
+
   &.is-blocked {
     overflow-y: hidden;
     body {
