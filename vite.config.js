@@ -22,6 +22,9 @@ export default defineConfig({
         },
         devSourcemap: true,
     },
-    base: "/"
+    base: "/",
+    build: {
+        manifest: true,
+    },
 
 })
