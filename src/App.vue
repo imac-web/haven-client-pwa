@@ -31,6 +31,10 @@ import "@ionic/vue/css/display.css";
 
 import TheBase from "@/templates/layout/TheBase.vue";
 
+import { registerSW } from "virtual:pwa-register";
+
+registerSW({ immediate: true });
+
 export default defineComponent({
   name: "App",
   components: {
