@@ -27,7 +27,7 @@ export default defineConfig({
                 theme_color: '#000',
                 icons: [
                     {
-                        src: 'icon-192x192.png',
+                        src: 'https://raw.githubusercontent.com/imac-web/haven-client-pwa/main/icon-192x192.png',
                         sizes: '192x192',
                         type: 'image/png'
                     },
