@@ -30,6 +30,7 @@ import {
 } from "vue";
 import { useStore } from "vuex";
 import { userContext } from "@/utils";
+import { useResizeObserver } from "@vueuse/core";
 
 import { gsap, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
@@ -55,6 +56,8 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+
+    const main = ref(null);
 
     const currentScrollProgress = ref(0);
 
@@ -147,6 +150,22 @@ export default defineComponent({
       window.addEventListener("resize", onResize);
       window.addEventListener("scroll", onScroll);
       refreshScrollTrigger();
+      useResizeObserver(main.value, (entries) => {
+        const entry = entries[0];
+        const { width, height } = entry.contentRect;
+        console.log(`width: ${width}, height: ${height}`);
+
+        // Scroll to top if height has changed
+        if (height !== prevHeight) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        // Store the current height for comparison in the next resize event
+        prevHeight = height;
+      });
+
+      // Declare prevHeight outside of the resize observer callback
+      let prevHeight = main.value.offsetHeight;
     });
     onBeforeUnmount(() => {
       window.removeEventListener("resize", onResize);
@@ -163,6 +182,7 @@ export default defineComponent({
       appHeight,
       headerHeight,
       panelWidth,
+      main,
     };
   },
 });
