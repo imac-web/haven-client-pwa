@@ -70,7 +70,7 @@ export default defineComponent({
     }
 
     function inputFocus() {
-      store.dispatch("scroll/toggleDisabledScroll", false);
+      store.dispatch("scroll/toggleDisabledScroll", true);
     }
 
     return {
