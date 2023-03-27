@@ -9,11 +9,7 @@
     :backdrop-breakpoint="0.5"
     class="l-panel-mobile"
   >
-    <ion-content
-      class="ion-padding"
-      ref="contentEl"
-      :scroll-padding="isIOS ? '0 0 300px 0' : '0'"
-    >
+    <ion-content class="ion-padding" ref="contentEl">
       <div class="l-panel-mobile__wrapper">
         <ion-searchbar
           @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
@@ -194,8 +190,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  //--ion-background-color: var(--color-haven_dark_grey);
-  --ion-background-color: red;
+  --ion-background-color: var(--color-haven_dark_grey);
+  //--ion-background-color: red;
 
   position: absolute;
   bottom: 0;

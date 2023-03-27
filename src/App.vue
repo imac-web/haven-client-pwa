@@ -40,4 +40,8 @@ export default defineComponent({
   position: fixed;
   overflow: hidden;
 }
+
+.scroll-content {
+  padding-bottom: 0 !important;
+}
 </style>
