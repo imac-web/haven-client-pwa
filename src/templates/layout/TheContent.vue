@@ -73,6 +73,7 @@ export default defineComponent({
       window.scrollTo(0, 0);
       setTimeout(() => {
         window.scrollTo(0, 0);
+        console.log("focus");
         alert("focus");
       }, 1000);
       store.dispatch("scroll/toggleScrollTop", true);
