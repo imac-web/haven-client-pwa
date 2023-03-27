@@ -60,12 +60,6 @@ import { PANEL_COMPONENTS } from "@/constants";
 
 import fetchServices from "@/utils/fetchServices";
 
-// Detect if the device is running on iOS
-const isIOS = () => {
-  const userAgent = window.navigator.userAgent.toLowerCase();
-  return /iphone|ipad|ipod/.test(userAgent);
-};
-
 export default defineComponent({
   components: {
     IonModal,
@@ -169,23 +163,7 @@ export default defineComponent({
 
     const contentEl = ref(null);
 
-    onMounted(() => {
-      window.addEventListener("keyboardWillShow", (e) => {
-        contentEl.value.style.height = `calc(100% - ${e.keyboardHeight}px)`;
-      });
-
-      window.addEventListener("keyboardWillHide", () => {
-        contentEl.value.style.height = "100%";
-      });
-      if (isIOS()) {
-        const cordova = window.cordova;
-        //alert(cordova);
-        if (cordova && cordova.plugins && cordova.plugins.Keyboard) {
-          alert("keyboard");
-          cordova.plugins.Keyboard.setKeyboardShrinkView(false);
-        }
-      }
-    });
+    onMounted(() => {});
 
     return {
       isReady,

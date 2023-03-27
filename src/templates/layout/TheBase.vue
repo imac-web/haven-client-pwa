@@ -8,7 +8,7 @@
     <!-- <the-loader></the-loader> -->
     <the-header class="l-base__header" />
 
-    <main class="l-main" ref="main">
+    <main class="l-main" ref="main" :style="{ height: contentHeight + 'px' }">
       <the-content />
       <!-- <the-footer></the-footer> -->
     </main>
@@ -146,9 +146,16 @@ export default defineComponent({
     //       END RESIZE
     ////////////////////////////////
 
+    const contentHeight = ref(window.innerHeight);
+
+    const updateContentHeight = () => {
+      contentHeight.value = window.innerHeight - main.value.innerHeight;
+    };
+
     onMounted(() => {
       window.addEventListener("resize", onResize);
       window.addEventListener("scroll", onScroll);
+      window.addEventListener("resize", updateContentHeight);
       refreshScrollTrigger();
       useResizeObserver(main.value, (entries) => {
         const entry = entries[0];
@@ -174,6 +181,7 @@ export default defineComponent({
     onBeforeUnmount(() => {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateContentHeight);
     });
 
     watch(() => {
