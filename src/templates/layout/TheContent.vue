@@ -1,49 +1,10 @@
 <template>
   <div class="l-content" ref="content">
-    <ion-content class="ion-padding">
-      <div class="l-panel-mobile__wrapper">
-        <ion-searchbar
-          @click="inputFocus"
-          @input="onInput"
-          show-clear-button="always"
-          placeholder="Recherche"
-          class="l-panel-mobile__searchbar"
-        ></ion-searchbar>
-        <ion-list class="l-panel-mobile__list">
-          <ion-item class="l-panel-mobile__list-item">
-            <ion-label>result.label </ion-label>
-          </ion-item>
-          <ion-item class="l-panel-mobile__list-item">
-            <ion-label>result.label </ion-label>
-          </ion-item>
-          <ion-item class="l-panel-mobile__list-item">
-            <ion-label>result.label </ion-label>
-          </ion-item>
-          <ion-item class="l-panel-mobile__list-item">
-            <ion-label>result.label </ion-label>
-          </ion-item>
-        </ion-list>
-        <component
-          class="l-panel-mobile__wrapper-content"
-          :is="panelMobileComponent"
-          :data="panelMobileData"
-          :index="panelMobileIndex"
-          @close="close"
-        />
-      </div>
-    </ion-content>
+    <map-base class="l-content__map" />
   </div>
 </template>
 
 <script>
-import {
-  IonModal,
-  IonContent,
-  IonLabel,
-  IonSearchbar,
-  IonItem,
-  IonList,
-} from "@ionic/vue";
 import { defineComponent, computed, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { MODAL_COMPONENTS } from "@/constants";
@@ -69,19 +30,8 @@ export default defineComponent({
       });
     }
 
-    function inputFocus() {
-      window.scrollTo(0, 0);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        console.log("focus");
-      }, 1000);
-      store.dispatch("scroll/toggleScrollTop", true);
-      store.dispatch("scroll/toggleDisabledScroll", true);
-    }
-
     return {
       openModal,
-      inputFocus,
     };
   },
 });
@@ -109,9 +59,5 @@ export default defineComponent({
       width: 100%;
     }
   }
-}
-.ion-padding {
-  position: fixed;
-  top: 50%;
 }
 </style>
