@@ -3,7 +3,7 @@
     <ion-content class="ion-padding">
       <div class="l-panel-mobile__wrapper">
         <ion-searchbar
-          @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
+          @click="inputFocus"
           @input="onInput"
           show-clear-button="always"
           placeholder="Recherche"
@@ -69,8 +69,13 @@ export default defineComponent({
       });
     }
 
+    function inputFocus() {
+      store.dispatch("scroll/toggleDisabledScroll", false);
+    }
+
     return {
       openModal,
+      inputFocus,
     };
   },
 });
