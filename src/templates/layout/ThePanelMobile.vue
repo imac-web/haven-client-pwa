@@ -1,46 +1,44 @@
 <template>
-  <Teleport to="body">
-    <ion-modal
-      ref="modal"
-      :is-open="true"
-      :initial-breakpoint="0.15"
-      :breakpoints="[0.15, 0.25, 0.5, 0.75, 1]"
-      handle-behavior="cycle"
-      :backdrop-dismiss="false"
-      :backdrop-breakpoint="0.5"
-      class="l-panel-mobile"
-    >
-      <ion-content class="ion-padding">
-        <div class="l-panel-mobile__wrapper">
-          <ion-searchbar
-            @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
-            @ion-input="onInput"
-            @ion-focus="onFocus"
-            show-clear-button="always"
-            placeholder="Recherche"
-            class="l-panel-mobile__searchbar"
-          ></ion-searchbar>
-          <ion-list v-if="results.length > 0" class="l-panel-mobile__list">
-            <ion-item
-              class="l-panel-mobile__list-item"
-              v-for="result in results"
-              :key="result.id"
-              @click="selectResult(result)"
-            >
-              <ion-label>{{ result.label }}</ion-label>
-            </ion-item>
-          </ion-list>
-          <component
-            class="l-panel-mobile__wrapper-content"
-            :is="panelMobileComponent"
-            :data="panelMobileData"
-            :index="panelMobileIndex"
-            @close="close"
-          />
-        </div>
-      </ion-content>
-    </ion-modal>
-  </Teleport>
+  <ion-modal
+    ref="modal"
+    :is-open="true"
+    :initial-breakpoint="0.15"
+    :breakpoints="[0.15, 0.25, 0.5, 0.75, 1]"
+    handle-behavior="cycle"
+    :backdrop-dismiss="false"
+    :backdrop-breakpoint="0.5"
+    class="l-panel-mobile"
+  >
+    <ion-content class="ion-padding">
+      <div class="l-panel-mobile__wrapper">
+        <ion-searchbar
+          @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
+          @ion-input="onInput"
+          @ion-focus="onFocus"
+          show-clear-button="always"
+          placeholder="Recherche"
+          class="l-panel-mobile__searchbar"
+        ></ion-searchbar>
+        <ion-list v-if="results.length > 0" class="l-panel-mobile__list">
+          <ion-item
+            class="l-panel-mobile__list-item"
+            v-for="result in results"
+            :key="result.id"
+            @click="selectResult(result)"
+          >
+            <ion-label>{{ result.label }}</ion-label>
+          </ion-item>
+        </ion-list>
+        <component
+          class="l-panel-mobile__wrapper-content"
+          :is="panelMobileComponent"
+          :data="panelMobileData"
+          :index="panelMobileIndex"
+          @close="close"
+        />
+      </div>
+    </ion-content>
+  </ion-modal>
 </template>
 
 <script>
@@ -181,8 +179,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  //--ion-background-color: var(--color-haven_dark_grey);
-  --ion-background-color: red;
+  --ion-background-color: var(--color-haven_dark_grey);
+  //--ion-background-color: red;
 
   position: absolute;
   bottom: 0;
