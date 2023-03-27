@@ -12,7 +12,7 @@
       <the-content />
       <!-- <the-footer></the-footer> -->
     </main>
-    <the-panel-mobile />
+    <!-- <the-panel-mobile /> -->
     <the-panel />
     <the-modal />
   </div>

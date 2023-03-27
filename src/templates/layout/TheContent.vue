@@ -1,10 +1,49 @@
 <template>
   <div class="l-content" ref="content">
-    <map-base class="l-content__map" />
+    <ion-content class="ion-padding">
+      <div class="l-panel-mobile__wrapper">
+        <ion-searchbar
+          @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
+          @input="onInput"
+          show-clear-button="always"
+          placeholder="Recherche"
+          class="l-panel-mobile__searchbar"
+        ></ion-searchbar>
+        <ion-list class="l-panel-mobile__list">
+          <ion-item class="l-panel-mobile__list-item">
+            <ion-label>result.label </ion-label>
+          </ion-item>
+          <ion-item class="l-panel-mobile__list-item">
+            <ion-label>result.label </ion-label>
+          </ion-item>
+          <ion-item class="l-panel-mobile__list-item">
+            <ion-label>result.label </ion-label>
+          </ion-item>
+          <ion-item class="l-panel-mobile__list-item">
+            <ion-label>result.label </ion-label>
+          </ion-item>
+        </ion-list>
+        <component
+          class="l-panel-mobile__wrapper-content"
+          :is="panelMobileComponent"
+          :data="panelMobileData"
+          :index="panelMobileIndex"
+          @close="close"
+        />
+      </div>
+    </ion-content>
   </div>
 </template>
 
 <script>
+import {
+  IonModal,
+  IonContent,
+  IonLabel,
+  IonSearchbar,
+  IonItem,
+  IonList,
+} from "@ionic/vue";
 import { defineComponent, computed, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { MODAL_COMPONENTS } from "@/constants";
@@ -59,5 +98,9 @@ export default defineComponent({
       width: 100%;
     }
   }
+}
+.ion-padding {
+  position: fixed;
+  top: 50%;
 }
 </style>
