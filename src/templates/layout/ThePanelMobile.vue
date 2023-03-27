@@ -180,7 +180,7 @@ export default defineComponent({
 .l-panel-mobile {
     --ion-background-color: var(--color-haven_dark_green);
 
-    position: absolute;
+    position: fixed;
     @include min(md) {
         display: none;
     }
