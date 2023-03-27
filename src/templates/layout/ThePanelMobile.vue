@@ -178,7 +178,7 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-    --ion-background-color: var(--color-haven_dark_green);
+    --ion-background-color: red;
 
     position: fixed;
     @include min(md) {
