@@ -70,6 +70,7 @@ export default defineComponent({
     }
 
     function inputFocus() {
+      window.scrollTo(0, 0);
       store.dispatch("scroll/toggleScrollTop", true);
       store.dispatch("scroll/toggleDisabledScroll", true);
     }
