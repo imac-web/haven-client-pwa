@@ -51,6 +51,7 @@ import {
   IonList,
 } from "@ionic/vue";
 import { defineComponent, computed, ref, watch, onMounted } from "vue";
+
 import { useStore } from "vuex";
 import PanelMobileComponent from "@/templates/components/organisms/Panels/PanelMobileComponent.vue";
 import emitter from "@/services/emitter";
@@ -58,6 +59,13 @@ import { GeoApiFrProvider } from "leaflet-geosearch";
 import { PANEL_COMPONENTS } from "@/constants";
 
 import fetchServices from "@/utils/fetchServices";
+
+// Detect if the device is running on iOS
+const isIOS = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test(userAgent);
+};
+
 export default defineComponent({
   components: {
     IonModal,
@@ -158,6 +166,15 @@ export default defineComponent({
     function onFocus() {
       window.scrollTo(0, 0);
     }
+
+    onMounted(() => {
+      if (isIOS()) {
+        const cordova = window.cordova;
+        if (cordova && cordova.plugins && cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.setKeyboardShrinkView(false);
+        }
+      }
+    });
 
     return {
       isReady,
