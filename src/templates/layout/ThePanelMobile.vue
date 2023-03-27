@@ -14,7 +14,8 @@
         <div class="l-panel-mobile__wrapper">
           <ion-searchbar
             @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
-            @input="onInput"
+            @ion-input="onInput"
+            @ion-focus="onFocus"
             show-clear-button="always"
             placeholder="Recherche"
             class="l-panel-mobile__searchbar"
@@ -156,6 +157,10 @@ export default defineComponent({
       modal.value.$el.setCurrentBreakpoint(1);
     });
 
+    function onFocus() {
+      modal.value.$el.setCurrentBreakpoint(1);
+    }
+
     return {
       isReady,
       panelMobileData,
@@ -168,6 +173,7 @@ export default defineComponent({
       results,
       selectResult,
       modal,
+      onFocus,
     };
   },
 });
@@ -175,8 +181,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  //--ion-background-color: var(--color-haven_dark_grey);
-  --ion-background-color: red;
+  --ion-background-color: var(--color-haven_dark_grey);
+  //--ion-background-color: red;
 
   position: absolute;
   bottom: 0;
