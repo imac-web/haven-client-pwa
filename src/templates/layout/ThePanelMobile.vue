@@ -158,7 +158,7 @@ export default defineComponent({
     });
 
     function onFocus() {
-      modal.value.$el.setCurrentBreakpoint(1);
+      window.scrollTo(0, 0);
     }
 
     return {
