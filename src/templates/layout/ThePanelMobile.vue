@@ -9,7 +9,11 @@
     :backdrop-breakpoint="0.5"
     class="l-panel-mobile"
   >
-    <ion-content class="ion-padding" ref="contentEl">
+    <ion-content
+      class="ion-padding"
+      ref="contentEl"
+      :scroll-padding="isIOS ? '0 0 300px 0' : '0'"
+    >
       <div class="l-panel-mobile__wrapper">
         <ion-searchbar
           @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
@@ -49,6 +53,7 @@ import {
   IonSearchbar,
   IonItem,
   IonList,
+  isPlatform,
 } from "@ionic/vue";
 import { defineComponent, computed, ref, watch, onMounted } from "vue";
 
@@ -165,6 +170,8 @@ export default defineComponent({
 
     onMounted(() => {});
 
+    const isIOS = isPlatform("ios");
+
     return {
       isReady,
       panelMobileData,
@@ -179,6 +186,7 @@ export default defineComponent({
       modal,
       onFocus,
       contentEl,
+      isIOS,
     };
   },
 });
@@ -186,8 +194,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  --ion-background-color: var(--color-haven_dark_grey);
-  //--ion-background-color: red;
+  //--ion-background-color: var(--color-haven_dark_grey);
+  --ion-background-color: red;
 
   position: absolute;
   bottom: 0;
