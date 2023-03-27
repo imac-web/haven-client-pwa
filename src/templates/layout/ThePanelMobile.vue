@@ -186,8 +186,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  //--ion-background-color: var(--color-haven_dark_grey);
-  --ion-background-color: red;
+  --ion-background-color: var(--color-haven_dark_grey);
+  //--ion-background-color: red;
 
   position: absolute;
   bottom: 0;
@@ -195,6 +195,10 @@ export default defineComponent({
     display: none;
   }
   display: block;
+
+  &__wrapper {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 
   &__searchbar {
     color: var(--color-haven_white);
