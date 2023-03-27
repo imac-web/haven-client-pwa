@@ -170,9 +170,9 @@ export default defineComponent({
     onMounted(() => {
       if (isIOS()) {
         const cordova = window.cordova;
-        console.log(cordova);
+        alert(cordova);
         if (cordova && cordova.plugins && cordova.plugins.Keyboard) {
-          console.log("keyboard");
+          alert("keyboard");
           cordova.plugins.Keyboard.setKeyboardShrinkView(false);
         }
       }
