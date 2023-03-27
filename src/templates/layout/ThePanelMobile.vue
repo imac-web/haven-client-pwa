@@ -12,7 +12,7 @@
     <ion-content class="ion-padding" ref="contentEl">
       <div class="l-panel-mobile__wrapper">
         <ion-searchbar
-          @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
+          @click="$refs.modal.$el.setCurrentBreakpoint(0.5)"
           @ion-input="onInput"
           @ion-focus="onFocus"
           show-clear-button="always"
