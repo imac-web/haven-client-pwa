@@ -9,7 +9,7 @@
     :backdrop-breakpoint="0.5"
     class="l-panel-mobile"
   >
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding" ref="contentEl">
       <div class="l-panel-mobile__wrapper">
         <ion-searchbar
           @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
@@ -167,10 +167,19 @@ export default defineComponent({
       window.scrollTo(0, 0);
     }
 
+    const contentEl = ref(null);
+
     onMounted(() => {
+      window.addEventListener("keyboardWillShow", (e) => {
+        contentEl.value.style.height = `calc(100% - ${e.keyboardHeight}px)`;
+      });
+
+      window.addEventListener("keyboardWillHide", () => {
+        contentEl.value.style.height = "100%";
+      });
       if (isIOS()) {
         const cordova = window.cordova;
-        alert(cordova);
+        //alert(cordova);
         if (cordova && cordova.plugins && cordova.plugins.Keyboard) {
           alert("keyboard");
           cordova.plugins.Keyboard.setKeyboardShrinkView(false);
@@ -191,6 +200,7 @@ export default defineComponent({
       selectResult,
       modal,
       onFocus,
+      contentEl,
     };
   },
 });
@@ -198,8 +208,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  //--ion-background-color: var(--color-haven_dark_grey);
-  --ion-background-color: red;
+  --ion-background-color: var(--color-haven_dark_grey);
+  //--ion-background-color: red;
 
   position: absolute;
   bottom: 0;
