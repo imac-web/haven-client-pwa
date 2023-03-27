@@ -69,7 +69,7 @@ export default defineComponent({
                 "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
                 {
                     maxZoom: 20,
-                    className: "map-tiles",
+                    className: "dark-map-tiles",
                 }
             );
 
@@ -367,11 +367,10 @@ export default defineComponent({
 }
 
 :root {
-    //--map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-    --map-tiles-filter: contrast(1.15);
+    --dark-map-tiles-filter: contrast(1.15);
 }
 
-.map-tiles {
-    filter: var(--map-tiles-filter, none);
+.dark-map-tiles {
+    filter: var(--dark-map-tiles-filter, none);
 }
 </style>
