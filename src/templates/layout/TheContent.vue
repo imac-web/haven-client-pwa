@@ -73,6 +73,16 @@ export default defineComponent({
       store.dispatch("scroll/toggleDisabledScroll", true);
     }
 
+    if ("visualViewport" in window) {
+      window.visualViewport.addEventListener("resize", function (event) {
+        if (event.target.height + 30 < document.scrollElement.clientHeight) {
+          alert("keyboard up?");
+        } else {
+          alert("keyboard down?");
+        }
+      });
+    }
+
     return {
       openModal,
       inputFocus,
