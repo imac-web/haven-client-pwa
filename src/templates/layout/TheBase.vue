@@ -157,7 +157,7 @@ export default defineComponent({
 
         // Scroll to top if height has changed
         if (height !== prevHeight) {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo(0, 0);
         }
 
         // Store the current height for comparison in the next resize event
