@@ -178,6 +178,7 @@ export default defineComponent({
   --ion-background-color: var(--color-haven_dark_grey);
 
   position: fixed;
+  bottom: 0;
   @include min(md) {
     display: none;
   }
