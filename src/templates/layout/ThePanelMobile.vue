@@ -13,7 +13,6 @@
       <ion-content class="ion-padding">
         <div class="l-panel-mobile__wrapper">
           <ion-searchbar
-            @click="$refs.modal.$el.setCurrentBreakpoint(0.5)"
             @input="onInput"
             @ion-focus="onFocus"
             show-clear-button="always"
@@ -162,6 +161,7 @@ export default defineComponent({
     });
 
     function onFocus() {
+      modal.value.$el.setCurrentBreakpoint(1);
       window.scrollTo(0, 0);
       document.body.scrollTop = 0;
     }
@@ -186,7 +186,8 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  --ion-background-color: var(--color-haven_dark_green);
+  //--ion-background-color: var(--color-haven_dark_green);
+  --ion-background-color: green;
 
   position: absolute;
   bottom: 0;
