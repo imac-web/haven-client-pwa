@@ -1,6 +1,8 @@
 <template>
   <div class="o-navigation">
-    <div class="o-navigation__logo">HAVEN</div>
+    <div class="o-navigation__logo">
+      <object-icon class="o-navigation__logo-icon" name="logo" />
+    </div>
     <div class="o-navigation__search"><search /></div>
   </div>
 </template>
@@ -12,12 +14,14 @@ import { MODAL_COMPONENTS } from "@/constants";
 
 import ButtonPrimary from "@/templates/components/atoms/_buttons/ButtonPrimary.vue";
 import Search from "@/templates/components/organisms/Search/Search.vue";
+import ObjectIcon from "@/templates/objects/ObjectIcon.vue";
 
 export default defineComponent({
   name: "Navigation",
   components: {
     ButtonPrimary,
     Search,
+    ObjectIcon,
   },
   setup() {
     const store = useStore();
@@ -39,6 +43,8 @@ export default defineComponent({
 <style lang="scss">
 .o-navigation {
   --nav-padding: 2rem;
+  --nav-svg-width: 15rem;
+  --nav-svg-height: 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,7 +54,7 @@ export default defineComponent({
   padding: var(--nav-padding);
 
   &__logo {
-    font-size: 3rem;
+    /*  font-size: 3rem;
     font-weight: 700;
     letter-spacing: 0.1rem;
     background: linear-gradient(
@@ -58,7 +64,12 @@ export default defineComponent({
       transparent 100%
     );
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+
+    &-icon {
+      --svg-width: var(--nav-svg-width);
+      --svg-height: var(--nav-svg-height);
+    }
   }
 
   &__search {
