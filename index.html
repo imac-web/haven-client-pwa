@@ -192,13 +192,31 @@
     <!-- built files will be auto injected -->
 </body>
 
-<script>
+<script type="text/javascript">
     const resizeOps = () => {
         document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
     };
 
     resizeOps();
     window.addEventListener("resize", resizeOps);
+
+    function docReady(fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    docReady(function () {
+        // DOM is loaded and ready for manipulation here
+        console.log("DOM is ready")
+        document.ontouchmove = function (e) {
+            e.preventDefault();
+        }
+    });
 </script>
 
 </html>

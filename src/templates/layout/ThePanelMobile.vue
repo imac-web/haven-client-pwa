@@ -15,6 +15,7 @@
           <ion-searchbar
             @click="$refs.modal.$el.setCurrentBreakpoint(0.5)"
             @input="onInput"
+            @ion-focus="onFocus"
             show-clear-button="always"
             placeholder="Recherche"
             class="l-panel-mobile__searchbar"
@@ -160,6 +161,11 @@ export default defineComponent({
       modal.value.$el.setCurrentBreakpoint(1);
     });
 
+    function onFocus() {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+    }
+
     return {
       isReady,
       panelMobileData,
@@ -172,6 +178,7 @@ export default defineComponent({
       results,
       selectResult,
       modal,
+      onFocus,
     };
   },
 });
