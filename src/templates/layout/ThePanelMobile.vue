@@ -161,7 +161,7 @@ export default defineComponent({
     });
 
     function onFocus() {
-      modal.value.$el.setCurrentBreakpoint(1);
+      modal.value.setCurrentBreakpoint(0.5);
       window.scrollTo(0, 0);
       document.body.scrollTop = 0;
     }
@@ -186,8 +186,7 @@ export default defineComponent({
 
 <style lang="scss">
 .l-panel-mobile {
-  //--ion-background-color: var(--color-haven_dark_green);
-  --ion-background-color: green;
+  --ion-background-color: var(--color-haven_dark_green);
 
   position: absolute;
   bottom: 0;
