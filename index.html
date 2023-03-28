@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="HAVEN - Score d'habitabilité">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 
     <meta name="mobile-web-app-capable" content="yes" />
@@ -171,6 +172,13 @@
             color: navy;
             text-decoration: underline;
         }
+
+
+        html,
+        body {
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+        }
     </style>
 </head>
 
@@ -183,5 +191,14 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
 </body>
+
+<script>
+    const resizeOps = () => {
+        document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+    };
+
+    resizeOps();
+    window.addEventListener("resize", resizeOps);
+</script>
 
 </html>
