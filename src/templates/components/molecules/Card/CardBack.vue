@@ -5,7 +5,7 @@
       <table class="m-card-back__content-table">
         <tr v-for="(data, i) in data" :key="`detail-${i}`">
           <td v-if="data.label && data.score >= 0">{{ data.label }}</td>
-          <td v-if="data.score >= 0" class="score-value">{{ data.score }}</td>
+          <td v-if="data.score >= 0" class="score-value">{{ data.score }} <span>/ 10</span></td>
         </tr>
       </table>
     </div>
@@ -93,7 +93,7 @@ export default defineComponent({
         90deg,
         rgba(2, 0, 36, 1) 0%,
         rgba(37, 198, 133, 0) 0%,
-        rgba(37, 198, 133, 0.9598433123249299) 50%,
+        rgba(130, 130, 130, 0.9598433123249299) 50%,
         rgba(37, 198, 133, 0) 100%
       );
     }
@@ -119,7 +119,7 @@ export default defineComponent({
             90deg,
             rgba(2, 0, 36, 1) 0%,
             rgba(37, 198, 133, 0) 0%,
-            rgba(37, 198, 133, 0.9598433123249299) 50%,
+            rgba(130, 130, 130, 0.9598433123249299) 50%,
             rgba(37, 198, 133, 0) 100%
           );
         }
@@ -141,6 +141,10 @@ export default defineComponent({
 
       & .score-value {
         font-weight: bold;
+
+        & > span {
+          color: var(--color-haven_grey);
+        }
       }
     }
   }

@@ -10,7 +10,9 @@
           :progress="score * 10"
           :angle="90"
           :size="80"
-          emptyColor="transparent"
+          emptyColor="rgba(255, 255, 255, 0.1)"
+          :thickness="8"
+          :empty-thickness="8"
           :legend="score"
           :legend-formatter="myFormatter"
           color="#25c685"
@@ -53,7 +55,7 @@ export default defineComponent({
 
     const myFormatter = (computed) => {
       return `
-        <span style=" font-size: 2.5rem;">${score.value}</span>
+        <span style=" font-size: 2.5rem; font-weight: bold">${score.value}</span>
       `;
     };
 
