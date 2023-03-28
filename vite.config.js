@@ -25,6 +25,8 @@ export default defineConfig({
                 short_name: 'Haven',
                 description: "Haven - Score d'habitabilité",
                 theme_color: '#000',
+                background_color: '#000',
+                display: 'fullscreen',
                 icons: [
                     {
                         src: 'https://raw.githubusercontent.com/imac-web/haven-client-pwa/main/icon-192x192.png',
