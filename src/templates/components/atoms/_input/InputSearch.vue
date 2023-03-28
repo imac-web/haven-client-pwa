@@ -55,7 +55,7 @@ export default defineComponent({
 
     async function onInput(event) {
       const query = event.target.value;
-      if (query.length > 0) {
+      if (query.length > 3) {
         results.value = await provider.search({ query });
       } else {
         results.value = [];

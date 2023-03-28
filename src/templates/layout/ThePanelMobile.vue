@@ -13,7 +13,7 @@
       <ion-content class="ion-padding">
         <div class="l-panel-mobile__wrapper">
           <ion-searchbar
-            @click="$refs.modal.$el.setCurrentBreakpoint(0.75)"
+            @click="$refs.modal.$el.setCurrentBreakpoint(0.5)"
             @input="onInput"
             show-clear-button="always"
             placeholder="Recherche"
@@ -69,6 +69,7 @@ export default defineComponent({
     IonList,
     PanelMobileComponent,
   },
+  emits: ["SelectedResult"],
   setup(props) {
     const modal = ref(null);
     const store = useStore();
@@ -117,7 +118,7 @@ export default defineComponent({
 
     async function onInput(event) {
       const query = event.target.value;
-      if (query.length > 0) {
+      if (query.length > 3) {
         results.value = await provider.search({ query });
       } else {
         results.value = [];
@@ -139,16 +140,19 @@ export default defineComponent({
     const selectResult = async (result) => {
       close();
       openPanelMobile(result);
+      emitter.emit("selected-result", result);
       modal.value.$el.setCurrentBreakpoint(1);
       results.value = [];
-      let services = await fetchServices(result.y, result.x, 1000)
-        .then((data) => {
-          return data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      let services = await fetchServices(
+        result.y,
+        result.x,
+        result.raw.properties.citycode
+      ).catch((err) => {
+        console.log(err);
+      });
       results.value = [];
+
+      close();
       openPanelMobile(result, services);
     };
 
