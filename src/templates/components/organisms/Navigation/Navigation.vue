@@ -54,18 +54,6 @@ export default defineComponent({
   padding: var(--nav-padding);
 
   &__logo {
-    /*  font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: 0.1rem;
-    background: linear-gradient(
-      to right,
-      var(--color-haven_white) 0%,
-      var(--color-haven_white) 70%,
-      transparent 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
-
     &-icon {
       --svg-width: var(--nav-svg-width);
       --svg-height: var(--nav-svg-height);
