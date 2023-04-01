@@ -228,6 +228,7 @@ export default defineComponent({
   &__map {
     max-height: 100vh;
     height: 100vh;
+    background-color: #333;
     @include min(md) {
       //height: 50vh;
     }
