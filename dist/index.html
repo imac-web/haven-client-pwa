@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="HAVEN - Score d'habitabilité">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Haven - Score d'habitabilité" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+    <meta name="HandheldFriendly" content="true" />
+
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAYqSURBVHhe7d09i1xlHMbhVNpooZWICJo5M7viy9ewE98+g1jYWIgoGEhmdjNqfCsFEcSAfgAtRc3OTjZhfd2ACn4DbYyFAWGc1VOcYuv/3O5zXXCz7TPnGX6creYMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/Mj7Yufuhoze2u+X5rU3u7NXZ9gOfn7uzP1aTuv3pvZu+i+N76BazyX1fvHZ7fyxOs/Fi+tLkxlu3Rovp5rac3eoO57e65ezJ/lhNOru48NHkaLN30R3sHP+92X197pH+WJxm3XL6yvbP767GB7ub2/WLq8l3b65G+7vP9Mdq0mhx4ZPtnzZ7F5PD+Wr9BvD3aO/cY/2xOM3Wr50vb914e9Xtzza3qzur8eHrq9Fi9nR/rCaN9qeXt442exfja7vH9/DX6Mr5R/tjcZoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyiUF4MEr08f7YzVptJh+uHXjnZOfUdEEoDERAViud+3iqlvM3h/tTZ8bL6bPt7bjz71+Ftcm37xx8jMqmgA0JiIA/Y7fAibfvbmafN/g1p97/G8Epyc+m6oJQGOSAvDvljvt7qTnUTwBaExcAGyjE4DGCIANJwCNEQAbTgAaIwA2nAA0RgBsOAFojADYcALQGAGw4QSgMQJgwwlAYwTAhhOAxgiADScAjREAG04AGiMANpwANEYAbDgBaIwA2HAC0BgBsOEEoDECYMMJQGMEwIYTgMYIgA0nAI0RABtOABojADacADRGAGw4AWiMANhwAtAYAbDhBKAxAmDDCUBjBMCGE4DGJAVgfDj/76fBGt34YNdPg1ErJgDLneMv3q+j/dnB+kyHrW20Pz0YLaa/d8cROOn5FE0AGrP+8m0+AP3Pg4+Wu0/1x2pSt5x+vHW02bsQgMYkBaC7MnuyP1aTusUFAaBW1BvAYvZ0f6wmrf8NuCwAlBKAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkC5bnHh1e1f3ltf/MXN7XC+mvxwaXX2yuzZ/lhNWsf40+2fN3sXk29fX3WL2Wq0N32sPxanWbecvTj58dKfo/3ZHxvb1Z0/uuvzm2cXsyf6YzVpHYAPJj++dfPEZ1S09dvYzfUbwG+TL88/3B+L02x7/9Jd3fLi1mTv/HijuzYfj/fmd/THatLWV9N7Nn8X8/H2cj66/7MXbuuPBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOQ5c+YfErui49mQ+WEAAAAASUVORK5CYII=" />
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAYqSURBVHhe7d09i1xlHMbhVNpooZWICJo5M7viy9ewE98+g1jYWIgoGEhmdjNqfCsFEcSAfgAtRc3OTjZhfd2ACn4DbYyFAWGc1VOcYuv/3O5zXXCz7TPnGX6creYMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/Mj7Yufuhoze2u+X5rU3u7NXZ9gOfn7uzP1aTuv3pvZu+i+N76BazyX1fvHZ7fyxOs/Fi+tLkxlu3Rovp5rac3eoO57e65ezJ/lhNOru48NHkaLN30R3sHP+92X197pH+WJxm3XL6yvbP767GB7ub2/WLq8l3b65G+7vP9Mdq0mhx4ZPtnzZ7F5PD+Wr9BvD3aO/cY/2xOM3Wr50vb914e9Xtzza3qzur8eHrq9Fi9nR/rCaN9qeXt442exfja7vH9/DX6Mr5R/tjcZoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyiUF4MEr08f7YzVptJh+uHXjnZOfUdEEoDERAViud+3iqlvM3h/tTZ8bL6bPt7bjz71+Ftcm37xx8jMqmgA0JiIA/Y7fAibfvbmafN/g1p97/G8Epyc+m6oJQGOSAvDvljvt7qTnUTwBaExcAGyjE4DGCIANJwCNEQAbTgAaIwA2nAA0RgBsOAFojADYcALQGAGw4QSgMQJgwwlAYwTAhhOAxgiADScAjREAG04AGiMANpwANEYAbDgBaIwA2HAC0BgBsOEEoDECYMMJQGMEwIYTgMYIgA0nAI0RABtOABojADacADRGAGw4AWiMANhwAtAYAbDhBKAxAmDDCUBjBMCGE4DGJAVgfDj/76fBGt34YNdPg1ErJgDLneMv3q+j/dnB+kyHrW20Pz0YLaa/d8cROOn5FE0AGrP+8m0+AP3Pg4+Wu0/1x2pSt5x+vHW02bsQgMYkBaC7MnuyP1aTusUFAaBW1BvAYvZ0f6wmrf8NuCwAlBKAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkC5bnHh1e1f3ltf/MXN7XC+mvxwaXX2yuzZ/lhNWsf40+2fN3sXk29fX3WL2Wq0N32sPxanWbecvTj58dKfo/3ZHxvb1Z0/uuvzm2cXsyf6YzVpHYAPJj++dfPEZ1S09dvYzfUbwG+TL88/3B+L02x7/9Jd3fLi1mTv/HijuzYfj/fmd/THatLWV9N7Nn8X8/H2cj66/7MXbuuPBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOQ5c+YfErui49mQ+WEAAAAASUVORK5CYII=" />
+    <link rel="mask-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAYqSURBVHhe7d09i1xlHMbhVNpooZWICJo5M7viy9ewE98+g1jYWIgoGEhmdjNqfCsFEcSAfgAtRc3OTjZhfd2ACn4DbYyFAWGc1VOcYuv/3O5zXXCz7TPnGX6creYMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/Mj7Yufuhoze2u+X5rU3u7NXZ9gOfn7uzP1aTuv3pvZu+i+N76BazyX1fvHZ7fyxOs/Fi+tLkxlu3Rovp5rac3eoO57e65ezJ/lhNOru48NHkaLN30R3sHP+92X197pH+WJxm3XL6yvbP767GB7ub2/WLq8l3b65G+7vP9Mdq0mhx4ZPtnzZ7F5PD+Wr9BvD3aO/cY/2xOM3Wr50vb914e9Xtzza3qzur8eHrq9Fi9nR/rCaN9qeXt442exfja7vH9/DX6Mr5R/tjcZoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyglADgGgnADkEADKCUAOAaCcAOQQAMoJQA4BoJwA5BAAyiUF4MEr08f7YzVptJh+uHXjnZOfUdEEoDERAViud+3iqlvM3h/tTZ8bL6bPt7bjz71+Ftcm37xx8jMqmgA0JiIA/Y7fAibfvbmafN/g1p97/G8Epyc+m6oJQGOSAvDvljvt7qTnUTwBaExcAGyjE4DGCIANJwCNEQAbTgAaIwA2nAA0RgBsOAFojADYcALQGAGw4QSgMQJgwwlAYwTAhhOAxgiADScAjREAG04AGiMANpwANEYAbDgBaIwA2HAC0BgBsOEEoDECYMMJQGMEwIYTgMYIgA0nAI0RABtOABojADacADRGAGw4AWiMANhwAtAYAbDhBKAxAmDDCUBjBMCGE4DGJAVgfDj/76fBGt34YNdPg1ErJgDLneMv3q+j/dnB+kyHrW20Pz0YLaa/d8cROOn5FE0AGrP+8m0+AP3Pg4+Wu0/1x2pSt5x+vHW02bsQgMYkBaC7MnuyP1aTusUFAaBW1BvAYvZ0f6wmrf8NuCwAlBKAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkA5AcghAJQTgBwCQDkByCEAlBOAHAJAOQHIIQCUE4AcAkC5bnHh1e1f3ltf/MXN7XC+mvxwaXX2yuzZ/lhNWsf40+2fN3sXk29fX3WL2Wq0N32sPxanWbecvTj58dKfo/3ZHxvb1Z0/uuvzm2cXsyf6YzVpHYAPJj++dfPEZ1S09dvYzfUbwG+TL88/3B+L02x7/9Jd3fLi1mTv/HijuzYfj/fmd/THatLWV9N7Nn8X8/H2cj66/7MXbuuPBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOQ5c+YfErui49mQ+WEAAAAASUVORK5CYII=" color="#000">
+    <meta name="theme-color" content="#000">
+
+    
+    <title>HAVEN - Score d'habitabilité</title>
+
+    <style>
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+            background-color: #333;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        html {
+            font-family: "Helvetica Neue", Helvetica, Verdana, sans-serif;
+        }
+
+        a {
+            color: #3f51b5;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: navy;
+            text-decoration: underline;
+        }
+
+
+        html,
+        body {
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/index-0e5dceac.js"></script>
+  <link rel="stylesheet" href="/assets/index-4e9eff6c.css">
+<link rel="manifest" href="/manifest.webmanifest"></head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but &lt;%= htmlWebpackPlugin.options.title %> doesn't
+                work properly without JavaScript enabled. Please enable it to
+                continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+</body>
+
+<script type="text/javascript">
+    const resizeOps = () => {
+        document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+    };
+
+    resizeOps();
+    window.addEventListener("resize", resizeOps);
+
+    function docReady(fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    docReady(function () {
+        // DOM is loaded and ready for manipulation here
+        console.log("DOM is ready")
+        document.ontouchmove = function (e) {
+            e.preventDefault();
+        }
+    });
+</script>
+
+</html>

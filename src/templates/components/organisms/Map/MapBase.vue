@@ -83,7 +83,7 @@ export default defineComponent({
       map = L.map(mapContainer.value, {
         tap: false,
         zoomControl: false,
-        layers: [dark],
+        layers: [osm],
       }).setView([48.84277323737967, 2.587709798324433], 13);
 
       const resizeObserver = new ResizeObserver(() => {
