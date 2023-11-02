@@ -64,11 +64,10 @@ export default defineComponent({
 
     // ----- Mapbox -----
     function setupGeoSearch() {
-      var dark = L.tileLayer(
-        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
-        {
-          maxZoom: 20,
-          className: "dark-map-tiles",
+      var dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+	      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	      subdomains: 'abcd',
+	      maxZoom: 20
         }
       );
 
@@ -83,7 +82,7 @@ export default defineComponent({
       map = L.map(mapContainer.value, {
         tap: false,
         zoomControl: false,
-        layers: [osm],
+        layers: [dark],
       }).setView([48.84277323737967, 2.587709798324433], 13);
 
       const resizeObserver = new ResizeObserver(() => {
